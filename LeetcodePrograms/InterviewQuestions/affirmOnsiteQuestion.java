@@ -108,8 +108,6 @@ public class affirmOnsiteQuestion {
             engine.register(new ResolverB());
             engine.register(new ResolverC());
 
-            System.out.println(engine.resolve("C", Map.of("A", 10))); // should be 30
-            System.out.println(engine.resolve("C", Map.of("B", 15))); // should be 30
         }
     }
 

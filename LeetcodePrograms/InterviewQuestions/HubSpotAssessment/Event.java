@@ -1,4 +1,4 @@
-package HubSpotAssessment;
+package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
 public class Event {
     private String url;

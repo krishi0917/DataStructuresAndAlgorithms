@@ -1,4 +1,4 @@
-package HubSpotAssessment;
+package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
 import java.util.List;
 

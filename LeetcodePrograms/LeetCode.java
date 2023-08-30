@@ -8341,7 +8341,7 @@ Output: true
 //        Then we can easily have our solution as we always keep track of the left and right of the node.
 
     public class PrintBinaryTree {
-        public static class TreeNode {
+        public class TreeNode {
             int val;
             TreeNode left;
             TreeNode right;
@@ -8398,7 +8398,7 @@ Output: true
         }
 
 
-        private static int getHeight(TreeNode root) {
+        private int getHeight(TreeNode root) {
             if (root == null) {
                 return 0;
             }

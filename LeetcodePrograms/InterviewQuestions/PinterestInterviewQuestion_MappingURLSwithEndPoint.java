@@ -1,4 +1,4 @@
-package LeetcodePrograms.TrieDatastructureQuestions;
+package LeetcodePrograms.InterviewQuestions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +42,7 @@ and what endpoint name they should map to:
         | ...
 */
 
-public class MappingURLSwithEndPoint_PinterestInterviewQuestion {
+public class PinterestInterviewQuestion_MappingURLSwithEndPoint {
     class TrieNode {
         Map<String, TrieNode> children;
         String endpointResult; //final output
@@ -55,7 +55,7 @@ public class MappingURLSwithEndPoint_PinterestInterviewQuestion {
 
     private TrieNode root;
 
-    public MappingURLSwithEndPoint_PinterestInterviewQuestion() {
+    public PinterestInterviewQuestion_MappingURLSwithEndPoint() {
         root = new TrieNode();
     }
 
@@ -127,7 +127,7 @@ public class MappingURLSwithEndPoint_PinterestInterviewQuestion {
     }
 
     public static void main(String[] args) {
-        MappingURLSwithEndPoint_PinterestInterviewQuestion pinterestInterviewQuestion = new MappingURLSwithEndPoint_PinterestInterviewQuestion();
+        PinterestInterviewQuestion_MappingURLSwithEndPoint pinterestInterviewQuestion = new PinterestInterviewQuestion_MappingURLSwithEndPoint();
         pinterestInterviewQuestion.addPattern("GET users" , "get_all_users");
         pinterestInterviewQuestion.addPattern("GET users/<UID>" , "get_user");
         pinterestInterviewQuestion.addPattern("GET users/<UID>/preferences" , "get_user_preferences");

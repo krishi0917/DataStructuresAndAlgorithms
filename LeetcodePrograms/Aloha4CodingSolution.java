@@ -1,12 +1,8 @@
 package LeetcodePrograms;
 import java.util.*;
 public class Aloha4CodingSolution {
-
-
-
-
     public class Main {
-        static class NaryTree{
+         class NaryTree{
             NaryTree parent;
             ArrayList<NaryTree> children;
             String path;
@@ -20,7 +16,7 @@ public class Aloha4CodingSolution {
 
         }
 
-        public static void listFiles(boolean isRecursive,NaryTree currentNode){
+        public void listFiles(boolean isRecursive,NaryTree currentNode){
             System.out.println(currentNode.path);
             for(int i =0 ; i < currentNode.children.size() ; i++){
                 NaryTree temp = currentNode.children.get(i);
@@ -35,7 +31,7 @@ public class Aloha4CodingSolution {
                 }
             }
         }
-        public static void mkdirectory(String name,NaryTree currentNode){
+        public void mkdirectory(String name,NaryTree currentNode){
             NaryTree newDir = new NaryTree(currentNode.path+"/"+name , true,currentNode  );
             for(int i = 0 ; i < currentNode.children.size() ; i++){
                 if(currentNode.children.get(i).path.equals(newDir.path)){
@@ -46,12 +42,12 @@ public class Aloha4CodingSolution {
             currentNode.children.add(newDir);
         }
 
-        public static void touchFile(String name,NaryTree currentNode){
+        public  void touchFile(String name,NaryTree currentNode){
             NaryTree newDir = new NaryTree(name , false,currentNode  );
             currentNode.children.add(newDir);
         }
 
-        public static void changeDirectory(String dirName ,NaryTree currentNode){
+        public  void changeDirectory(String dirName ,NaryTree currentNode){
             for(int i = 0 ; i < currentNode.children.size() ; i++){
                 if(currentNode.children.get(i).path.equals(currentNode.path + "/"+dirName)){
                     if(currentNode.children.get(i).isDir){
@@ -63,7 +59,7 @@ public class Aloha4CodingSolution {
             System.out.println("Directory not found");
         }
 
-        public static void processCommand(String command , NaryTree root, NaryTree currentNode){
+        public  void processCommand(String command , NaryTree root, NaryTree currentNode){
             String cmdArr[] = command.split(" ");
             String action = cmdArr[0];
             if(action.equals("ls")){
@@ -127,7 +123,7 @@ public class Aloha4CodingSolution {
                 System.out.println("Unrecognized command");
             }
         }
-        public static void main(String[] args) {
+        public  void main(String[] args) {
             Scanner sc = new Scanner(System.in);
             NaryTree root = new NaryTree("/root",true,null);
             NaryTree currentNode = root;

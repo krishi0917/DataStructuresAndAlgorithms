@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.toList;
 public class TwilioHackerRank {
-    class Result {
+    static class Result {
 
         /*
          * Complete the 'calculateTotalMessageCost' function below.
@@ -13,7 +13,7 @@ public class TwilioHackerRank {
          * The function accepts STRING_ARRAY messages as parameter.
          */
 
-        public static double calculateTotalMessageCost(List<String> messages) {
+        public double calculateTotalMessageCost(List<String> messages) {
             Stream<Character> s = Stream.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '.', ' ');
 
             Set<Character> hs = s.collect(Collectors.toSet());
@@ -57,9 +57,10 @@ public class TwilioHackerRank {
                 })
                 .collect(toList());
 
-        double result = Result.calculateTotalMessageCost(messages);
 
-        bufferedWriter.write(String.valueOf(result));
+        // double result = Result.calculateTotalMessageCost(messages);
+
+        // bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
 
         bufferedReader.close();

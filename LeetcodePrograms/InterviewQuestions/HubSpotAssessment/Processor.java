@@ -1,4 +1,4 @@
-package HubSpotAssessment;
+package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
 import java.util.*;
 // visitor can have multiple sessions
@@ -65,5 +65,8 @@ public class Processor {
                 visitorIdToIntermediateTimestampMap.put(currentVisitorId,currentTimestamp); //might not be required
             }
         }
+
+        System.out.println(visitorIdToSessionsMap);
+
     }
 }
