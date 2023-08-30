@@ -1,6 +1,13 @@
+package LeetcodePrograms;
+
 import java.util.Stack;
 
-public class RedundantParenthesis {
+
+// - works for / and *
+// - doesnt matter for lhs stuff
+// / works for none
+
+public class Navan_RedundantParenthesis {
     public static String removeBrackets(String s){
         //code here
         char[] str = s.toCharArray();
@@ -17,7 +24,7 @@ public class RedundantParenthesis {
                 boolean mul = false;
                 boolean div = false;
                 while (!st.isEmpty() && str[st.peek()] != '(') {
-                    char op=str[st.pop()];
+                    char op=str[st.pop()]; // keep removing  characters from the stack until we encounter (
                     if (op == '+') {
                         add = true;
                     } else if (op == '-') {
@@ -29,7 +36,8 @@ public class RedundantParenthesis {
                     }
                 }
                 int j = st.pop();
-                int prev = i++; // i++ to operate the next parenthesis
+                int prev = i++; // maintain the ith location so that if true, this can be a part of removal
+                // i++ to operate the next parenthesis
                 while (!st.isEmpty() && str[st.peek()]=='(' && i < n && str[i] == ')') { // this branck is for marking the redundant parenthesis
                     visited[st.pop()] = true;
                     visited[i++] = true;
