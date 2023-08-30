@@ -98,6 +98,7 @@ public class GenericHashMap<K,V> {
 				size++;
 			}
 		}
+		
 		if((1.0*size)/numBuckets>0.7) {
 			//do something
 			ArrayList<GenericHashNode<K, V>>tmp=bucket;

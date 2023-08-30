@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 
 // Main class should be named 'Solution'
-class Solution {
+class Timebased {
     Map<String,String> map = new HashMap<>();
     public String get(String key){
         if(map.containsKey(key)){
@@ -20,7 +20,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution s = new Solution();
+        Timebased s = new Timebased();
         System.out.println(s.get("foo"));
         s.set("foo","bar");
         System.out.println(s.get("foo"));

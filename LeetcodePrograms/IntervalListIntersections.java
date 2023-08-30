@@ -1,12 +1,8 @@
 package LeetcodePrograms;
 import java.util.*;
 
-/**
- * Created by rkhurana on 3/17/19.
- */
-// Leetcode 986 Given two lists of closed intervals, each list of intervals is pairwise disjoint and in sorted order.
+// // #Uber #Facebook Leetcode 986 Given two lists of closed intervals, each list of intervals is pairwise disjoint and in sorted order.
 // Return the intersection of these two interval lists.
-// #Uber #Facebook
 
 public class IntervalListIntersections {
     public Interval[] intervalIntersection2(Interval[] A, Interval[] B) {

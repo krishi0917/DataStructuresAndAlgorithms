@@ -3,10 +3,8 @@ package LeetcodePrograms;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.TreeMap;
-
-
 /**
- * @author Rishi Khurana
+ * 1235. Maximum Profit in Job Scheduling
  * We have n jobs, where every job is scheduled to be done from startTime[i] to endTime[i], obtaining a profit of
  * profit[i].
  *
@@ -14,26 +12,70 @@ import java.util.TreeMap;
  * no two jobs in the subset with overlapping time range.
  *
  * If you choose a job that ends at time X you will be able to start another job that starts at time X.
- *
- *
- *
+
  * Example 1:
- *
- *
- *
  * Input: startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70]
  * Output: 120
  * Explanation: The subset chosen is the first and fourth job.
  * Time range [1-3]+[3-6] , we get profit of 120 = 50 + 70.
  */
 public class MaximumProfitInJobScheduling {
-    private class Job {
+
+
+    class Job {
         int start, finish, profit;
         Job(int start, int finish, int profit) {
             this.start = start;
             this.finish = finish;
             this.profit = profit;
         }
+    }
+
+
+    class FinishTimeComparator implements Comparator<Job>{
+
+        @Override
+        public int compare(Job arg0, Job arg1) {
+            if(arg0.finish <= arg1.finish){
+                return -1;
+            }else{
+                return 1;
+            }
+        }
+
+    }
+
+    /**
+     * Tushar roy solution.. use this one.. dp approach
+     * #Approach Sort the jobs by finish time.
+     * For every job find the first job which does not overlap with this job
+     * and see if this job profit plus profit till last non overlapping job is greater
+     * than profit till last job.
+     * @param jobs
+     * @return
+     */
+    public int maximum(Job[] jobs){
+        int T[] = new int[jobs.length];
+        FinishTimeComparator comparator = new FinishTimeComparator();
+        Arrays.sort(jobs, comparator);
+
+        T[0] = jobs[0].profit;
+        for(int i=1; i < jobs.length; i++){
+            T[i] = Math.max(jobs[i].profit, T[i-1]);
+            for(int j=i-1; j >=0; j--){
+                if(jobs[j].finish <= jobs[i].start){
+                    T[i] = Math.max(T[i], jobs[i].profit + T[j]);
+                    break;
+                }
+            }
+        }
+        int maxVal = Integer.MIN_VALUE;
+        for (int val : T) {
+            if (maxVal < val) {
+                maxVal = val;
+            }
+        }
+        return maxVal;
     }
 
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {

@@ -7,9 +7,7 @@ import java.util.*;
 // understood the priority queue one solution but not the arraylist one
 
 //there is one more method by using merge sort
-/**
- * Created by rkhurana on 3/17/19.
- */
+
 public class EmployeeFreeTime {
     public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
         List<Interval> result = new ArrayList<>();

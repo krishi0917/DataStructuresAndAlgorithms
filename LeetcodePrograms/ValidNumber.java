@@ -1,8 +1,6 @@
 package LeetcodePrograms;
-//#LinkedIn WeWorkQuestion
+//#LinkedIn WeWorkQuestion #facebook
 /**
- * Created by rkhurana on 2/26/19.
- * facebook
  * 65. Valid Number
 
  * A valid number can be split up into these components (in order):
@@ -28,32 +26,7 @@ package LeetcodePrograms;
  */
 public class ValidNumber {
 
-    public boolean validateNumber2(String s) {
-        boolean n = false;
-        boolean e = false;
-        boolean afe = true;
-        boolean p = false;
-        s=s.trim();
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
-                n = true;
-                afe = true;
-            }
-            else if(s.charAt(i)=='.' && p==false && e == false){
-                p=true;
-            }
-            else if (s.charAt(i) == 'e' && e == false && n==true){
-                e=true;
-                afe = false;
-            }
-            else if(((s.charAt(i) == '+') || s.charAt(i) =='-') && (i==0 || s.charAt(i-1)=='e'))
-                ;
-            else
-                return false;
-        }
-        return n && afe;
-    }
-
+    //first method is better
     public boolean validateNumber(String s) {
         /**
          * isNumber(s)==true if and only if s=s1 or s1+'e'+s2, where s1, s2
@@ -92,9 +65,9 @@ public class ValidNumber {
             }
 
             switch (c) {
-			/*
-			 * case ' ': continue;
-			 */ // extend to accept any space everywhere
+                /*
+                 * case ' ': continue;
+                 */ // extend to accept any space everywhere
                 case 'e':
                     // already has 'e' or no digit before 'e'
                     if (hasE || !hasDigit)
@@ -103,10 +76,8 @@ public class ValidNumber {
 
                     // reset for the exponential number
                     hasFirst = hasDigit = false;
-                    hasDot = true; // the exponent must be an integer, hence
-                    // regard as if a dot exists already. Set
-                    // hasDot = false extending to accept any
-                    // (decimal) number as an exponent.
+                    hasDot = true; // the exponent must be an integer, hence regard as if a dot exists already.
+                    // Set hasDot = false extending to accept any (decimal) number as an exponent.
                     continue;
                 case '+':
                 case '-':
@@ -126,6 +97,34 @@ public class ValidNumber {
 
         return hasDigit;
     }
+
+    public boolean validateNumber2(String s) {
+        boolean n = false;
+        boolean e = false;
+        boolean afe = true;
+        boolean p = false;
+        s=s.trim();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                n = true;
+                afe = true;
+            }
+            else if(s.charAt(i)=='.' && p==false && e == false){
+                p=true;
+            }
+            else if (s.charAt(i) == 'e' && e == false && n==true){
+                e=true;
+                afe = false;
+            }
+            else if(((s.charAt(i) == '+') || s.charAt(i) =='-') && (i==0 || s.charAt(i-1)=='e'))
+                ;
+            else
+                return false;
+        }
+        return n && afe;
+    }
+
+
 
     public static void main(String []args){
         ValidNumber vn = new ValidNumber();

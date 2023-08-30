@@ -35,9 +35,10 @@ public class KthLargestElement {
         //int left = start;
         int partitionIndex = start;
         for (int i = start; i < end; i++) {
-            if (nums[i] <= pivot) // Put numbers < pivot to pivot's left
+            if (nums[i] <= pivot) { // Put numbers < pivot to pivot's left
                 swap(nums, partitionIndex, i);  //sending the index here
                 partitionIndex++;
+            }
         }
         swap(nums, partitionIndex, end);// Finally, swap A[end] with A[left]
 
@@ -56,8 +57,8 @@ public class KthLargestElement {
     }
 
     public static void main(String []args) {
-        int []nums = {3,2,1,5,6,8,10 ,4,7,9};
+        int []nums = {11,2,1,5,6,8,10 ,4,7,9};
         int []nums2 = {3,2,3,1,2,4,5,5,};
-        System.out.println(findKthLargest(nums , 3));
+        System.out.println(findKthLargest2(nums , 3));
     }
 }

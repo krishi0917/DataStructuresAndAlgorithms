@@ -98,7 +98,7 @@ class ChimeQuestion {
             System.out.print("-");
         }
 
-        System.out.print(e.empName);
+        System.out.println(e.empName);
         List<Employee> subordinates = e.subordinates;
         for(Employee emp : subordinates){
             printStructure(emp, level+1);
@@ -107,6 +107,7 @@ class ChimeQuestion {
 
     public static void main(String[] args) {
         ChimeQuestion s = new ChimeQuestion();
+        //"id:name:manager_id,id:name:manager_id"
         s.findOrg("1:Max:4,2:Ann:0,3:Albert:2,4:Edmond:2");
     }
 }

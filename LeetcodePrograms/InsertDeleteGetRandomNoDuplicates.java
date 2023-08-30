@@ -5,9 +5,10 @@ import java.util.*;
  */
 public class InsertDeleteGetRandomNoDuplicates {
     ArrayList<Integer> list;
+    // map to put the value and the location in the list of that element
     HashMap<Integer, Integer> map;
-    java.util.Random rand = new java.util.Random();
-    /** Initialize your data structure here. */
+    Random rand = new Random();
+
     public InsertDeleteGetRandomNoDuplicates() {
         list = new ArrayList<>();
         map = new HashMap<>();

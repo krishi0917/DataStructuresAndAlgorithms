@@ -2,11 +2,11 @@ package LeetcodePrograms;
 
 import java.util.Stack;
 
-
+// time complexity O(N) for the pop max operation but the other operations is O(1)
 public class MaxStack2 {
     Stack<Integer> stack;
     Stack<Integer> maxStack;
-    /** initialize your data structure here. */
+
     public MaxStack2() {
         stack = new Stack<>();
         maxStack = new Stack<>();

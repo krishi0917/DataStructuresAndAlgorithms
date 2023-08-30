@@ -8,9 +8,13 @@ import java.util.Random;
 //528. Random Pick with Weight.  #Uber #Facebook
 // Given an array w of positive integers, where w[i] describes the weight of index i, write a function
 // pickIndex which randomly picks an index in proportion to its weight.
+
+
+
 // Solution
 // very well explained https://www.youtube.com/watch?v=KAZM4tsH8aI
-// Use accumulated freq array to get idx.
+
+//        Use accumulated freq array to get idx.
 //        w[] = {2,5,3,4} => wsum[] = {2,7,10,14}
 //        then get random val random.nextInt(14)+1, idx is in range [1,14]
 //

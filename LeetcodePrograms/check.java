@@ -1,10 +1,6 @@
 package LeetcodePrograms;
 
 /*
- * Click `Run` to execute the snippet below!
- */
-
-/*
 Given a string s which represents an expression, evaluate this expression and return its value.
 * /
 

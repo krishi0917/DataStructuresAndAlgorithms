@@ -5,67 +5,76 @@ import java.util.*;
  */
 public class TrieWordDictionary2 {
 
-        private class TrieNode {
+    private class TrieNode {
 
-            Map<Character, TrieNode> children;
-            boolean endOfWord;
+        Map<Character, TrieNode> children;
+        boolean endOfWord;
 
-            TrieNode() {
-                children = new HashMap<>();
-                endOfWord = false;
+        TrieNode() {
+            children = new HashMap<>();
+            endOfWord = false;
+        }
+
+    }
+
+    private TrieNode root;
+
+    /**
+     * Initialize your data structure here.
+     */
+    public TrieWordDictionary2() {
+        root = new TrieNode();
+    }
+
+    /**
+     * Adds a word into the data structure.
+     */
+    public void addWord(String word) {
+        addWord(root, word, 0);
+    }
+
+    private void addWord(TrieNode node, String word, int index) {
+        if (index == word.length()) {
+            node.endOfWord = true;
+            return;
+        }
+
+        char ch = word.charAt(index);
+        TrieNode childNode = node.children.get(ch);
+        if (childNode == null) {
+            childNode = new TrieNode();
+            node.children.put(ch, childNode);
+        }
+        addWord(childNode, word, index + 1);
+    }
+
+    /**
+     * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+     */
+    public boolean search(String word) {
+        return search(root, word, 0);
+    }
+
+    private boolean search(TrieNode node, String word, int index) {
+        if (index == word.length())
+            return node.endOfWord;
+
+        char ch = word.charAt(index);
+        TrieNode child = node.children.get(ch);
+        if (word.charAt(index) == '.') {
+            for (Character c : node.children.keySet()) {
+                if (search(node.children.get(c), word, index + 1))
+                    return true;
             }
-
         }
 
-        private TrieNode root;
-        /** Initialize your data structure here. */
-        public TrieWordDictionary2() {
-            root = new TrieNode();
-        }
+        if (child == null)
+            return false;
 
-        /** Adds a word into the data structure. */
-        public void addWord(String word) {
-            addWord(root, word, 0);
-        }
-        private void addWord(TrieNode node, String word, int index) {
-            if (index == word.length()) {
-                node.endOfWord = true;
-                return;
-            }
+        return search(child, word, index + 1);
+    }
 
-            char ch = word.charAt(index);
-            TrieNode childNode = node.children.get(ch);
-            if (childNode == null) {
-                childNode = new TrieNode();
-                node.children.put(ch, childNode);
-            }
-            addWord(childNode, word, index + 1);
-        }
-
-        /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
-        public boolean search(String word) {
-            return search(root, word, 0);
-        }
-        private boolean search(TrieNode node, String word, int index) {
-            if (index == word.length())
-                return node.endOfWord;
-
-            char ch = word.charAt(index);
-            TrieNode child = node.children.get(ch);
-            if (word.charAt(index) == '.') {
-                for (Character c : node.children.keySet()) {
-                    if (search(node.children.get(c), word, index + 1))
-                        return true;
-                }
-            }
-
-            if (child == null)
-                return false;
-
-            return search(child, word, index + 1);
-        }
-
-    public static void main(String []args){
+    public static void main(String[] args) {
         TrieWordDictionary2 dict = new TrieWordDictionary2();
         dict.addWord("bad");
         dict.addWord("bed");
@@ -78,6 +87,4 @@ public class TrieWordDictionary2 {
         System.out.println(dict.search(".ad"));
 //        System.out.println(dict.search("b..") );
     }
-
-    }
-
+}

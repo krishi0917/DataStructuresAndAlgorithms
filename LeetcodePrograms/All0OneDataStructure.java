@@ -2,12 +2,8 @@
 package LeetcodePrograms;
 import java.util.*;
 /**
- * Created by rkhurana on 2/24/19.
+ * go for AllOOneDataStructure3
  * 432. All O`one Data Structure
- * Hard
- *
- * 657
- * Share
  * Implement a data structure supporting the following operations:
  *
  * Inc(Key) - Inserts a new key with value 1. Or increments an existing key by 1. Key is guaranteed to be a non-empty
@@ -17,6 +13,9 @@ import java.util.*;
  * GetMaxKey() - Returns one of the keys with maximal value. If no element exists, return an empty string "".
  * GetMinKey() - Returns one of the keys with minimal value. If no element exists, return an empty string "".
  * Challenge: Perform all these in O(1) time complexity.
+ *
+ *
+ * 3rd solution (All0OneDataStructure3) is the best solution
  */
 public class All0OneDataStructure {
     HashMap<String, Integer> map;
@@ -137,15 +136,10 @@ public class All0OneDataStructure {
         ds.inc("C");
         ds.inc("D");
         ds.inc("E");
-
-
-
         ds.dec("A");
         ds.dec("C");
         ds.dec("D");
         ds.dec("C");
         ds.dec("E");
-
-
     }
 }

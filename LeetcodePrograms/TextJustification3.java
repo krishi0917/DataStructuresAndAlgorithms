@@ -1,5 +1,5 @@
 package LeetcodePrograms;
-
+// use this program for the interview
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +11,11 @@ public class TextJustification3  {
         int index = 0;
 
         while (index < n) {
-            int len = 0; // used for the else part when you have to write the words in a line
-            // to make sure the number of words are there without spaces
-            int totalChars = words[index].length(); // used to find if it increases the max width
+            int len = 0;  //len is total characters without spaces. used to find spaces in the following else part
+            int totalChars = words[index].length();// total characters in that particular word and in the future extra spaces will also be added in this
+            // total chars is also used to find if it increases the max width
             len+=words[index].length();
-            int last = index + 1;
+            int last = index + 1; //this last will be used in the else part while forming the whole sentence in that particular line. We will iterate till last
             while (last < n) {  /// total number of words in this line
                 if (totalChars + 1 + words[last].length() > maxWidth)
                     break;
@@ -23,7 +23,6 @@ public class TextJustification3  {
                 len +=words[last].length();
                 last++;
             }
-
             int gaps = last - index - 1;
             StringBuilder sb = new StringBuilder();
             if (last == n || gaps == 0) {    // if there is only word or its the last line
@@ -31,7 +30,7 @@ public class TextJustification3  {
                     sb.append(words[i]);
                     sb.append(' ');
                 }
-                sb.deleteCharAt(sb.length() - 1); // extra character that is added just before this
+                sb.deleteCharAt(sb.length() - 1); // extra space in the end is added in the above for loop
                 while (sb.length() < maxWidth) { // add the remaining characters with spaces
                     sb.append(' ');
                 }
@@ -42,8 +41,8 @@ public class TextJustification3  {
                     sb.append(words[i]);
                     int s=0;
                     if(i == last - 1) // this condition will come when you have printed the last word in the line
-                        // we cannot do the last - 1 in the for loop because in that condition last word ie "an" in
-                        // our case wont be printed.
+                        // for loop will end before even printing the list word in the first line. In our case, its "an"
+                        // for ex when an is printed for the line "this is an", no extra spaces needs to be put after an and hence we break the loop
                         break;
                     while(s++ < spaces){
                         sb.append(" ");
@@ -61,9 +60,10 @@ public class TextJustification3  {
 
     public static void main(String []args){
         String words = "winter is coming.";
+        String words2 = "This is an example of text jistify qwerty";
        // String []words1 = {"What","must","be","acknowledgment","shall","be"};
-        int maxWidth = 18;
-        System.out.println(fullJustify(words,maxWidth));
+        int maxWidth = 16;
+        System.out.println(fullJustify(words2,maxWidth));
     }
 
 }

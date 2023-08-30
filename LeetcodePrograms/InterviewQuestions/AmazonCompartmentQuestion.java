@@ -1,4 +1,4 @@
-package LeetcodePrograms;
+package LeetcodePrograms.InterviewQuestions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -201,7 +201,6 @@ class RobinhoodQuestion {
     }
 
     int order_book(String[][] orders) {
-
         int count = 0;
         Queue<OrderBook> buyOrder = new PriorityQueue<>(new Comparator<OrderBook>() {
             public int compare(OrderBook o1, OrderBook o2) {

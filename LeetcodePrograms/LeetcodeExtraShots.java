@@ -44,7 +44,6 @@ public class LeetcodeExtraShots {
     }
 
     /**
-     * @author Rishi Khurana
      * 1056. Confusing Number
      * Given a number N, return true if and only if it is a confusing number, which satisfies the following condition:
      *

@@ -1,9 +1,7 @@
 package LeetcodePrograms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by rkhurana on 2/27/19.
@@ -11,7 +9,7 @@ import java.util.Set;
 public class InsertDeleteGetRandomDuplicates {
     ArrayList<Integer> nums;
     HashMap<Integer, Set<Integer>> map;
-    java.util.Random rand = new java.util.Random();
+    Random rand = new Random();
 
     /** Initialize your data structure here. */
     public InsertDeleteGetRandomDuplicates() {
@@ -23,7 +21,7 @@ public class InsertDeleteGetRandomDuplicates {
     public boolean insert(int val) {
         boolean contain = map.containsKey(val);
         if (!contain)
-            map.put(val, new LinkedHashSet<Integer>());
+            map.put(val, new LinkedHashSet<>());
         map.get(val).add(nums.size());
         nums.add(val);
         return !contain;

@@ -1,17 +1,19 @@
 package LeetcodePrograms;
 import java.util.*;
 /**
- * Created by rkhurana on 2/24/19.
+ * Shortest word distance
+ *
  * Design a class which receives a list of words in the constructor, and implements a method that
  * takes two words word1 and word2 and return the shortest distance between these two words in the list.
  * Your method will be called repeatedly many times with different parameters.
 
  Example:
  Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+ // wonder how the second program is O(n+m) and the first is O(n*m) // if we apply the merge sort then it becomes O(n + m), but dont know how it is merge sort
  */
 public class ShortestWordDistanceII {
     private Map<String, List<Integer>> map;
-
 
     public ShortestWordDistanceII(String[] words) {
         map = new HashMap<String, List<Integer>>();
@@ -25,7 +27,6 @@ public class ShortestWordDistanceII {
                 map.put(w, list);
             }
         }
-
     }
 
     public int shortest(String word1, String word2) {
@@ -44,14 +45,32 @@ public class ShortestWordDistanceII {
         }
         return ret;
     }
+
+
+    public int shortest2(String word1, String word2) {
+        List<Integer> is = map.get(word1), js = map.get(word2);
+        int dist = Integer.MAX_VALUE;
+        for (int i = 0, j = 0; i < is.size() && j < js.size();) {
+            dist = Math.min(dist, Math.abs(is.get(i) - js.get(j)));
+            if (is.get(i) < js.get(j)) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        return dist;
+    }
+
+
     public static void main(String []args){
         String []words = {"practice", "makes", "perfect", "coding", "makes","practice"};
 
-        String word1 = "coding";
+        String word1 = "makes";
         String word2 = "practice";
         ShortestWordDistanceII s = new ShortestWordDistanceII(words);
-        System.out.println(s.shortest(word1,word2));
-
+        System.out.println(s.shortest2(word1,word2));
     }
+
+
 
 }

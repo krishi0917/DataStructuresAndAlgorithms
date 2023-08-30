@@ -6,8 +6,14 @@ import java.util.Set;
 
 
 /**
- * Created by rkhurana on 7/26/18.
+ * // Q128. Longest consecutive sequence #TopInterviewQuestion #GoodQuestion #Facebook #Uber
+ * // Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+ * // For example, Given [100, 4, 200, 1, 3, 2],
+ * // The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
  */
+
+
+// second approach is an interesting one
 public class LongestConsecutiveSequence {
     public static int longestConsecutive(int[] num) {
         int res = 0;
@@ -39,10 +45,10 @@ public class LongestConsecutiveSequence {
     public static void main(String []args){
         int num[] = {100, 4, 200, 1, 3, 2};
         System.out.println(longestConsecutive2(num));
-
-
     }
 
+    // the idea is to put the elements in the set and only do the calculation when n-1 element is not present in the set.
+    // in that case you are in the beginning and you can calculate the best consecutive elements.
     public static int longestConsecutive2(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for(int n : nums) {
@@ -54,8 +60,7 @@ public class LongestConsecutiveSequence {
                 // n-1 exist, that means the current element is already been considered before for the longest length
                 // . thus we can ignore this one and can move forward
                 int m = n + 1;
-                while(set.contains(m)) { // if the element is there in the set, it means time to find out the
-                    // length
+                while(set.contains(m)) { // if the element is there in the set, it means time to find out the length
                     m++;
                 }
                 best = Math.max(best, m - n);

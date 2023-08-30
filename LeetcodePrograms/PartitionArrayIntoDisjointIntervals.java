@@ -1,7 +1,7 @@
 package LeetcodePrograms;
 
 /**
- * @author Rishi Khurana
+ *
  * 915. Partition Array into Disjoint Intervals
  * Given an array A, partition it into two (contiguous) subarrays left and right so that:
  *

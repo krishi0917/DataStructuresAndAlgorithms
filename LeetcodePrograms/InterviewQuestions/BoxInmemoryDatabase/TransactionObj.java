@@ -1,4 +1,4 @@
-package LeetcodePrograms.BoxInmemoryDatabase;
+package LeetcodePrograms.InterviewQuestions.BoxInmemoryDatabase;
 
 import java.util.Stack;
 

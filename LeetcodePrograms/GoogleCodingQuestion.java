@@ -4,7 +4,6 @@ import java.util.*;
  * @author Rishi Khurana
  */
 class GoogleCodingQuestion {
-    /** Initialize your data structure here. */
 
     // t1 main enter
     // t2 foo enter

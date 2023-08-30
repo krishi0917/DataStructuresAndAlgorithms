@@ -1,7 +1,6 @@
 package LeetcodePrograms;
 import java.util.*;
-/**
- * @author Rishi Khurana
+/*
  * 743. Network Delay Time
  * There are N network nodes, labelled 1 to N.
  *

@@ -1,6 +1,21 @@
+//binary tree: write code to find if all nodes have the same value
+//binary tree: write code to return the count of nodes where the nodes and its descendants have the same value
 
-//hzttps://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order
-// -traversal-questions-in-java
+// https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
+// compress i < j
+// to do question
+// Problem 2 : Given the root of a binary tree, print the tree column by column starting from right
+//
+//
+//    3
+//   / \
+//  1   4
+//    /  \
+//   2    6
+//
+//
+//6,4,3,2,1
+//https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order-traversal-questions-in-java
 //did not understand the degree of an array
 //image smoother
 //largest pallindrome product
@@ -25,7 +40,6 @@
 //contains duplicates III
 //https://leetcode.com/problems/subsets/discuss/
 //the maze question
-//partition equal subset sum , target sum and subset sum all are similar and needs to be done together
 //word ladder problem
 // a very important link
 //https://leetcode.com/problems/combination-sum/?tab=Solutions
@@ -50,22 +64,6 @@
 // 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
 // 7 is a candidate, and 7 = 7.
 // These are the only two combinations.
-
-// 53. Maximum Subarray  cadence algorothm
-// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum
-// and return its sum.
-// Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach,
-// which is more subtle.
-// Example 1:
-// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-// Output: 6
-// Explanation: [4,-1,2,1] has the largest sum = 6.
-// Example 2:
-// Input: nums = [1]
-// Output: 1
-// Example 3:
-// Input: nums = [0]
-// Output: 0
 
 // 76. Minimum Window Substring
 // Given two strings s and t, return the minimum window in s which will contain all the characters in t. If there is
@@ -135,27 +133,6 @@
 // Input: s = "eceba", k = 2
 // Output: 3
 // Explanation: The substring is "ece" with length 3.
-
-// 373. Find K Pairs with Smallest Sums
-// You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
-// Define a pair (u,v) which consists of one element from the first array and one element from the second array.
-// Find the k pairs (u1,v1),(u2,v2) ...(uk,vk) with the smallest sums.
-// Example 1:
-// Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
-// Output: [[1,2],[1,4],[1,6]]
-// Explanation: The first 3 pairs are returned from the sequence:
-// [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
-
-// 416. Partition Equal Subset Sum.  #split #subset #sum
-// Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets
-// such that the sum of elements in both subsets is equal.
-// Note:
-// 1.	Each of the array element will not exceed 100.
-// 2.	The array size will not exceed 200.
-// Example 1:
-// Input: [1, 5, 11, 5]
-// Output: true
-// Explanation: The array can be partitioned as [1, 5, 5] and [11].
 
 // 494. Target Sum #sum #target
 // You are given a list of non-negative integers, a1, a2, ..., an, and a target, S. Now you have 2 symbols + and -.
@@ -243,16 +220,6 @@
 // You can split them into two consecutive subsequences :
 // 1, 2, 3
 // 3, 4, 5
-
-// 698. Partition to K Equal Sum Subsets facebook
-// Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k
-// non-empty subsets whose sums are all equal.
-
-//Example 1:
-
-//Input: nums = [4, 3, 2, 3, 5, 2, 1], k = 4
-//Output: True
-//Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
 
 // 920. Number of Music Playlists
 // Your music player contains N different songs and she wants to listen to L (not necessarily different) songs during
@@ -368,7 +335,6 @@
 // [3,6] -> (3 + 6 <= 9)
 
 package LeetcodePrograms;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -378,11 +344,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-
 public class LeetCode {
 
-// 32. Longest Valid Parenthesis
+// Q32. Longest Valid Parenthesis #parentheses
 // Given a string containing just the characters '(' and ')', find the
 // length of the longest valid (well-formed) parentheses substring.
     public static int longestValidParentheses2(String s) {
@@ -404,11 +368,10 @@ public class LeetCode {
                 }
             }
         }
-
         return max;
     }
 
-    // Q35 search insert position a very easy question
+    // Q35 search insert position a very easy question #bs
     // Given a sorted array and a target value, return the index if the target is found.
     // If not, return the index where it would be if it were inserted in order.
     public int searchInsert(int[] A, int target) {
@@ -495,7 +458,6 @@ public class LeetCode {
                 }
             }
         }
-
         return true;
     }
 
@@ -536,8 +498,7 @@ public class LeetCode {
         return new int[]{start + 1, end + 1};
     }
 
-
-    // Q9 Pallindrome Number #GoodQuestion
+    // Q9 Palindrome Number #GoodQuestion #palindrome
     // For those that are confused with the argument whether this algorithm is O(N) or O(lgN):
     // This algorithm is O(N) where N is the number of digits. At the same time it is O(lnX), where X is the input
     // value. Now, stop arguing about the time complexity and concentrate on coding.
@@ -573,7 +534,7 @@ public class LeetCode {
         return (x == rev || x == rev / 10);
     }
 
-    // Q125 Valid Palindrome #TopInterviewQuestion #FacebookQuestion
+    // Q125 Valid Palindrome #TopInterviewQuestion #FacebookQuestion #palindrome
     // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
     // Input: "A man, a plan, a canal: Panama" Output: true
     public boolean isPalindrome(String s) {
@@ -603,7 +564,7 @@ public class LeetCode {
 
     // facebook 26 google 9 amazon 7 bloombergg 7 bytedance 3
     // time complexity O(n) space O(1)
-    // Q31 next permutation ... #GoodQuestion
+    // Q31 next permutation ... #GoodQuestion #permutation
     // [6，3，4，9，8，7，1]
     //      i-1 i     k
     // (1) leftward find the first decreasing number @ index i - 1, (4)
@@ -919,7 +880,7 @@ public class LeetCode {
 
     // Q14 longest common prefix #TopInterviewQuestion  vertical scaling solution is good
     // have to check for the complexity
-// Write a function to find the longest common prefix string amongst an array of strings.
+    // Write a function to find the longest common prefix string amongst an array of strings.
     public static String longestCommonPrefix(String[] strs) {
         StringBuilder result = new StringBuilder();
         if (strs != null && strs.length > 0) {
@@ -957,8 +918,8 @@ public class LeetCode {
         }
         return result.toString();
     }
-    //    or horizontal scaling
 
+    //    or horizontal scaling
     //    what is the time complexity.
     //    m is the lenght of the longest string
     //    n is the length of the strs
@@ -987,8 +948,7 @@ public class LeetCode {
         return prefix;
     }
 
-    // time complexity for the below algorith m is O(n * m) .. n number of string and m is the length of the longest
-    // string
+    // time complexity for the below algorith m is O(n * m) .. n number of string and m is the length of the longest string
     // Vertical Scaling like checking the first character of every string from the first string
     public String longestCommonPrefix5(String[] strs) {
         if (strs.length == 0) {
@@ -1274,6 +1234,22 @@ public class LeetCode {
         return sb.toString();
     }
 
+/*
+796. Rotate String
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+For example, if s = "abcde", then it will be "bcdea" after one shift.
+Example 1:
+
+Input: s = "abcde", goal = "cdeab"
+Output: true
+ */
+    public boolean rotateString(String A, String B) {
+
+        return A.length() == B.length() && (A + A).contains(B);
+    }
+
+
 // Q152 Maximum Product SubArray  Max Product Subarray #TopInterviewQuestion
 // a very good explanation of the below solution
 //    Let me reason the solution.
@@ -1327,7 +1303,7 @@ public class LeetCode {
 // Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 // Maintain Indices https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/ #NeedsAttention
 
-    static int maxSubArraySum(int a[], int size)
+    public int maxSubArraySum(int a[], int size)
     {
         int max_so_far = a[0];
         int curr_max = a[0];
@@ -1340,7 +1316,7 @@ public class LeetCode {
         return max_so_far;
     }
 
-    static int maxSubArraySumNoIndices(int a[]) {
+    public int maxSubArraySumNoIndices(int a[]) {
         int size = a.length;
         int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
         for (int i = 0; i < size; i++) {
@@ -1353,7 +1329,7 @@ public class LeetCode {
         return max_so_far;
     }
 
-    static int maxSubArraySumWithIndices(int a[], int size) {
+    public int maxSubArraySumWithIndices(int a[], int size) {
         int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
                 start =0, end = 0, s=0;
         for (int i=0; i< size; i++ ) {
@@ -1374,6 +1350,42 @@ public class LeetCode {
         System.out.println( "Starting index "+start
                 + "Ending index " + end);
         return max_so_far;
+    }
+
+//    254. Factor Combinations
+//    Numbers can be regarded as the product of their factors.
+//    For example, 8 = 2 x 2 x 2 = 2 x 4.
+//    Given an integer n, return all possible combinations of its factors. You may return the answer in any order.
+//    Note that the factors should be in the range [2, n - 1].
+//    Example 1:
+//    Input: n = 1
+//    Output: []
+//    Example 2:
+//
+//    Input: n = 12
+//    Output: [[2,6],[3,4],[2,2,3]]
+
+    public List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(result, new ArrayList<Integer>(), n, 2);
+        return result;
+    }
+
+    public void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
+        if (n <= 1) {
+            if (item.size() > 1) {
+                result.add(new ArrayList<Integer>(item));
+            }
+            return;
+        }
+
+        for (int i = start; i <= n; ++i) {
+            if (n % i == 0) {
+                item.add(i);
+                helper(result, item, n/i, i);
+                item.remove(item.size()-1);
+            }
+        }
     }
 
 //    325. Maximum Size Subarray Sum Equals k
@@ -1426,7 +1438,7 @@ public class LeetCode {
         return false;
     }
 
-    // Q69 Sqrt(x) #TopInterviewQuestion
+    // Q69 Sqrt(x) #TopInterviewQuestion sqrt
     // Find the square root of a number
     public static int sqrt(int x) {
         if (0 == x)
@@ -1444,7 +1456,6 @@ public class LeetCode {
         }
         return ans;
     }
-
 
     // Q83 Remove Duplicates from sorted list I
     public ListNode deleteDuplicates(ListNode head) {
@@ -2232,7 +2243,7 @@ public class LeetCode {
         }
     }
 
-// Q26 remove duplicates from sorted array #TopInterviewQuestion #inline
+// Q26. remove duplicates from sorted array #TopInterviewQuestion #inline
 // Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
 // Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
     public static int removeduplicatesfromSortedArray(int A[], int n) {
@@ -2774,6 +2785,9 @@ public class LeetCode {
     // 1 2 3      1 4 7                         7 4 1
     // 4 5 6 ---> 2 5 8 (after transpose) --- > 8 5 2
     // 7 8 9      3 6 9                         9 6 3
+
+
+    //better solution in rotate.java which works even when the length and the breadth is different
     public void rotate(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = i; j < matrix[0].length; j++) {
@@ -2831,6 +2845,7 @@ public class LeetCode {
     // Time complexity is O(k^n), where k is the biggest number of letters a digit can map (k=4) and n is the length of the digit string.
     public static List<String> letterCombinations4(String digits) {
         LinkedList<String> ans = new LinkedList<String>();
+
         if (digits.length()==0){
             return ans;
         }
@@ -2914,7 +2929,55 @@ public class LeetCode {
         return total;
     }
 
+    // 364. Nested List Weight Sum II
+    // You are given a nested list of integers nestedList. Each element is either an integer or a list
+    // whose elements may also be integers or other lists.
+
+    // The depth of an integer is the number of lists that it is inside of.
+    // For example, the nested list [1,[2,2],[[3],2],1]
+    // has each integer's value set to its depth. Let maxDepth be the maximum depth of any integer.
+    // The weight of an integer is maxDepth - (the depth of the integer) + 1.
+    // Return the sum of each integer in nestedList multiplied by its weight.
+    // Example 1:
+    // Input: nestedList = [[1,1],2,[1,1]]
+    // Output: 8
+    // Explanation: Four 1's with a weight of 1, one 2 with a weight of 2.
+    // 1*1 + 1*1 + 2*2 + 1*1 + 1*1 = 8
+
+    // Example 2:
+    // Input: nestedList = [1,[4,[6]]]
+    // Output: 17
+    // Explanation: One 1 at depth 3, one 4 at depth 2, and one 6 at depth 1.
+    // 1*3 + 4*2 + 6*1 = 17
+
     //nested list weight sum II (its the opposite of nested list weight sum. here weight is defined from bottom to top)  #Linkedin
+
+    // Solution of how it is done
+    // Instead of multiplying by depth, add integers multiple times (by going level by level and adding the unweighted sum to the
+    // weighted sum after each level).
+
+    // For future readers, this is a key fact I used when understanding this algorithm:
+    //Each integer get added one extra time for the mere existence of each one level under it.
+    //The concept of weight here is implemented with repeated addition;
+
+    /*  unweighted = Running sum of all numbers
+        weighted = Running sum OF above sum
+
+        e.g.                                   unweighted        weighted
+        level 1 - integers = [2]     sum = 2     2                2
+        level 2 - integers = [1,3]   sum = 4     2 + 4            2 +  2+4
+        level 3 - integers = [2,2,1] sum = 5     2 + 4 + 5        2 +  2+4 +  2+4+5
+
+    # time complexity
+    I think it's 0(N^2) where N is the max number of elements at any level. The loop will go N times followed by the insertion addAll
+    operation which will again take O(N) time. Tell me if I am wrong?
+
+    i think it's 0(N^2) as well. the code looks clean tho. But I think BFS is more efficient ? (maybe i was wrong.)
+
+    It is O(N^2), where N is the amount of nested integer objects. Worst case all elements are nested within each other;
+    if there are N elements, then the first 'level' (1 element) is re-added N times, the second N-1 times, third N-2 etc..
+    N+(N-1)+(N-2)+...+1 = N(N-1)/2 = O(N^2)
+     */
     public int depthSumInverse(List<NestedInteger> nestedList) {
         int unweighted = 0, weighted = 0;
         while (!nestedList.isEmpty()) {
@@ -2929,6 +2992,28 @@ public class LeetCode {
             nestedList = nextLevel;
         }
         return weighted;
+    }
+
+    public int depthSumInverseIterative(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.isEmpty()) return 0;
+        Queue<List<NestedInteger>> q = new LinkedList();
+        int singleSum = 0;
+        int sum = 0;
+        q.add(nestedList);
+        while (!q.isEmpty()) {
+            int sz = q.size();
+            for (int i = 0; i < sz; i++){
+                nestedList = q.poll();
+                for (NestedInteger ni : nestedList) {
+                    if (ni.isInteger())
+                        singleSum += ni.getInteger();
+                    else
+                        q.add(ni.getList());
+                }
+            }
+            sum += singleSum; //add to sum after processing the whole layer
+        }
+        return sum;
     }
 
 // #GoogleFavouriteQuestion #Facebook
@@ -3065,6 +3150,7 @@ public class LeetCode {
     }
 
     // Q50 Implement pow(x,n) #TopInterviewQuestion
+    // second way is better
     public static double pow(double x, int n) {
         if (n == 0)
             return 1.;
@@ -3733,6 +3819,17 @@ public class LeetCode {
     }
 
     // Q150 Evaluate Reverse polish notation #TopInterviewQuestion  #LinkedinQuestion
+    /*
+    Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+    Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
+    Note that division between two integers should truncate toward zero.
+    It is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate to a result,
+    and there will not be any division by zero operation.
+    Example 1:
+        Input: tokens = ["2","1","+","3","*"]
+        Output: 9
+        Explanation: ((2 + 1) * 3) = 9
+    */
     public int evalReversePolishNotation(String[] tokens) {
         int a, b;
         Stack<Integer> S = new Stack<Integer>();
@@ -4272,12 +4369,14 @@ public String decodeString(String s) {
 // the set made of all the nodes' value in the whole tree. If no such second minimum value exists, output
 // -1 instead.
 
-    // Solution : The author explained pretty clearly, but maybe I can try to rephrase it. The special tree structure
-// makes sure that the value of left and right is not lesser than root value, so by asking for second minimum,
-// it is actually asking for the smallest value in left and right subtree. This value can't be equal to root value,
-// so we need recursion if we find that left or right val is same as root val. It is possible that all values in
-// left/right subtree is the same, and we mark the return value as -1 indicating no candidate exists in this subtree.
-    public int findSecondMinimumValue(TreeNode root) {
+// Solution :The special tree structure makes sure that the value of left and right is not lesser than root value,
+// so by asking for second minimum, it is actually asking for the smallest value in left and right subtree.
+// This value can't be equal to root value, so we need recursion if we find that left or right val is same as root val.
+// It is possible that all values in left/right subtree is the same, and we mark the return value as -1 indicating no
+// candidate exists in this subtree.
+
+// Time Complexity worst O(n) where you have to iterate the whole tree and all having the same value
+ public int findSecondMinimumValue(TreeNode root) {
         if (root == null) {
             return -1;
         }
@@ -4407,6 +4506,21 @@ public String decodeString(String s) {
                 return cur;
         }
     }
+
+//    236. Lowest Common Ancestor of a Binary Tree
+//    Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+//    According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+//    Example 1:
+//    Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+//    Output: 3
+//    Explanation: The LCA of nodes 5 and 1 is 3.
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    if (root == null || root == p || root == q) return root;
+    TreeNode left = lowestCommonAncestor(root.left, p, q);
+    TreeNode right = lowestCommonAncestor(root.right, p, q);
+    return left == null ? right : right == null ? left : root;
+}
+
 
 // Q268 missing number #TopInterviewQuestion
 // Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing
@@ -4646,6 +4760,67 @@ public String decodeString(String s) {
         }
     }
 
+    /*
+1650. Lowest Common Ancestor of a Binary Tree III
+Given two nodes of a binary tree p and q, return their lowest common ancestor (LCA).
+Each node will have a reference to its parent node. The definition for Node is below:
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node parent;
+}
+According to the definition of LCA on Wikipedia: "The lowest common ancestor of two nodes p and q in a tree T is the
+lowest node that has both p and q as descendants (where we allow a node to be a descendant of itself)."
+ */
+
+    public class LowestCommonAncestorOfABinaryTreeiii {
+/*
+    Approach : Calculate the depth of each one and get down to the same depth from the higher depth one.
+    now keep on going to the parent untill you meet
+*/
+
+        class Node{
+            public int val;
+            public Node left;
+            public Node right;
+            public Node parent;
+        }
+        public Node lowestCommonAncestor(Node p, Node q) {
+
+            if (p == null || q == null)
+                throw new IllegalArgumentException("Invalid input as p and q are guaranteed to exist");
+
+            int pDepth = getDepth(p), qDepth = getDepth(q);
+
+            while (pDepth > qDepth) {
+                pDepth--;
+                p = p.parent;
+            }
+
+            while (qDepth > pDepth) {
+                qDepth--;
+                q = q.parent;
+            }
+
+            while (p != q) {
+                p = p.parent;
+                q = q.parent;
+            }
+
+            return p;
+        }
+
+        private int getDepth(Node a) {
+            int depth = 0;
+            while (a != null) {
+                a = a.parent;
+                depth++;
+            }
+            return depth;
+        }
+    }
+
     // Q541 Reverse String II
     // Given a string and an integer k, you need to reverse the first k
     // characters for every 2k characters
@@ -4781,15 +4956,71 @@ public String decodeString(String s) {
         return max1;
     }
 
+    /*
+261. Graph Valid Tree
+You have a graph of n nodes labeled from 0 to n - 1. You are given an integer n and a list of edges where edges[i] = [ai, bi]
+indicates that there is an undirected edge between nodes ai and bi in the graph.
+Return true if the edges of the given graph make up a valid tree, and false otherwise.
+Example 1:
+Input: n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]
+Output: true
+ */
+
+        public boolean validTree(int n, int[][] edges) {
+            // initialize adjacency list
+            List<List<Integer>> adjList = new ArrayList<List<Integer>>(n);
+
+            // initialize vertices
+            for (int i = 0; i < n; i++)
+                adjList.add(i, new ArrayList<Integer>());
+
+            // add edges
+            for (int i = 0; i < edges.length; i++) {
+                int u = edges[i][0], v = edges[i][1];
+                adjList.get(u).add(v);
+                adjList.get(v).add(u);
+            }
+
+            boolean[] visited = new boolean[n];
+
+            // make sure there's no cycle
+            if (hasCycle(adjList, 0, visited, -1))
+                return false;
+
+            // make sure all vertices are connected
+            for (int i = 0; i < n; i++) {
+                if (!visited[i])
+                    return false;
+            }
+
+            return true;
+        }
+
+        // check if an undirected graph has cycle started from vertex u
+        boolean hasCycle(List<List<Integer>> adjList, int u, boolean[] visited, int parent) {
+            visited[u] = true;
+
+            for (int i = 0; i < adjList.get(u).size(); i++) {
+                int v = adjList.get(u).get(i);
+
+                if ((visited[v] && parent != v) || (!visited[v] && hasCycle(adjList, v, visited, u)))
+                    return true;
+            }
+
+            return false;
+        }
+
 // Q128 Longest consecutive sequence #TopInterviewQuestion #GoodQuestion #Facebook #Uber
 // Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
 // For example, Given [100, 4, 200, 1, 3, 2],
 // The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
+
 // Solution:
 // We will use HashTable. The key thing is to keep track of the sequence length and store that in the boundary
 // points of the sequence. For example, as a result, for sequence {1, 2, 3, 4, 5}, map.get(1) and map.get(5) should both return 5.
 // Whenever a new element n is inserted into the map, do two things: See if n - 1 and n + 1 exist in the map,
 // and if so, it means there is an existing sequence next to n.
+
 // Variables left and right will be the length of those two sequences, while 0 means there is no sequence
 // and n will be the boundary point later. Store (left + right + 1) as the associated value to key n into
 // the map. Use left and right to locate the other end of the sequences to the left and right of n respectively, and
@@ -5287,7 +5518,7 @@ public String decodeString(String s) {
     }
 
 
- // Q33 Search in a rotated sorted array #TopInterviewQuestion
+ // Q33 Search in rotated sorted array #TopInterviewQuestion
 //	Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.(i.e.,
 // [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]). You are given a target value to search. If found in the array return its index,
 // otherwise return -1. You may assume no duplicate exists in the array.
@@ -5690,7 +5921,39 @@ public String decodeString(String s) {
         return results;
     }
 
-    // Q120 Triangle #GoodQuestion  #NobdyAskedthisQuestioninLast6Months
+    // Variation of work break 2 problem
+    /*
+    sent = "ilikestarbucks" => ["i","like","starbucks"]
+    words = "i,like,starbuck,sta,bucks,st,ar,a".split(",")
+
+    input  List<String> words =Arrays.asList("i","like","starbuck","sta","bucks","st","ar","a");
+ */
+    public List<String> tokenize(String sent, List<String> words) {
+        return tokenizeUtil(sent,words);
+    }
+
+    public List<String> tokenizeUtil(String s , List<String> words){
+        List<String> results = new ArrayList<>();
+        if(s.length()==0){
+            return results;
+        }
+
+        for(String word : words){
+            if(s.startsWith(word)){
+                String sub = s.substring(word.length());
+                List<String> subStrings = tokenizeUtil(sub,words);
+                if(subStrings!=null){
+                    results.add(word);
+                    results.addAll(subStrings);
+                    return results;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    // Q120 Triangle #GoodQuestion
     // Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on
     // the row below.
     // For example, given the following triangle
@@ -5922,8 +6185,8 @@ public String decodeString(String s) {
         if (numerator == 0)
             return "0";
         StringBuilder result = new StringBuilder();
-        Long n = new Long(numerator);
-        Long d = new Long(denominator);
+        Long n = Long.valueOf(numerator);
+        Long d = Long.valueOf(denominator);
         // negative or positive
         if (n * d < 0)
             result.append("-");
@@ -6299,32 +6562,6 @@ public String decodeString(String s) {
         return ret;
     }
 
-    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook
-    // Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
-    // Calling next() will return the next smallest number in the BST.
-    // Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
-    private Stack<TreeNode> stack = new Stack<>();
-
-    public void constructor(TreeNode root) {
-        pushAll(root);
-    }
-
-    /** @return whether we have a next smallest number */
-    public boolean hasNext() {
-        return !stack.isEmpty();
-    }
-
-    /** @return the next smallest number */
-    public int next() {
-        TreeNode tmpNode = stack.pop();
-        pushAll(tmpNode.right);  //important step
-        return tmpNode.val;
-    }
-
-    private void pushAll(TreeNode node) {
-        for (; node != null; stack.push(node), node = node.left);
-    }
-
     // Q155 Min Stack #TopInterviewQuestion
     // Design a stack that supports push, pop, top, and retrieving the minimum
     // element in constant time.
@@ -6556,141 +6793,6 @@ public String decodeString(String s) {
         throw new IllegalArgumentException();
     }
 
-    // Q252 Meeting Rooms I
-    // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
-    // determine if a person could attend all meetings. For example, Given [[0, 30],[5, 10],[15, 20]], return false.
-    // If a person can attend all meetings, there must not be any overlaps between any meetings.
-    // After sorting the intervals, we can compare the current end and next start.
-    public boolean canAttendMeetings(Interval[] intervals) {
-        Arrays.sort(intervals, new Comparator<Interval>() {  // this takes O(n log n) complexity
-            public int compare(Interval a, Interval b) {
-                return a.start - b.start;
-            }
-        });
-
-        for (int i = 0; i < intervals.length - 1; i++) {  // this is O(n)
-            if (intervals[i].end > intervals[i + 1].start) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // another way
-//    In the above implementation, you use the sort method to get all objects sorted - O(nlogn) time complexity.
-//    After sorting you go through each object comparing it with the previous object to find if there is an overlap - O(n) time complexity.
-//
-//    What if you can find if there is an overlap while you sort and raise a flag?
-//
-//    Here's my implementation:
-
-    private boolean canAttendMeetings2(Interval[] intervals) {
-        try {
-            Arrays.sort(intervals, new IntervalComparator());
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    private class IntervalComparator implements Comparator<Interval> {
-        @Override
-        public int compare(Interval o1, Interval o2) {
-            if (o1.start < o2.start && o1.end <= o2.start)
-                return -1;
-            else if (o1.start > o2.start && o1.start >= o2.end)
-                return 1;
-            throw new RuntimeException();
-        }
-    }
-
-// thirdway
-// the start and end of interval i all stayed in the ith position in array starts or ends. In this situation,
-// what's left to do is easy to understand, just make sure no start[i] is smaller than end[i-1] for i=1..length-1 is okay.
-        public boolean canAttendMeetings3(Interval[] intervals) {
-            int len = intervals.length;
-            if (len == 0) {
-                return true;
-            }
-            int[] begin = new int[len];
-            int[] stop = new int[len];
-            for (int i = 0; i < len; i++) {
-                begin[i] = intervals[i].start;
-                stop[i] = intervals[i].end;
-            }
-            Arrays.sort(begin);
-            Arrays.sort(stop);
-            int endT = 0;
-            for (int i = 1; i < len; i++) {
-                if (begin[i] < stop[i - 1]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        // Q253 Meeting Rooms II #TopInterviewQuestion
-        // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
-        // find the minimum number of conference rooms required.
-        public int minMeetingRooms(Interval[] intervals) {
-
-            if (intervals == null || intervals.length == 0)
-                return 0;
-            Arrays.sort(intervals, new Comparator<Interval>() {
-                public int compare(Interval i1, Interval i2) {
-                    return i1.start - i2.start;
-                }
-            });
-
-            PriorityQueue<Integer> queue = new PriorityQueue<>();
-            // it has  to be a priority queue instead of a simple queue.. for example [[0,30],[5,10],[15,20]]
-
-            int count = 1;
-            queue.offer(intervals[0].end);
-
-            for (int i = 1; i < intervals.length; i++) {
-                if (intervals[i].start < queue.peek()) {
-                    count++;
-
-                } else {
-                    queue.poll();
-                }
-
-                queue.offer(intervals[i].end); //this is the main point to remember
-            }
-            return count;
-        }
-
-        //good solution but have to see the concept again
-        //    He is checking how many meetings begin before the earliest-ended meeting ends.
-        //    For eg:
-        //    Starts 1,5,6,9,10
-        //    Ends 8,11,12,13,14
-        //    so meeting 1,5,6 start before first meeting ends at 8 so we need 3 rooms.
-        //            For 9 and 8 we just move i++ and endsItr++ ( think of as it took the spot of the meeting ended at 8.)
-        //    then for 10 an  d 11.. all previous rooms are occupied and one of them ends after 10... so we need a room for a
-        //    meeting starting at 10
-        //    so total 4 rooms
-        public int minMeetingRooms2(Interval[] intervals) {
-            int[] starts = new int[intervals.length];
-            int[] ends = new int[intervals.length];
-            for (int i = 0; i < intervals.length; i++) {
-                starts[i] = intervals[i].start;
-                ends[i] = intervals[i].end;
-            }
-            Arrays.sort(starts);
-            Arrays.sort(ends);
-            int rooms = 0;
-            int endsItr = 0;
-            for (int i = 0; i < starts.length; i++) {
-                if (starts[i] < ends[endsItr])
-                    rooms++;
-                else
-                    endsItr++;
-            }
-            return rooms;
-        }
-
         // NOT a LeetcodePrograms question BUT similar to the above one. Only difference
         // Meeting start time and end times are two different arrays Returns minimum number of platforms required
         public  int findPlatform(int arr[], int dep[], int n) {
@@ -6793,9 +6895,6 @@ public String decodeString(String s) {
         private int n1, insert;
         private long sum;
 
-        /**
-         * Initialize your data structure here.
-         */
         public void MovingAverageConstructor(int size) {
             window = new int[size];
             insert = 0;
@@ -6972,6 +7071,7 @@ public String decodeString(String s) {
         // Minimum Window Substring #GoodQuestion
         //    Input: S = "ADOBECODEBANC", T = "ABC"
         //    Output: "BANC"
+    // second way is better
         public static String minWindow(String s, String t) {
             Map<Character, Integer> map = new HashMap<>();
             for (char temp : s.toCharArray()) {
@@ -7007,59 +7107,52 @@ public String decodeString(String s) {
             return minLength == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLength);
         }
 
-    // same question as above but with the string and not playing with the characters
-    public static String findMatch(String str , String query){
-        String queryArr[] = query.split(" ");
-        String strArr[] = str.split(" ");
-        Map<String, Integer> map = new HashMap<>();
-        for(int i = 0 ; i < strArr.length ; i++){
-            map.put(strArr[i] , 0);
-        }
-        for(int i = 0 ; i < queryArr.length ; i++){
-            if(map.containsKey(queryArr[i])){
-                map.put(queryArr[i] , map.get(queryArr[i])+1);
-            }
-        }
-
-        int start = 0, end = 0 , minLength = Integer.MAX_VALUE , minStart = 0;
-        int numOfTargets = queryArr.length;
-        while(end < strArr.length){
-            String current = strArr[end];
-            if(map.get(current) > 0){
-                numOfTargets--;
-            }
-
-            map.put(current , map.get(current) -1 );
-
-            //query - key list - input
-            //doc [start, end]
-
-            while(numOfTargets == 0){
-                if(minLength > end - start + 1){
-                    minLength = end - start + 1;
-                    minStart = start;
-                }
-                String head = strArr[start];
-                if(map.get(head) >= 0){
-                    numOfTargets++;
-                }
-
-                map.put(head , map.get(head)+1);
-                start++;
-            }
-            end++;
-        }
-        if(minLength == Integer.MAX_VALUE){
+    public static String minWindow2(String s, String t) {
+        if(s == null || s.length() < t.length() || s.length() == 0){
             return "";
-
-        }else{
-            StringBuilder sb = new StringBuilder();
-            for(int i = minStart ; i < minStart + minLength ; i++){
-                sb.append(strArr[i] + " ");
-            }
-            return sb.toString();
         }
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+        for(char c : t.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c,map.get(c)+1);
+            }else{
+                map.put(c,1);
+            }
+        }
+        int left = 0;
+        int minLeft = 0;
+        int minLen = s.length()+1;
+        int count = 0;
+        for(int right = 0; right < s.length(); right++){
+            if(map.containsKey(s.charAt(right))){
+                map.put(s.charAt(right),map.get(s.charAt(right))-1);
+                if(map.get(s.charAt(right)) >= 0){
+                    count ++;
+                }
+                while(count == t.length()){
+                    if(right-left+1 < minLen){
+                        minLeft = left;
+                        minLen = right-left+1;
+                    }
+                    if(map.containsKey(s.charAt(left))){
+                        map.put(s.charAt(left),map.get(s.charAt(left))+1);
+                        if(map.get(s.charAt(left)) > 0){
+                            count --;
+                        }
+                    }
+                    left ++ ;
+                }
+            }
+        }
+        if(minLen>s.length())
+        {
+            return "";
+        }
+
+        return s.substring(minLeft,minLeft+minLen);
     }
+
+
         // second method is better
         //Shuffle of a given array
         static void randomize(int arr[], int n) {
@@ -7156,9 +7249,6 @@ public String decodeString(String s) {
             return true;
         }
 
-        /**
-         * Get a random element from the set.
-         */
         public int getRandom() {
             return list.get(rand.nextInt(list.size()));
         }
@@ -7176,9 +7266,7 @@ public String decodeString(String s) {
             return true;
         }
 
-        /**
-         * Get a random element from the set.
-         */
+        // Get a random element from the set.
         public int getRandom1() {
             int max = list.size();
             int min = 0;
@@ -7238,205 +7326,6 @@ public String decodeString(String s) {
             }
         }
 
-        // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion #matrix
-        // Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
-        // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
-        // Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
-        // Every time when you poll out the root(Top Element in Heap), you need to
-        // know the row number and column number of that element(so we can create a tuple class here), replace that root
-        // with the next element from the same column. explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
-        // time complexity of this one O(min(K,N)+K*logN)
-
-        public int kthSmallest(int[][] matrix, int k) {
-            int n = matrix.length;
-            PriorityQueue<Tuple> pq = new PriorityQueue<>();
-            for (int j = 0; j <= n - 1; j++)
-                pq.offer(new Tuple(0, j, matrix[0][j]));
-            for (int i = 0; i < k - 1; i++) {
-                Tuple t = pq.poll();
-                if (t.x == n - 1)
-
-                    continue;
-                pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
-            }
-            return pq.poll().val;
-        }
-
-        // or
-        // have to understand again . quite complicated
-//        time complexity for binary search is O(n * n log(max_element - min_element) where n is the number of rows.
-    public int kthSmallest2(int[][] matrix, int k) {
-            int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;// [lo , hi)
-            while (lo < hi) {
-                int mid = lo + (hi - lo) / 2;
-                int count = 0, j = matrix[0].length - 1;
-                for (int i = 0; i < matrix.length; i++) {
-                    while (j >= 0 && matrix[i][j] > mid)
-                        j--;
-                    count += (j + 1);
-                }
-                if (count < k)
-                    lo = mid + 1;
-                else
-                    hi = mid;
-            }
-            return lo;
-        }
-
-        // Given a list of strings write a function to write the kth most frequent recurrent strings
-        public String kthMostFrequentString(String[] string, int k) {
-            HashMap<String, Integer> map = new HashMap<>();
-            for (String s : string) {
-                Integer x = map.get(s);
-                if (x == null)
-                    x = 0;
-                map.put(s, ++x);
-            }
-            List<Map.Entry> list = new ArrayList(map.entrySet());
-
-            // Collections.sort(list, new Comparator<GenericHashMap.Entry<String, Integer>>() {
-            // public int compare(GenericHashMap.Entry<String, Integer> a,
-            // GenericHashMap.Entry<String, Integer> b) {
-            // return b.getValue() - a.getValue();
-            // }
-            // });
-
-            Collections.sort(list, new Comparator() {
-                public int compare(Object o1, Object o2) {
-                    Integer v1 = (Integer) ((Map.Entry) o1).getValue();
-                    Integer v2 = (Integer) ((Map.Entry) o2).getValue();
-                    return v1.compareTo(v2);
-                }
-            });
-
-            if (list.size() > k)
-                return (String) (list.get(k)).getKey();
-
-            Iterator iter = list.iterator();
-            int total = 0;
-            while (iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
-                System.out.println(entry.getKey() + " " + entry.getValue());
-                total += ((int) entry.getValue());
-            }
-            return null;
-        }
-
-        //	or O(n) Solution
-        // a very smart solution where after creating a hashmap, creating an array of arraylist and storing the number according to the frequency
-        public List<Integer> topKFrequent3(int[] nums, int k) {
-
-            List<Integer>[] bucket = new List[nums.length + 1];
-            Map<Integer, Integer> frequencyMap = new HashMap<>();
-
-            for (int n : nums) {
-                frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
-            }
-
-            for (int key : frequencyMap.keySet()) {
-                int frequency = frequencyMap.get(key);
-                if (bucket[frequency] == null) {
-                    bucket[frequency] = new ArrayList<>();
-                }
-                bucket[frequency].add(key);
-            }
-
-            List<Integer> res = new ArrayList<>();
-
-            for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
-                if (bucket[pos] != null) {
-                    res.addAll(bucket[pos]);
-                }
-            }
-            return res;
-        }
-
-        // same logic as above but above they have string below we have set of integers.
-        // Q347 Top k frequent elements #TopInterviewQuestion
-        // Given a non-empty array of integers, return the k most frequent elements.
-        // For example, Given [1,1,1,2,2,3] and k = 2, return [1,2].
-        // this method is a much better option O(n log n)
-        public List<Integer> topKFrequent(int[] nums, int k) {
-            if (nums == null) {
-                return null;
-            }
-
-            Map<Integer, Integer> freqs = new HashMap<>();
-            for (int num : nums) {
-                freqs.put(num, freqs.getOrDefault(num, 0) + 1);
-            }
-
-            List<Map.Entry<Integer, Integer>> entries = new ArrayList<>(freqs.entrySet());
-            // Collections.sort method is only applicable to list and thus we are adding the complete hashmap in the list
-            Collections.sort(entries, new Comparator<Map.Entry<Integer, Integer>>() {
-                public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
-                    return b.getValue() - a.getValue();
-                }
-            });
-
-            List<Integer> results = new ArrayList<>();
-            for (int i = 0; i < k; i++) {
-                results.add(entries.get(i).getKey());
-            }
-
-            return results;
-        }
-
-        // or another way is below. Use treeMap. Use freqncy as the key so we can get all freqencies in order
-        public List<Integer> topKFrequent2(int[] nums, int k) {
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int n : nums) {
-                map.put(n, map.getOrDefault(n, 0) + 1);
-            }
-
-            TreeMap<Integer, List<Integer>> freqMap = new TreeMap<>();
-            for (int num : map.keySet()) {
-                int freq = map.get(num);
-                if (!freqMap.containsKey(freq)) {
-                    freqMap.put(freq, new LinkedList<>());
-                }
-                freqMap.get(freq).add(num);
-            }
-
-            List<Integer> res = new ArrayList<>();
-            while (res.size() < k) {
-                Map.Entry<Integer, List<Integer>> entry = freqMap.pollLastEntry();
-                res.addAll(entry.getValue());
-            }
-            return res;
-        }
-
-    public List<String> topKFrequent(String[] words, int k) {
-
-        List<String> result = new LinkedList<>();
-        Map<String, Integer> map = new HashMap<>();
-        for(int i=0; i<words.length; i++)
-        {
-            if(map.containsKey(words[i]))
-                map.put(words[i], map.get(words[i])+1);
-            else
-                map.put(words[i], 1);
-        }
-
-        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
-                (a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue()
-        );
-
-
-
-        for(Map.Entry<String, Integer> entry: map.entrySet())
-        {
-            pq.offer(entry);
-            if(pq.size()>k)
-                pq.poll();
-        }
-
-        while(!pq.isEmpty())
-            result.add(0, pq.poll().getKey());
-
-        return result;
-    }
-
         // Q341 Flatten Nest List Iterator #TopInterviewQuestion   #Facebook #UberQuestion
         // In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack,
         // it returns the very first element. Second, in the hasNext() function, we peek the first element in stack currently,
@@ -7472,86 +7361,7 @@ public String decodeString(String s) {
             }
         }
 
-        // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
-        void inorderTraversal(TreeNode root) {
-            if (root == null)
-                return;
-            Stack<TreeNode> stack = new Stack<>();
-            TreeNode current = root;
-            boolean done = false;
-            while (!done) {
-                if (current != null) {
-                    stack.push(current);
-                    current = current.left;
-                } else {
-                    if (stack.isEmpty())
-                        done = true;
-                    else {
-                        current = stack.pop();
-                        System.out.println(current.val);
-                        current = current.right;
-                    }
-                }
-            }
-        }
-
-        void preOrderTraversal(TreeNode root) {
-            if (root == null)
-                return;
-            Stack<TreeNode> S = new Stack<>();
-            Queue<TreeNode> Q = new LinkedList<>();
-            S.push(root);
-            while (!S.isEmpty()) {
-                TreeNode curr = S.peek();
-                Q.add(curr);
-                S.pop();
-                if (curr.right != null)
-                    S.push(curr.right);
-                if (curr.left != null)
-                    S.push(curr.left);
-
-            }
-            while (!Q.isEmpty())
-                System.out.println(Q.poll().val);
-
-        }
-
-        void postOrderTraversal(TreeNode root) {
-            if (root == null)
-                return;
-            Stack<TreeNode> Stack = new Stack<>();
-            Stack<TreeNode> out = new Stack<>();
-            Stack.push(root);
-            while (!Stack.isEmpty()) {
-                TreeNode cur = Stack.peek();
-                out.push(cur);
-                Stack.pop();
-                if (cur.left != null)
-                    Stack.push(cur.left);
-                if (cur.right != null)
-                    Stack.push(cur.right);
-            }
-            while (!out.isEmpty()) {
-                System.out.println(out.peek().val);
-                out.pop();
-            }
-
-        }
-
-        // 285	Inorder Successor of a BST
-        public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-            TreeNode succ = null;
-            while (root != null) {
-                if (p.val < root.val) {
-                    succ = root;
-                    root = root.left;
-                } else
-                    root = root.right;
-            }
-            return succ;
-        }
-
-        // Q46 Permutation of a string #TopInterviewQuestion
+        // Q46 Permutation of a string #TopInterviewQuestion #permutation
         public static HashSet<String> getAllPermutations(String str) {
             // Create a hash set to prevent any duplicate entries
             HashSet<String> permutations = new HashSet<>();
@@ -7572,30 +7382,28 @@ public String decodeString(String s) {
             return permutations;
         }
 
-        // Q105 Construct Binary Tree from Preorder and Inorder Traversal
-        // #TopInterviewQuestion
-        // Preorder traversing implies that PRE[0] is the root node. Then we can find this PRE[0] in IN, say it's IN[5].
-        // Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left side,
-        // IN[6] to the end is on the right side.  Recursively doing this on subarrays, we can build a tree out of it :)
-        public TreeNode buildTree(int[] preorder, int[] inorder) {
-            return helper(0, 0, inorder.length - 1, preorder, inorder);
-        }
+    // Time complexity : where P(N, k) = \frac{N!}{(N - k)!} = N (N - 1) ... (N - k + 1)P(N,k)=(N−k)! N! = N(N−1)...(N−k+1) is so-called k-permutations_of_n, or partial permutation.
+    // Space complexity : O(N!) since one has to keep N!
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        // Arrays.sort(nums); // not necessary
+        backtrack(list, new ArrayList<>(), nums);
+        return list;
+    }
 
-        public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
-            if (preStart > preorder.length - 1 || inStart > inEnd) {
-                return null;
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
+        if(tempList.size() == nums.length){
+            list.add(new ArrayList<>(tempList));
+        } else{
+            for(int i = 0; i < nums.length; i++){
+                if(tempList.contains(nums[i]))
+                    continue; // element already exists, skip
+                tempList.add(nums[i]);
+                backtrack(list, tempList, nums);
+                tempList.remove(tempList.size() - 1);
             }
-            TreeNode root = new TreeNode(preorder[preStart]);
-            int inIndex = 0; // Index of current root in inorder
-            for (int i = inStart; i <= inEnd; i++) {
-                if (inorder[i] == root.val) {
-                    inIndex = i;
-                }
-            }
-            root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
-            root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
-            return root;
         }
+    }
 
         // Q362 Design a hit counter which counts the number of hits received in the past 5 minutes.
         // Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made
@@ -7651,20 +7459,11 @@ public String decodeString(String s) {
         // store the number of hit for that bucket
         int[] hits;
 
-        /**
-         * Initialize your data structure here.
-         */
         public void HitCounterConstructor() {
             hits = new int[300];
             times = new int[300];
         }
 
-        /**
-         * Record a hit.
-         *
-         * @param timestamp
-         *         - The current timestamp (in seconds granularity).
-         */
         public void hit(int timestamp) {
             w.lock();
             try {
@@ -7682,12 +7481,7 @@ public String decodeString(String s) {
             }
         }
 
-        /**
-         * Return the number of hits in the past 5 minutes.
-         *
-         * @param timestamp
-         *         - The current timestamp (in seconds granularity).
-         */
+         //Return the number of hits in the past 5 minutes.
         public int getHits(int timestamp) {
             int sum = 0;
             r.lock();
@@ -7770,154 +7564,6 @@ public String decodeString(String s) {
 
         }
 
-        // Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion
-        // The idea is simple: print the tree in pre-order traversal and use "X" to denote null node and split node
-        // with ",". We can use a StringBuilder for building the string on the fly.
-        // For deserializing, we use a Queue to store the pre-order traversal and since we have "X" as null node, we
-        // know exactly how to where to end building subtress.
-
-        private static final String splitter = ",";
-        private static final String NN = "X";
-
-        // Encodes a tree to a single string.
-        public String serialize2(TreeNode root) {
-            StringBuilder sb = new StringBuilder();
-            buildString(root, sb);
-            return sb.toString();
-        }
-
-        private void buildString(TreeNode node, StringBuilder sb) {
-            if (node == null) {
-                sb.append(NN).append(splitter);
-            } else {
-                sb.append(node.val).append(splitter);
-                buildString(node.left, sb);
-                buildString(node.right, sb);
-            }
-        }
-
-        // Decodes your encoded data to tree.
-        public TreeNode deserialize2(String data) {
-            //Deque<String> nodes = new LinkedList<>();
-            Queue<String> nodes1 = new LinkedList<>();
-            //both the below statements will work
-
-            nodes1.addAll(Arrays.asList(data.split(splitter)));
-            //		Collections.addAll(nodes1, data.split(splitter)); this works too
-            return buildTree(nodes1);
-        }
-
-        private TreeNode buildTree(Queue<String> nodes) {
-            String val = nodes.remove();
-
-            if (val.equals(NN))
-                return null;
-            else {
-                TreeNode node = new TreeNode(Integer.valueOf(val));
-                node.left = buildTree(nodes);
-                node.right = buildTree(nodes);
-                return node;
-            }
-        }
-
-        // Without recursion Serialize and Deserialize
-        // Here I use typical BFS method to handle a binary tree. I use string n to
-        // represent null values. The string of the binary tree in the example will be "1 2 3 n n 4 5 n n n
-        // n ". When deserialize the string, I assign left and right child for each not-null node, and add the not-null
-        // children to the queue, waiting to be handled later.
-        // Encodes a tree to a single string.
-        public String serialize(TreeNode root) {
-            if (root==null) return "";
-            Queue<TreeNode> qu=new LinkedList<>();
-            StringBuilder sb=new StringBuilder();
-            qu.offer(root);
-            sb.append(String.valueOf(root.val));
-            sb.append(' ');
-            while (!qu.isEmpty()) {
-                TreeNode x=qu.poll();
-                if (x.left==null) sb.append("null ");
-                else {
-                    qu.offer(x.left);
-                    sb.append(String.valueOf(x.left.val));
-                    sb.append(' ');
-                }
-                if (x.right==null) sb.append("null ");
-                else {
-                    qu.offer(x.right);
-                    sb.append(String.valueOf(x.right.val));
-                    sb.append(' ');
-                }
-            }
-            return sb.toString();
-        }
-
-    // Decodes your encoded data to tree.
-    // Decodes your encoded data to tree.
-    // in decoding there are 2 queues one for pushing the main element and then second is used for the left and right
-    // of it and once the iteration of the outer queue is finished, we set the outerqueue as inner queue and then
-    // another round of iteration goes
-
-    public TreeNode deserialize(String data) {
-        if (data.length()==0) return null;
-        String[] node=data.split(" ");
-        Queue<TreeNode> qu=new LinkedList<>();
-        TreeNode root=new TreeNode(Integer.valueOf(node[0]));
-        qu.offer(root);
-        int i=1;
-        while (!qu.isEmpty()) {
-            Queue<TreeNode> nextQu=new LinkedList<>();
-            while (!qu.isEmpty()) {
-                TreeNode x=qu.poll();
-                if (node[i].equals("null")) x.left=null;
-                else {
-                    x.left=new TreeNode(Integer.valueOf(node[i]));
-                    nextQu.offer(x.left);
-                }
-                i++;
-                if (node[i].equals("null")) x.right=null;
-                else {
-                    x.right=new TreeNode(Integer.valueOf(node[i]));
-                    nextQu.offer(x.right);
-                }
-                i++;
-            }
-            qu=nextQu;
-        }
-        return root;
-    }
-
-    // no need to use 2 queues in the above deserialization
-    public TreeNode deserialize_bfs(String data) {
-        if (data.length()==0) return null;
-        String[] node=data.split(" ");
-        Queue<TreeNode> qu=new LinkedList<>();
-        TreeNode root=new TreeNode(Integer.valueOf(node[0]));
-        qu.offer(root);
-        int i=1;
-        while (!qu.isEmpty()) {
-            // Queue<TreeNode> nextQu=new LinkedList<>();
-            while (!qu.isEmpty()) {
-                int size = qu.size();
-                for (int y = 0; y < size; ++y) {
-                    TreeNode x=qu.poll();
-                    if (node[i].equals("null")) x.left=null;
-                    else {
-                        x.left=new TreeNode(Integer.valueOf(node[i]));
-                        qu.offer(x.left);
-                    }
-                    i++;
-                    if (node[i].equals("null")) x.right=null;
-                    else {
-                        x.right=new TreeNode(Integer.valueOf(node[i]));
-                        qu.offer(x.right);
-                    }
-                    i++;
-                }
-            }
-        }
-        return root;
-    }
-
         // Q680 Valid palindrome 2 #GoodQuestion #FacebookQuestion #Palindrome
         // Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome
         public boolean validPalindrome2(String s) {
@@ -7942,39 +7588,6 @@ public String decodeString(String s) {
                     return false;
             }
             return true;
-        }
-
-        // Minimum insertions to form a palindrome #GoodQuestion
-        // Base Case For Recursive Solution : if l > h (we crossed pointers) return INT_MAX
-        // if l == h return 0; (only one character, which is already palindrome, 0 insertion is required to make it palindrome)
-        // if l == h-1 and if str[l] == str[h] return 0; (if two length string example “aa or ab” and both characters are same ie
-        // : “aa” , its already palindrome,  so return 0)
-        // if l == h-1 and if str[l] != str[h] return 1; (if two length string is there example “ab” and both characters are
-        // different , we need 1 insertion to make this string a palindrome one ie “bab” or “aba“
-        // very well explained. https://www.youtube.com/watch?v=DOnK40BvazI
-        int findMinInsertionsRec(char str[], int l, int h) {
-            if (l > h)
-                return Integer.MAX_VALUE;
-            if (l == h)
-                return 0; // only 1 character
-            if (l == h - 1)
-                return (str[l] == str[h]) ? 0 : 1;
-            // this is for aa , ab type of strings when there is only 2 characters
-
-            return (str[l] == str[h]) ? findMinInsertionsRec(str, l + 1, h - 1)
-                    : (Math.min(findMinInsertionsRec(str, l, h - 1), findMinInsertionsRec(str, l + 1, h)) + 1);
-        }
-
-        int findMinInsertionsDP(char str[], int n) {
-            int[][] table = new int[n][n];
-            int l, h, len;
-            // memset(table, 0, sizeof(table));
-            Arrays.fill(table, 0);
-            for (len = 1; len < n; len++) // ++gap for length of the string as 1,2,3,4..n
-                for (l = 0, h = len; h < n; l++, h++) // it was ++l,++h
-                    table[l][h] = (str[l] == str[h]) ? table[l + 1][h - 1]
-                            : (Math.min(table[l][h - 1], table[l + 1][h]) + 1);
-            return table[0][n - 1];
         }
 
         // 658. Find K Closest Elements
@@ -8075,203 +7688,119 @@ public String decodeString(String s) {
             return res;
         }
 
-        // Q334 Increasing triplet subsequence #NOTaTopInterviewQuestion #FacebookTwice
-        // Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
-        public boolean increasingTriplet(int[] nums) {
-            // start with two largest values, as soon as we find a number bigger than both, while both have been updated, return true.
-            int small = Integer.MAX_VALUE, big = Integer.MAX_VALUE;
-            for (int n : nums) {
-                if (n <= small) {
-                    small = n;
-                } // update small if n is smaller than both ..// c1 is min seen so
-                // far (it's a candidate for 1st element)
-                else if (n <= big) { // here when x > c1, i.e. x might be either c2 or c3
-                    big = n;
-                } // update big only if greater than small but smaller than big .. x is better than the current c2, store it
-                else
-                    return true; // return if you find a number bigger than both the increasing subsequence of 3 elements exists
-            }
-            return false;
+
+//    349. Intersection of Two Arrays
+//    Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+//
+//    Example 1:
+//    Input: nums1 = [1,2,2,1], nums2 = [2,2]
+//    Output: [2]
+//    Example 2:
+//
+//    Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+//    Output: [9,4]
+//    Explanation: [4,9] is also accepted.
+
+//    Use two hash sets
+//    Time complexity: O(n)
+
+
+    public int[] intersection1(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> intersect = new HashSet<>();
+        for (int i = 0; i < nums1.length; i++) {
+            set.add(nums1[i]);
         }
-
-        // Q674 longest continuous increase subsequence #GoodQuestion #faceBookQuestion
-        // Given an unsorted array of integers, find the length of longest continuous increasing subsequence (subarray).
-        public int findLengthOfLCIS(int[] nums) {
-            int res = 0, cnt = 0;
-            for (int i = 0; i < nums.length; i++) {
-                if (i == 0 || nums[i - 1] < nums[i])
-                    res = Math.max(res, ++cnt);
-                else
-                    cnt = 1;
+        for (int i = 0; i < nums2.length; i++) {
+            if (set.contains(nums2[i])) {
+                intersect.add(nums2[i]);
             }
-            return res;
         }
-
-        // Q45 Jump Game II
-        // Given an array of non-negative integers, you are initially positioned at the first index of the array.
-        // Each element in the array represents your maximum jump length at that position.
-        // Your goal is to reach the last index in the minimum number of jumps.
-        // In this method, we build a jumps[] array from left to right such that jumps[i] indicates the minimum
-        // number of jumps needed to reach arr[i] from arr[0]. Finally, we return jumps[n-1].
-        // tushar roy example. https://www.youtube.com/watch?v=cETfFsSTGJI
-        private static int minJumps2(int[] arr, int n) {
-            int jumps[] = new int[n]; // jumps[n-1] will hold the result ..
-            // this is basically the minimum number of jumps needed to reach to that point
-            int i, j;
-            if (n == 0 || arr[0] == 0)
-                return Integer.MAX_VALUE; // if first element is 0, END CANNOT BE REACHED
-            jumps[0] = 0;
-            // Find the minimum number of jumps to reach arr[i] from arr[0], and assign this value to jumps[i]
-            for (i = 1; i < n; i++) {
-                jumps[i] = Integer.MAX_VALUE;
-                for (j = 0; j < i; j++) {
-                    if (i <= j + arr[j]) {   // can i reach i from j
-                        jumps[i] = Math.min(jumps[i], jumps[j] + 1);
-                        break;
-                    }
-                }
-            }
-            return jumps[n - 1];
+        int[] result = new int[intersect.size()];
+        int i = 0;
+        for (Integer num : intersect) {
+            result[i++] = num;
         }
+        return result;
+    }
 
-        // O(n) complexity for the jump game 2
-        public int jump(int A[]) {
-            if (A.length <= 1)
-                return 0;
-            int ladder = A[0];
-            int stairs = A[0];
-            int jump = 1;
-            for (int level = 1; level < A.length; level++) {
-                if (level == A.length - 1)
-                    return jump;
-                if (level + A[level] > ladder)
-                    ladder = level + A[level]; //build up the ladder
-                stairs--; //use up the stairs
-                if (stairs == 0) {
-                    jump++;
-                    stairs = ladder - level;
-                }
-            }
-            return jump;
-        }
-
-// Q56 Merge Intervals
-// Sorting takes O(n log(n)) and merging the intervals takes O(n). So, the resulting algorithm takes O(n log(n)).
-    public List<Interval> merge(List<Interval> intervals) {
-            List<Interval> result = new ArrayList<>();
-            if (intervals == null || intervals.size() == 0)
-                return result;
-            // Sort by ascending starting point using an anonymous Comparator
-            Collections.sort(intervals, new Comparator<Interval>() {
-                public int compare(Interval i1, Interval i2) {
-                    if (i1.start != i2.start)
-                        return i1.start - i2.start;
-                    else
-                        return i1.end - i2.end;
-                }
-            });
-            Interval pre = intervals.get(0);
-            for (int i = 0; i < intervals.size(); i++) {
-                Interval curr = intervals.get(i);
-                if (curr.start > pre.end) {
-                    result.add(pre);
-                    pre = curr;
-                } else {
-                    Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
-                    pre = merged; //over here it is not getting merged as there is a possibility that
-                    // next element could be merged
-                }
-            }
-            result.add(pre);
-            return result;
-        }
-
-        // Q57 Insert Interval  #TopInterviewQuestion
-        public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-
-            List<Interval> result = new ArrayList<>();
-            int i = 0;
-            int start = newInterval.start;
-            int end = newInterval.end;
-
-            while (i < intervals.size() && intervals.get(i).end < start) {
-                result.add(intervals.get(i++));
-            }
-
-            while (i < intervals.size() && intervals.get(i).start <= end) {
-                start = Math.min(start, intervals.get(i).start);
-                end = Math.max(end, intervals.get(i).end);
+    //    Sort both arrays, use two pointers
+//
+//    Time complexity: O(nlogn)
+    public int[] intersection2(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i = 0;
+        int j = 0;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] < nums2[j]) {
                 i++;
-            }
-
-            result.add(new Interval(start, end));
-
-            while (i < intervals.size())
-                result.add(intervals.get(i++));
-            return result;
-        }
-
-// K closest point using priority queue#GoodQuestion
-// the time complexity is O(NlogK),
-    public Point[] findKClosestPoints(Point[] points, int k, Point target) {
-            if (points == null || points.length == 0 || k < 1 || k > points.length)
-                return points;
-            Queue<Point> pq = new PriorityQueue<>(k, new Comparator<Point>() {
-                public int compare(Point p1, Point p2) {
-                    int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
-                    int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);
-                    return d1 - d2; // this will be d2 - d1
-                }
-            });
-            for (Point p : points) {
-                pq.offer(p);
-                if (pq.size() > k)
-                    pq.poll();
-            }
-            Point[] res = new Point[k];
-            for (int i = k - 1; i >= 0; i--)
-                res[i] = pq.poll();
-
-            return res;
-        }
-
-//  K closest point using quick select algorithm
-    public int[][] kClosest(int[][] points, int K) {
-        int len =  points.length, l = 0, r = len - 1;
-        while (l <= r) {
-            int mid = helper(points, l, r);
-            if (mid == K) break;
-            if (mid < K) {
-                l = mid + 1;
+            } else if (nums1[i] > nums2[j]) {
+                j++;
             } else {
-                r = mid - 1;
+                set.add(nums1[i]);
+                i++;
+                j++;
             }
         }
-        return Arrays.copyOfRange(points, 0, K);
-    }
-
-    private int helper(int[][] A, int l, int r) {
-        int[] pivot = A[l];
-        while (l < r) {
-            while (l < r && compare(A[r], pivot) >= 0)
-                r--;
-            A[l] = A[r];
-            while (l < r && compare(A[l], pivot) <= 0)
-                l++;
-            A[r] = A[l];
+        int[] result = new int[set.size()];
+        int k = 0;
+        for (Integer num : set) {
+            result[k++] = num;
         }
-        A[l] = pivot;
-        return l;
+        return result;
     }
 
-    private int compare(int[] p1, int[] p2) {
-        return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
+//    Binary search
+//    Time complexity: O(nlogn)
+    public int[] intersection3(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.sort(nums2);
+        for (Integer num : nums1) {
+            if (binarySearch(nums2, num)) {
+                set.add(num);
+            }
+        }
+        int i = 0;
+        int[] result = new int[set.size()];
+        for (Integer num : set) {
+            result[i++] = num;
+        }
+        return result;
     }
 
-        // Q127 Word ladder #TopInterviewQuestion
-        // Given two words (beginWord and endWord), and a dictionary's word list,
-        // find the length of shortest transformation sequence from beginWord to endWord, such that Only one letter can be changed at a time.
-        // Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+    public boolean binarySearch(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+                return true;
+            }
+            if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return false;
+    }
+
+// Q127 Word ladder #TopInterviewQuestion
+// Given two words (beginWord and endWord), and a dictionary's word list,
+// find the length of shortest transformation sequence from beginWord to endWord, such that Only one letter can be changed at a time.
+// Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+
+//  both the solution are bfs
+//  Approach "The idea behind bidirectional search is to run two simultaneous searches—one forward from
+//  the initial state and the other backward from the goal—hoping that the two searches meet in
+//  the middle.
+//
+// The time complexity is O(lN) where l is the length of the word and N is the total number of words in the dictionary.
+// To get the neighbors of one word, it takes 26 l. To get all neighbors, it will take at most 26lN since it only has N words
+// and all other branches that are not in the dictionary won't be traversed.
+// Space complexity is O(N) N is the total number of words in the dictionary
         public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
             Set<String> beginSet = new HashSet<>();
             Set<String> endSet = new HashSet<>();
@@ -8309,6 +7838,44 @@ public String decodeString(String s) {
             }
             return 0;
         }
+
+//    BFS using queue
+//    Time Complexity :- BigO(M^2 * N), where M is size of dequeued word & N is size of our word list
+//    Space Complexity :- BigO(M * N) where M is no. of character that we had in our string & N is the size of our wordList.
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> set = new HashSet<>(wordList);
+        if(!set.contains(endWord)) return 0;
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
+        Set<String> visited = new HashSet<>();
+        queue.add(beginWord);
+        int changes = 1;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i++){
+                String word = queue.poll();
+                if(word.equals(endWord))
+                    return changes;
+
+                for(int j = 0; j < word.length(); j++){
+                    for(int k = 'a'; k <= 'z'; k++){
+                        char arr[] = word.toCharArray();
+                        arr[j] = (char) k;
+
+                        String str = new String(arr);
+                        if(set.contains(str) && !visited.contains(str)){
+                            queue.add(str);
+                            visited.add(str);
+                        }
+                    }
+                }
+            }
+            ++changes;
+        }
+        return 0;
+    }
+
 //    126. Word Ladder II
 //    Given two words (beginWord and endWord), and a dictionary's word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:
 //
@@ -8403,6 +7970,7 @@ public String decodeString(String s) {
             bfs(tmp, endWord, map, dict);
         }
     }
+
         // Q207 Course Schedule #TopInterviewQuestion
         // There are a total of n courses you have to take, labeled from 0 to n-1. Some courses may have prerequisites,
         // for example to take course 0 you have to first take course 1, which is expressed as a pair:
@@ -8478,8 +8046,619 @@ public String decodeString(String s) {
             }
         }
 
-        // Tree Related Questions
-        // Q230 kth smallest element in the BST #TopInterviewQuestion
+// #Interval Questions
+
+    // Q252 Meeting Rooms I
+    // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
+    // determine if a person could attend all meetings. For example, Given [[0, 30],[5, 10],[15, 20]], return false.
+    // If a person can attend all meetings, there must not be any overlaps between any meetings.
+    // After sorting the intervals, we can compare the current end and next start.
+    public boolean canAttendMeetings(Interval[] intervals) {
+        Arrays.sort(intervals, new Comparator<Interval>() {  // this takes O(n log n) complexity
+            public int compare(Interval a, Interval b) {
+                return a.start - b.start;
+            }
+        });
+
+        for (int i = 0; i < intervals.length - 1; i++) {  // this is O(n)
+            if (intervals[i].end > intervals[i + 1].start) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // another way
+//    In the above implementation, you use the sort method to get all objects sorted - O(nlogn) time complexity.
+//    After sorting you go through each object comparing it with the previous object to find if there is an overlap - O(n) time complexity.
+//
+//    What if you can find if there is an overlap while you sort and raise a flag?
+//
+//    Here's my implementation:
+
+    private boolean canAttendMeetings2(Interval[] intervals) {
+        try {
+            Arrays.sort(intervals, new IntervalComparator());
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private class IntervalComparator implements Comparator<Interval> {
+        @Override
+        public int compare(Interval o1, Interval o2) {
+            if (o1.start < o2.start && o1.end <= o2.start)
+                return -1;
+            else if (o1.start > o2.start && o1.start >= o2.end)
+                return 1;
+            throw new RuntimeException();
+        }
+    }
+
+    // thirdway
+// the start and end of interval i all stayed in the ith position in array starts or ends. In this situation,
+// what's left to do is easy to understand, just make sure no start[i] is smaller than end[i-1] for i=1..length-1 is okay.
+    public boolean canAttendMeetings3(Interval[] intervals) {
+        int len = intervals.length;
+        if (len == 0) {
+            return true;
+        }
+        int[] begin = new int[len];
+        int[] stop = new int[len];
+        for (int i = 0; i < len; i++) {
+            begin[i] = intervals[i].start;
+            stop[i] = intervals[i].end;
+        }
+        Arrays.sort(begin);
+        Arrays.sort(stop);
+        int endT = 0;
+        for (int i = 1; i < len; i++) {
+            if (begin[i] < stop[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Q253 Meeting Rooms II #TopInterviewQuestion #Interval
+    // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
+    // find the minimum number of conference rooms required.
+    public int minMeetingRooms(Interval[] intervals) {
+
+        if (intervals == null || intervals.length == 0)
+            return 0;
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+            }
+        });
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        // it has  to be a priority queue instead of a simple queue.. for example [[0,30],[5,10],[15,20]]
+
+        int count = 1;
+        queue.offer(intervals[0].end);
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i].start < queue.peek()) {
+                count++;
+
+            } else {
+                queue.poll();
+            }
+
+            queue.offer(intervals[i].end); //this is the main point to remember
+        }
+        return count;
+    }
+
+    //good solution but have to see the concept again
+    //    He is checking how many meetings begin before the earliest-ended meeting ends.
+    //    For eg:
+    //    Starts 1,5,6,9,10
+    //    Ends 8,11,12,13,14
+    //    so meeting 1,5,6 start before first meeting ends at 8 so we need 3 rooms.
+    //            For 9 and 8 we just move i++ and endsItr++ ( think of as it took the spot of the meeting ended at 8.)
+    //    then for 10 an  d 11.. all previous rooms are occupied and one of them ends after 10... so we need a room for a
+    //    meeting starting at 10
+    //    so total 4 rooms
+    public int minMeetingRooms2(Interval[] intervals) {
+        int[] starts = new int[intervals.length];
+        int[] ends = new int[intervals.length];
+        for (int i = 0; i < intervals.length; i++) {
+            starts[i] = intervals[i].start;
+            ends[i] = intervals[i].end;
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        int rooms = 0;
+        int endsItr = 0;
+        for (int i = 0; i < starts.length; i++) {
+            if (starts[i] < ends[endsItr])
+                rooms++;
+            else
+                endsItr++;
+        }
+        return rooms;
+    }
+
+// Q56 Merge Intervals
+// Sorting takes O(n log(n)) and merging the intervals takes O(n). So, the resulting algorithm takes O(n log(n)).
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> result = new ArrayList<>();
+        if (intervals == null || intervals.size() == 0)
+            return result;
+        // Sort by ascending starting point using an anonymous Comparator
+        Collections.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval i1, Interval i2) {
+                if (i1.start != i2.start)
+                    return i1.start - i2.start;
+                else
+                    return i1.end - i2.end;
+            }
+        });
+        Interval pre = intervals.get(0);
+        for (int i = 0; i < intervals.size(); i++) {
+            Interval curr = intervals.get(i);
+            if (curr.start > pre.end) {
+                result.add(pre);
+                pre = curr;
+            } else {
+                Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
+                pre = merged; //over here it is not getting merged as there is a possibility that
+                // next element could be merged
+            }
+        }
+        result.add(pre);
+        return result;
+    }
+
+    // Q57 Insert Interval  #TopInterviewQuestion
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+
+        List<Interval> result = new ArrayList<>();
+        int i = 0;
+        int start = newInterval.start;
+        int end = newInterval.end;
+
+        while (i < intervals.size() && intervals.get(i).end < start) {
+            result.add(intervals.get(i++));
+        }
+
+        while (i < intervals.size() && intervals.get(i).start <= end) {
+            start = Math.min(start, intervals.get(i).start);
+            end = Math.max(end, intervals.get(i).end);
+            i++;
+        }
+
+        result.add(new Interval(start, end));
+
+        while (i < intervals.size())
+            result.add(intervals.get(i++));
+        return result;
+    }
+
+//      input:  slotsA = [[10, 50], [60, 120], [140, 210]]
+//              slotsB = [[0, 15], [60, 70]]  index j
+//
+//              duration = 8
+//      First common time slot for given duration
+//      output: [60, 68]
+    static class Interval {
+        int start;
+        int end;
+        public Interval(int s, int e) {
+            start = s;
+            end = e;
+        }
+
+        @Override
+        public String toString(){
+            return "start " + start + " end " + end;
+        }
+    }
+
+    public static Interval findFirstCommonSlotOfGivenDuration(List<Interval> interval1, List<Interval> interval2, int duration) {
+        int length1 = interval1.size();
+        int length2 = interval2.size();
+        int i = 0, j = 0;
+        while (i < length1 && j < length2) {
+            if (interval1.get(i).start > interval2.get(j).end) {
+                j++;
+            } else if (interval2.get(j).start > interval1.get(i).end) {
+                i++;
+            } else {
+                int end = Math.min(interval1.get(i).end, interval2.get(j).end);
+                int start = Math.max(interval1.get(i).start, interval2.get(j).start);
+                if (end - start >= duration) {
+                    Interval result = new Interval(start, start + duration);
+                    return result;
+                }
+                i++;
+                j++;
+            }
+        }
+        return new Interval(-1, -1);
+    }
+
+//    #Tree Related Questions #BinaryTree Related Questions #BinaryTreeRelatedQuestion #Binary Tree Related Question
+
+    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook
+    // Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+    // Calling next() will return the next smallest number in the BST.
+    // Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+    private Stack<TreeNode> stack = new Stack<>();
+
+    public void constructor(TreeNode root) {
+        pushAll(root);
+    }
+
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    /** @return the next smallest number */
+    public int next() {
+        TreeNode tmpNode = stack.pop();
+        pushAll(tmpNode.right);  //important step
+        return tmpNode.val;
+    }
+
+    private void pushAll(TreeNode node) {
+        for (; node != null; stack.push(node), node = node.left);
+    }
+
+    // Q655. Print Binary Tree
+// Print a binary tree in an m*n 2D string array following these rules:
+// The row number m should be equal to the height of the given binary tree. The column number n should always be an odd number.
+// The root node's value (in string format) should be put in the exactly middle of the first row it can be put. The column and the row where
+// the root node belongs will separate the rest space into two parts (left-bottom part and right-bottom part). You should print the left subtree
+// in the left-bottom part and print the right subtree in the right-bottom part. The left-bottom part and the right-bottom part should have the same size.
+// Even if one subtree is none while the other is not, you don't need to print anything for the none subtree but still need to leave the space as large as
+// that for the other subtree. However, if two subtrees are none, then you don't need to leave space for both of them.
+// Each unused space should contain an empty string "".
+// Print the subtrees following the same rules
+
+// Solution:
+//        It could be fairly easy when we made our first observation on the problem. For the output matrix, the number of rows is height of the tree.
+//        What about the number of columns?
+//        row = 1 => col = 1 = 2^1 - 1
+//        row = 2 => col = 3 = 2^2 - 1
+//        row = 3 => col = 7 = 2^3 - 1
+//        row = 4 => col = 15 = 2^4 - 1
+//        ...
+//        row = m => col = 2^m - 1
+
+/// easy approach
+//        This can be derived from the number of leaves of a full tree (i.e 2^(height - 1)) with spaces joined (i.e 2^(height - 1) - 1).
+//        Then we can fill the node in level by level. Another observation is we always print a node at the center of its subtree index range.
+//        What I mean is for the left or right child of a node, the subtree rooted at the child will use half of the indices of the node.
+//        root is at the center of left and right, say mid
+//        root.left (if not null) is at the center of left and mid - 1
+//        root.right (if not null) is at the center of mid + 1 and right
+//        Then we can easily have our solution as we always keep track of the left and right of the node.
+
+    public class PrintBinaryTree {
+        public static class TreeNode {
+            int val;
+            TreeNode left;
+            TreeNode right;
+
+            public TreeNode(int val) {
+                this.val = val;
+            }
+        }
+
+        public List<List<String>> printTree(TreeNode root) {
+            List<List<String>> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+            int rows = getHeight(root);
+            int cols = (int) Math.pow(2, rows) - 1;
+            // create an empty matrix first with full of ""
+            for (int i = 0; i < rows; i++) {
+                List<String> row = new ArrayList<>();
+                for (int j = 0; j < cols; j++) {
+                    row.add("");
+                }
+                res.add(row);
+            }
+
+            //one queue for the indexq from which we will have the left and right and then the next index will be from 0,mid -1 and mid+1,end
+
+            Queue<TreeNode> queue = new LinkedList<>();
+            Queue<int[]> indexQ = new LinkedList<>();
+            queue.offer(root);
+            indexQ.offer(new int[]{0, cols - 1});
+            int row = -1;
+            while (!queue.isEmpty()) {
+                row++;
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = queue.poll();
+                    int[] indices = indexQ.poll();
+                    if (cur == null) {
+                        continue;
+                    }
+                    int left = indices[0];
+                    int right = indices[1];
+                    int mid = left + (right - left) / 2;
+                    res.get(row).set(mid, String.valueOf(cur.val));
+
+                    queue.offer(cur.left);
+                    queue.offer(cur.right);
+                    indexQ.offer(new int[]{left, mid - 1});
+                    indexQ.offer(new int[]{mid + 1, right});
+                }
+            }
+            return res;
+        }
+
+
+        private static int getHeight(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+        }
+    }
+
+    // Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion
+    // The idea is simple: print the tree in pre-order traversal and use "X" to denote null node and split node
+    // with ",". We can use a StringBuilder for building the string on the fly.
+    // For deserializing, we use a Queue to store the pre-order traversal and since we have "X" as null node, we
+    // know exactly how to where to end building subtress.
+
+    private static final String splitter = ",";
+    private static final String NN = "X";
+
+    // Encodes a tree to a single string.
+    public String serialize2(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        buildString(root, sb);
+        return sb.toString();
+    }
+
+    private void buildString(TreeNode node, StringBuilder sb) {
+        if (node == null) {
+            sb.append(NN).append(splitter);
+        } else {
+            sb.append(node.val).append(splitter);
+            buildString(node.left, sb);
+            buildString(node.right, sb);
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize2(String data) {
+        //Deque<String> nodes = new LinkedList<>();
+        Queue<String> nodes1 = new LinkedList<>();
+        //both the below statements will work
+
+        nodes1.addAll(Arrays.asList(data.split(splitter)));
+        //		Collections.addAll(nodes1, data.split(splitter)); this works too
+        return buildTree(nodes1);
+    }
+
+    private TreeNode buildTree(Queue<String> nodes) {
+        String val = nodes.remove();
+
+        if (val.equals(NN))
+            return null;
+        else {
+            TreeNode node = new TreeNode(Integer.valueOf(val));
+            node.left = buildTree(nodes);
+            node.right = buildTree(nodes);
+            return node;
+        }
+    }
+
+    // Without recursion Serialize and Deserialize
+    // Here I use typical BFS method to handle a binary tree. I use string n to
+    // represent null values. The string of the binary tree in the example will be "1 2 3 n n 4 5 n n n
+    // n ". When deserialize the string, I assign left and right child for each not-null node, and add the not-null
+    // children to the queue, waiting to be handled later.
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root==null) return "";
+        Queue<TreeNode> qu=new LinkedList<>();
+        StringBuilder sb=new StringBuilder();
+        qu.offer(root);
+        sb.append(String.valueOf(root.val));
+        sb.append(' ');
+        while (!qu.isEmpty()) {
+            TreeNode x=qu.poll();
+            if (x.left==null) sb.append("null ");
+            else {
+                qu.offer(x.left);
+                sb.append(String.valueOf(x.left.val));
+                sb.append(' ');
+            }
+            if (x.right==null) sb.append("null ");
+            else {
+                qu.offer(x.right);
+                sb.append(String.valueOf(x.right.val));
+                sb.append(' ');
+            }
+        }
+        return sb.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    // Decodes your encoded data to tree.
+    // in decoding there are 2 queues one for pushing the main element and then second is used for the left and right
+    // of it and once the iteration of the outer queue is finished, we set the outerqueue as inner queue and then
+    // another round of iteration goes
+
+    public TreeNode deserialize(String data) {
+        if (data.length()==0) return null;
+        String[] node=data.split(" ");
+        Queue<TreeNode> qu=new LinkedList<>();
+        TreeNode root=new TreeNode(Integer.valueOf(node[0]));
+        qu.offer(root);
+        int i=1;
+        while (!qu.isEmpty()) {
+            Queue<TreeNode> nextQu=new LinkedList<>();
+            while (!qu.isEmpty()) {
+                TreeNode x=qu.poll();
+                if (node[i].equals("null")) x.left=null;
+                else {
+                    x.left=new TreeNode(Integer.valueOf(node[i]));
+                    nextQu.offer(x.left);
+                }
+                i++;
+                if (node[i].equals("null")) x.right=null;
+                else {
+                    x.right=new TreeNode(Integer.valueOf(node[i]));
+                    nextQu.offer(x.right);
+                }
+                i++;
+            }
+            qu=nextQu;
+        }
+        return root;
+    }
+
+    // no need to use 2 queues in the above deserialization
+    public TreeNode deserialize_bfs(String data) {
+        if (data.length()==0) return null;
+        String[] node=data.split(" ");
+        Queue<TreeNode> qu=new LinkedList<>();
+        TreeNode root=new TreeNode(Integer.valueOf(node[0]));
+        qu.offer(root);
+        int i=1;
+        while (!qu.isEmpty()) {
+            // Queue<TreeNode> nextQu=new LinkedList<>();
+            while (!qu.isEmpty()) {
+                int size = qu.size();
+                for (int y = 0; y < size; ++y) {
+                    TreeNode x=qu.poll();
+                    if (node[i].equals("null")) x.left=null;
+                    else {
+                        x.left=new TreeNode(Integer.valueOf(node[i]));
+                        qu.offer(x.left);
+                    }
+                    i++;
+                    if (node[i].equals("null")) x.right=null;
+                    else {
+                        x.right=new TreeNode(Integer.valueOf(node[i]));
+                        qu.offer(x.right);
+                    }
+                    i++;
+                }
+            }
+        }
+        return root;
+    }
+
+    // Q105 Construct Binary Tree from Preorder and Inorder Traversal
+    // #TopInterviewQuestion
+    // Preorder traversing implies that PRE[0] is the root node. Then we can find this PRE[0] in IN, say it's IN[5].
+    // Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left side,
+    // IN[6] to the end is on the right side.  Recursively doing this on subarrays, we can build a tree out of it :)
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return helper(0, 0, inorder.length - 1, preorder, inorder);
+    }
+
+    public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
+        if (preStart > preorder.length - 1 || inStart > inEnd) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int inIndex = 0; // Index of current root in inorder
+        for (int i = inStart; i <= inEnd; i++) {
+            if (inorder[i] == root.val) {
+                inIndex = i;
+            }
+        }
+        root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
+        root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
+        return root;
+    }
+
+    // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
+    void inorderTraversal(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        boolean done = false;
+        while (!done) {
+            if (current != null) {
+                stack.push(current);
+                current = current.left;
+            } else {
+                if (stack.isEmpty())
+                    done = true;
+                else {
+                    current = stack.pop();
+                    System.out.println(current.val);
+                    current = current.right;
+                }
+            }
+        }
+    }
+
+    void preOrderTraversal(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> S = new Stack<>();
+        Queue<TreeNode> Q = new LinkedList<>();
+        S.push(root);
+        while (!S.isEmpty()) {
+            TreeNode curr = S.peek();
+            Q.add(curr);
+            S.pop();
+            if (curr.right != null)
+                S.push(curr.right);
+            if (curr.left != null)
+                S.push(curr.left);
+
+        }
+        while (!Q.isEmpty())
+            System.out.println(Q.poll().val);
+
+    }
+
+    void postOrderTraversal(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> Stack = new Stack<>();
+        Stack<TreeNode> out = new Stack<>();
+        Stack.push(root);
+        while (!Stack.isEmpty()) {
+            TreeNode cur = Stack.peek();
+            out.push(cur);
+            Stack.pop();
+            if (cur.left != null)
+                Stack.push(cur.left);
+            if (cur.right != null)
+                Stack.push(cur.right);
+        }
+        while (!out.isEmpty()) {
+            System.out.println(out.peek().val);
+            out.pop();
+        }
+
+    }
+
+    // 285	Inorder Successor of a BST
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode succ = null;
+        while (root != null) {
+            if (p.val < root.val) {
+                succ = root;
+                root = root.left;
+            } else
+                root = root.right;
+        }
+        return succ;
+    }
+
+    // Q230 kth smallest element in the BST #TopInterviewQuestion
         // Given a binary search tree, write a function kthSmallest to find the kth
         // smallest element in it.
         public int kthSmallest(TreeNode root, int k) {
@@ -8827,7 +9006,7 @@ public String decodeString(String s) {
             }
         }
 
-        // Q100 Same Tree
+        // Q100. Same Tree
         // Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same
         // if they are structurally identical and the nodes have the same value.
         public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -8881,7 +9060,7 @@ public String decodeString(String s) {
 
         // see the diagram at https://www.geeksforgeeks.org/flip-binary-tree/
         //	https://leetcode.com/problems/binary-tree-upside-down/discuss/49406/Java-recursive-(O(logn)-space)-and-iterative-solutions-(O(1)-space)-with-explanation-and-figure
-
+    // go with the iterative solution...it works
         public TreeNode upsideDownBinaryTree1(TreeNode root) {
             if (root == null || root.left == null) {
                 return root;
@@ -8894,7 +9073,6 @@ public String decodeString(String s) {
             return newRoot;
         }
 
-        // don't know if the below solution will work or not ...could not trace it
         public TreeNode upsideDownBinaryTree2(TreeNode root) {
             TreeNode curr = root;
             TreeNode next = null;
@@ -9018,7 +9196,7 @@ public String decodeString(String s) {
             return false;
         }
 
-        // LinkedList Related Questions
+    // LinkedList Related Questions
 
         // Q203 Remove Linked List elements
         // Remove all elements from a linked list of integers that have value val.
@@ -9202,7 +9380,6 @@ public String decodeString(String s) {
         // Output: 1->3->5->2->4->NULL
         public ListNode oddEvenList(ListNode head) {
             if (head != null) {
-
                 ListNode odd = head, even = head.next, evenHead = even;
 
                 while (even != null && even.next != null) {
@@ -9378,7 +9555,7 @@ public String decodeString(String s) {
             return node1.next;
         }
 
-        // 2 Add Two Numbers #TopInterviewQuestion
+        // Q2 Add Two Numbers #TopInterviewQuestion
         // actually its two linked listed in reverse order You are given two non-empty linked lists representing two non-negative
         // integers. The digits are stored in reverse order and each of their nodes contain a single digit.
         // Add the two numbers and return it as a linked list. You may assume the two numbers do not contain any leading zero, except
@@ -9427,8 +9604,106 @@ public String decodeString(String s) {
             return head.next;
         }
 
-        // Dynamic Programming
-        // Q300 Length of longest increasing subsequence #TopInterviewQuestion
+        // Dynamic Programming related question
+
+    // Q45 Jump Game II
+    // Given an array of non-negative integers, you are initially positioned at the first index of the array.
+    // Each element in the array represents your maximum jump length at that position.
+    // Your goal is to reach the last index in the minimum number of jumps.
+    // In this method, we build a jumps[] array from left to right such that jumps[i] indicates the minimum
+    // number of jumps needed to reach arr[i] from arr[0]. Finally, we return jumps[n-1].
+    // tushar roy example. https://www.youtube.com/watch?v=cETfFsSTGJI
+    private static int minJumps2(int[] arr, int n) {
+        int jumps[] = new int[n]; // jumps[n-1] will hold the result ..
+        // this is basically the minimum number of jumps needed to reach to that point
+        int i, j;
+        if (n == 0 || arr[0] == 0)
+            return Integer.MAX_VALUE; // if first element is 0, END CANNOT BE REACHED
+        jumps[0] = 0;
+        // Find the minimum number of jumps to reach arr[i] from arr[0], and assign this value to jumps[i]
+        for (i = 1; i < n; i++) {
+            jumps[i] = Integer.MAX_VALUE;
+            for (j = 0; j < i; j++) {
+                if (i <= j + arr[j]) {   // can i reach i from j
+                    jumps[i] = Math.min(jumps[i], jumps[j] + 1);
+                    break;
+                }
+            }
+        }
+        return jumps[n - 1];
+    }
+
+    // O(n) complexity for the jump game 2
+    public int jump(int A[]) {
+        if (A.length <= 1)
+            return 0;
+        int ladder = A[0];
+        int stairs = A[0];
+        int jump = 1;
+        for (int level = 1; level < A.length; level++) {
+            if (level == A.length - 1)
+                return jump;
+            if (level + A[level] > ladder)
+                ladder = level + A[level]; //build up the ladder
+            stairs--; //use up the stairs
+            if (stairs == 0) {
+                jump++;
+                stairs = ladder - level;
+            }
+        }
+        return jump;
+    }
+
+    //    1312. Minimum Insertion Steps to Make a String Palindrome
+//    Given a string s. In one step you can insert any character at any index of the string.
+//    Return the minimum number of steps to make s palindrome.
+//    A Palindrome String is one that reads the same backward as well as forward.
+//    Example 1:
+//    Input: s = "zzazz"
+//    Output: 0
+//    Explanation: The string "zzazz" is already palindrome we don't need any insertions.
+
+    // Minimum insertions to form a palindrome #GoodQuestion
+    // Base Case For Recursive Solution : if l > h (we crossed pointers) return INT_MAX
+    // if l == h return 0; (only one character, which is already palindrome, 0 insertion is required to make it palindrome)
+    // if l == h-1 and if str[l] == str[h] return 0; (if two length string example “aa or ab” and both characters are same ie
+    // : “aa” , its already palindrome,  so return 0)
+    // if l == h-1 and if str[l] != str[h] return 1; (if two length string is there example “ab” and both characters are
+    // different , we need 1 insertion to make this string a palindrome one ie “bab” or “aba“
+    // very well explained. https://www.youtube.com/watch?v=DOnK40BvazI
+    int findMinInsertionsRec(char str[], int l, int h) {
+        if (l > h)
+            return Integer.MAX_VALUE;
+        if (l == h)
+            return 0; // only 1 character
+        if (l == h - 1)
+            return (str[l] == str[h]) ? 0 : 1;
+        // this is for aa , ab type of strings when there is only 2 characters
+
+        return (str[l] == str[h]) ? findMinInsertionsRec(str, l + 1, h - 1)
+                : (Math.min(findMinInsertionsRec(str, l, h - 1), findMinInsertionsRec(str, l + 1, h)) + 1);
+    }
+
+    //                                      0..4
+//                     0..3                              1..4
+//            0..2            1..3               1..3             2..4
+//        0..1    1..2     1..2     2..3     1..2    2..3    2..3    3..4
+//  if you see there is a number of calculation which we are doing it again and again and to avoid that we can go with dynamic programming/memoization
+//  where i can use the existing calculated things.
+// so we will start with bottom up approach and calculate the value with having two lengths. and then with 3 and logic remains the same as that of recursion
+    int findMinInsertionsDP(char str[], int n) {
+        int[][] table = new int[n][n];
+        int l, h, len;
+        // memset(table, 0, sizeof(table));
+        Arrays.fill(table, 0);
+        for (len = 1; len < n; len++) // ++gap for length of the string as 1,2,3,4..n
+            for (l = 0, h = len; h < n; l++, h++) // it was ++l,++h
+                table[l][h] = (str[l] == str[h]) ? table[l + 1][h - 1]
+                        : (Math.min(table[l][h - 1], table[l + 1][h]) + 1);
+        return table[0][n - 1];
+    }
+
+    // Q300 Length of longest increasing subsequence #TopInterviewQuestion
         // Given an unsorted array of integers, find the length of longest increasing subsequence.
         // Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
         // basic condition if arr[j] < arr[i] then T[i] = Max (T[i] , T[j]+1)
@@ -9476,7 +9751,7 @@ public String decodeString(String s) {
             return T[maxIndex];
         }
 
-        // Q322 Coin Change Problem #TopInterviewQuestion
+    // Q322 Coin Change Problem #TopInterviewQuestion
         // You are given coins of different denominations and a total amount of money amount.
         // Write a function to compute the fewest number of coins that you need to  make up that amount.
         // If that amount of money cannot be made up by any combination of the coins, return -1.
@@ -9533,7 +9808,8 @@ public String decodeString(String s) {
         // Solution : minimum of being on the same line go j steps back + 1 or number above that
         // if you just need the minimum number of coins and not the actual coin..use the below method
         // https://www.youtube.com/watch?v=Y0ZqKpToTic&t=235s
-        public static int coinChange(int[] coins, int amount) {
+
+    public static int coinChange(int[] coins, int amount) {
             //        rows will be up to the total amount from 0 to the amount
             //        column will be the coins
             // now see if you have a certain total, how many number of coins would it take to make that total
@@ -9587,7 +9863,11 @@ public String decodeString(String s) {
         }
 
         // Subset Sum
-        // go to i - 1 (one step above1) and input steps back from the current j value
+    // Given a set of non negative numbers and a total, find if there exists a  subset in this set whose sum is same as total.
+    // for example: input 2,3,7,8,10 target : 17 output : true
+
+    // Solution
+    // go to i - 1 (one step above1) and input steps back from the current j value
         // https://www.youtube.com/watch?v=s6FhG--P7z0&t=222s
 
         // Solution
@@ -9633,7 +9913,7 @@ public String decodeString(String s) {
             return map[m - 1][n - 1];
         }
 
-        // Unique Path 2
+        // Q63 Unique Path 2
         // Now consider if some obstacles are added to the grids. How many unique paths would there be?
         // An obstacle and empty space is marked as 1 and 0 respectively in the grid.
         // For example, There is one obstacle in the middle of a 3x3 grid as illustrated below.
@@ -9654,11 +9934,9 @@ public String decodeString(String s) {
                     else if (i == 0 && j == 0)
                         obstacleGrid[i][j] = 1;
                     else if (i == 0)
-                        obstacleGrid[i][j] = obstacleGrid[i][j - 1]
-                                * 1;// For row 0, if there are no paths to left cell, then its 0,else 1
+                        obstacleGrid[i][j] = obstacleGrid[i][j - 1] * 1;// For row 0, if there are no paths to left cell, then its 0,else 1
                     else if (j == 0)
-                        obstacleGrid[i][j] = obstacleGrid[i - 1][j]
-                                * 1;// For col 0, if there are no paths to upper cell,then its 0,else 1
+                        obstacleGrid[i][j] = obstacleGrid[i - 1][j] * 1;// For col 0, if there are no paths to upper cell,then its 0,else 1
                     else
                         obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
                 }
@@ -9666,9 +9944,21 @@ public String decodeString(String s) {
             return obstacleGrid[rows - 1][cols - 1];
         }
 
-        // Q44 Wild Card Matching #TopInterviewQuestion
-        // ? : any one character
-        // * : 0 or more sequence
+// Q44 Wild Card Matching #TopInterviewQuestion
+// ? : any one character
+// * : 0 or more sequence
+
+//    Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*' where:
+//
+//            '?' Matches any single character.
+//            '*' Matches any sequence of characters (including the empty sequence).
+//    The matching should cover the entire input string (not partial).
+//
+//    Example 1:
+//
+//    Input: s = "aa", p = "a"
+//    Output: false
+//    Explanation: "a" does not match the entire string "aa".
         public boolean isMatch(String s, String p) {
             char[] str = s.toCharArray();
             char[] pattern = p.toCharArray();
@@ -9746,7 +10036,26 @@ public String decodeString(String s) {
             return T[text.length][pattern.length];
         }
 
-        // Interleaving String
+//97. Interleaving String
+//
+//    Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
+//
+//    An interleaving of two strings s and t is a configuration where s and t are divided into n and m non-empty substrings respectively, such that:
+//
+//    s = s1 + s2 + ... + sn
+//            t = t1 + t2 + ... + tm
+//          |n - m| <= 1
+//    The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 + s3 + ...
+//    Note: a + b is the concatenation of strings a and b.
+
+//            Example 1:
+//    Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+//    Output: true
+//    Explanation: One way to obtain s3 is:
+//    Split s1 into s1 = "aa" + "bc" + "c", and s2 into s2 = "dbbc" + "a".
+//    Interleaving the two splits, we get "aa" + "dbbc" + "bc" + "a" + "c" = "aadbbcbcac".
+//    Since s3 can be obtained by interleaving s1 and s2, we return true.
+
         public boolean isInterleaved(char str1[], char str2[], char str3[]) {
             boolean T[][] = new boolean[str1.length + 1][str2.length + 1];
 
@@ -9777,7 +10086,17 @@ public String decodeString(String s) {
             return T[str1.length][str2.length];
         }
 
-        // Q5 longest palindromic Substring #TopInterviewQuestion
+//  Q5 longest palindromic Substring #TopInterviewQuestion
+//  Given a string s, return the longest palindromic substring in s.
+//
+//  Example 1:
+//    Input: s = "babad"
+//    Output: "bab"
+//    Explanation: "aba" is also a valid answer.
+//            Example 2:
+//
+//    Input: s = "cbbd"
+//    Output: "bb"
         // ideserve https://www.youtube.com/watch?v=obBdxeCx_Qs&t=117s
         public static String LPS(String s) {
             int n = s.length();
@@ -9815,7 +10134,19 @@ public String decodeString(String s) {
             return s.substring(palindromeBeginsAt, max_len + palindromeBeginsAt);
         }
 
-        // Longest common Subsequence
+    // 1143. Longest Common Subsequence
+    // Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
+    // A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing
+    // the relative order of the remaining characters.
+    // For example, "ace" is a subsequence of "abcde".
+
+    // A common subsequence of two strings is a subsequence that is common to both strings.
+
+    //Example 1:
+        // Input: text1 = "abcde", text2 = "ace"
+        // Output: 3
+        // Explanation: The longest common subsequence is "ace" and its length is 3.
+
         public static void commonSubsequence(String S1, String S2) {
             int s1_len = S1.length();
             int s2_len = S2.length();
@@ -9888,17 +10219,32 @@ public String decodeString(String s) {
             System.out.println(result.reverse());
         }
 
-        // longest palindromic subsequence  #dekhSakteHaiEkBaar
+// longest palindromic subsequence  #dekhSakteHaiEkBaar
+//    516. Longest Palindromic Subsequence
+//    Given a string s, find the longest palindromic subsequence's length in s.
+//    A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the
+//    order of the remaining elements.
+//    Example 1:
+//    Input: s = "bbbab"
+//    Output: 4
+//    Explanation: One possible longest palindromic subsequence is "bbbb".
+//    Example 2:
+//    Input: s = "cbbd"
+//    Output: 2
+//    Explanation: One possible longest palindromic subsequence is "bb".
+
+    // Approach
         // 1. Initialize a palindrome DP table of size nxn where n is the length of
         // the given String
         // 2. Set single length palindrome values to 1
-        // 3. Loop from lengths 2 to n and check palindrome for each length using
-        // the following rule
+        // 3. Loop from lengths 2 to n and check palindrome for each length using the following rule
         // palindrome[i][j] = palindrome[i+1][j-1] + 2, if s[i] == s[j]
-        // palindrome[i][j] = Math.max(palindrome[i+1][j], palindrome[i][j-1]), if
-        // s[i] != s[j]
+        // palindrome[i][j] = Math.max(palindrome[i+1][j], palindrome[i][j-1]), if s[i] != s[j]
         // 4. after the loop, return palindrome[0][n-1]
-        public static int LPSunsequence(String s) {
+
+    // https://www.youtube.com/watch?v=U4yPae3GEO0&ab_channel=IDeserve
+
+        public static int LPSubsequence(String s) {
             int n = s.length();
             int palindrome[][] = new int[n][n]; // Table to store lengths of palindrome subsequences.
 
@@ -9957,8 +10303,25 @@ public String decodeString(String s) {
             return result;
         }
 
-        //Minium Edit Distance
+    /**
+     * Q72. Edit Distance
+     * Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
+     * You have the following three operations permitted on a word:
 
+     * Insert a character
+     * Delete a character
+     * Replace a character
+     * Example 1:
+     * Input: word1 = "horse", word2 = "ros"
+     * Output: 3
+     * Explanation:
+     * horse -> rorse (replace 'h' with 'r')
+     * rorse -> rose (remove 'r')
+     * rose -> ros (remove 'e')
+     *
+
+     * dynamic solution is better
+     */
         public int recEditDistance(char[] str1, char str2[], int len1, int len2) {
 
             if (len1 == str1.length) {
@@ -9980,7 +10343,7 @@ public String decodeString(String s) {
             int temp[][] = new int[str1.length + 1][str2.length + 1];
 
             for (int i = 0; i < temp[0].length; i++) {
-                temp[0][i] = i;
+                temp[0][i] = i;  // since the other side is null/empty we need the whole length for every that row/column
             }
 
             for (int i = 0; i < temp.length; i++) {
@@ -9990,8 +10353,10 @@ public String decodeString(String s) {
             for (int i = 1; i <= str1.length; i++) {
                 for (int j = 1; j <= str2.length; j++) {
                     if (str1[i - 1] == str2[j - 1]) {
+                        // if characters are same, we dont need to take that in picture and use the one which was on the diagonal before this
                         temp[i][j] = temp[i - 1][j - 1];
                     } else {
+                        // if characters are different take the minimum of all three and add 1 to it
                         temp[i][j] = 1 + min(temp[i - 1][j - 1], temp[i - 1][j], temp[i][j - 1]);
                     }
                 }
@@ -10030,9 +10395,208 @@ public String decodeString(String s) {
 
         // Priority Queue related questions
 
-        // Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn)
-        //     O(N) best case / O(N^2) worst case running time + O(1) memory facebook
+    // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion #matrix
+    // Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
+    // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+    // Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
+    // Every time when you poll out the root(Top Element in Heap), you need to
+    // know the row number and column number of that element(so we can create a tuple class here), replace that root
+    // with the next element from the same column. explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
+    // time complexity of this one O(min(K,N)+K*logN)
 
+    public int kthSmallest(int[][] matrix, int k) {
+        int n = matrix.length;
+        PriorityQueue<Tuple> pq = new PriorityQueue<>();
+        for (int j = 0; j <= n - 1; j++)
+            pq.offer(new Tuple(0, j, matrix[0][j]));
+        for (int i = 0; i < k - 1; i++) {
+            Tuple t = pq.poll();
+            if (t.x == n - 1)
+
+                continue;
+            pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
+        }
+        return pq.poll().val;
+    }
+
+    // or
+    // have to understand again . quite complicated
+//        time complexity for binary search is O(n * n log(max_element - min_element) where n is the number of rows.
+    public int kthSmallest2(int[][] matrix, int k) {
+        int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;// [lo , hi)
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            int count = 0, j = matrix[0].length - 1;
+            for (int i = 0; i < matrix.length; i++) {
+                while (j >= 0 && matrix[i][j] > mid)
+                    j--;
+                count += (j + 1);
+            }
+            if (count < k)
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        return lo;
+    }
+
+    // Given a list of strings write a function to write the kth most frequent recurrent strings
+    public String kthMostFrequentString(String[] string, int k) {
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String s : string) {
+            Integer x = map.get(s);
+            if (x == null)
+                x = 0;
+            map.put(s, ++x);
+        }
+        List<Map.Entry> list = new ArrayList(map.entrySet());
+
+        // Collections.sort(list, new Comparator<GenericHashMap.Entry<String, Integer>>() {
+        // public int compare(GenericHashMap.Entry<String, Integer> a,
+        // GenericHashMap.Entry<String, Integer> b) {
+        // return b.getValue() - a.getValue();
+        // }
+        // });
+
+        Collections.sort(list, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                Integer v1 = (Integer) ((Map.Entry) o1).getValue();
+                Integer v2 = (Integer) ((Map.Entry) o2).getValue();
+                return v1.compareTo(v2);
+            }
+        });
+
+        if (list.size() > k)
+            return (String) (list.get(k)).getKey();
+
+        Iterator iter = list.iterator();
+        int total = 0;
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            System.out.println(entry.getKey() + " " + entry.getValue());
+            total += ((int) entry.getValue());
+        }
+        return null;
+    }
+
+    //	or O(n) Solution
+    // a very smart solution where after creating a hashmap, creating an array of arraylist and storing the number according to the frequency
+    public List<Integer> topKFrequent3(int[] nums, int k) {
+
+        List<Integer>[] bucket = new List[nums.length + 1];
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        for (int n : nums) {
+            frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+        }
+
+        for (int key : frequencyMap.keySet()) {
+            int frequency = frequencyMap.get(key);
+            if (bucket[frequency] == null) {
+                bucket[frequency] = new ArrayList<>();
+            }
+            bucket[frequency].add(key);
+        }
+
+        List<Integer> res = new ArrayList<>();
+
+        for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
+            if (bucket[pos] != null) {
+                res.addAll(bucket[pos]);
+            }
+        }
+        return res;
+    }
+
+    // same logic as above but above they have string below we have set of integers.
+    // Q347 Top k frequent elements #TopInterviewQuestion
+    // Given a non-empty array of integers, return the k most frequent elements.
+    // For example, Given [1,1,1,2,2,3] and k = 2, return [1,2].
+    // this method is a much better option O(n log n)
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        if (nums == null) {
+            return null;
+        }
+
+        Map<Integer, Integer> freqs = new HashMap<>();
+        for (int num : nums) {
+            freqs.put(num, freqs.getOrDefault(num, 0) + 1);
+        }
+
+        List<Map.Entry<Integer, Integer>> entries = new ArrayList<>(freqs.entrySet());
+        // Collections.sort method is only applicable to list and thus we are adding the complete hashmap in the list
+        Collections.sort(entries, new Comparator<Map.Entry<Integer, Integer>>() {
+            public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
+                return b.getValue() - a.getValue();
+            }
+        });
+
+        List<Integer> results = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            results.add(entries.get(i).getKey());
+        }
+
+        return results;
+    }
+
+    // or another way is below. Use treeMap. Use freqncy as the key so we can get all freqencies in order
+    public List<Integer> topKFrequent2(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+
+        TreeMap<Integer, List<Integer>> freqMap = new TreeMap<>();
+        for (int num : map.keySet()) {
+            int freq = map.get(num);
+            if (!freqMap.containsKey(freq)) {
+                freqMap.put(freq, new LinkedList<>());
+            }
+            freqMap.get(freq).add(num);
+        }
+
+        List<Integer> res = new ArrayList<>();
+        while (res.size() < k) {
+            Map.Entry<Integer, List<Integer>> entry = freqMap.pollLastEntry();
+            res.addAll(entry.getValue());
+        }
+        return res;
+    }
+
+    public List<String> topKFrequent(String[] words, int k) {
+
+        List<String> result = new LinkedList<>();
+        Map<String, Integer> map = new HashMap<>();
+        for(int i=0; i<words.length; i++)
+        {
+            if(map.containsKey(words[i]))
+                map.put(words[i], map.get(words[i])+1);
+            else
+                map.put(words[i], 1);
+        }
+
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
+                (a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue()
+        );
+
+
+
+        for(Map.Entry<String, Integer> entry: map.entrySet())
+        {
+            pq.offer(entry);
+            if(pq.size()>k)
+                pq.poll();
+        }
+
+        while(!pq.isEmpty())
+            result.add(0, pq.poll().getKey());
+
+        return result;
+    }
+
+    // Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn)
+
+    //     O(N) best case / O(N^2) worst case running time + O(1) memory facebook
         public int findKthLargest(int[] nums, int k) {
             PriorityQueue<Integer> pq = new PriorityQueue<>();
             for (int val : nums) {
@@ -10074,12 +10638,105 @@ public String decodeString(String s) {
                 return findKthLargest(nums, start, partitionIndex - 1, k);
         }
 
+    // K closest point using priority queue#GoodQuestion
+// the time complexity is O(NlogK),
+    public Point[] findKClosestPoints(Point[] points, int k, Point target) {
+        if (points == null || points.length == 0 || k < 1       || k > points.length)
+            return points;
+        Queue<Point> pq = new PriorityQueue<>(k, new Comparator<Point>() {
+            public int compare(Point p1, Point p2) {
+                int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
+                int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);
+                return d1 - d2; // this will be d2 - d1
+            }
+        });
+        for (Point p : points) {
+            pq.offer(p);
+            if (pq.size() > k)
+                pq.poll();
+        }
+        Point[] res = new Point[k];
+        for (int i = k - 1; i >= 0; i--)
+            res[i] = pq.poll();
+        return res;
+    }
+
+    //  K closest point using quick select algorithm
+    public int[][] kClosest(int[][] points, int K) {
+        int len =  points.length, l = 0, r = len - 1;
+        while (l <= r) {
+            int mid = helper(points, l, r);
+            if (mid == K)
+                break;
+            if (mid < K) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return Arrays.copyOfRange(points, 0, K);
+    }
+
+    private int helper(int[][] A, int l, int r) {
+        int[] pivot = A[l];
+        while (l < r) {
+            while (l < r && compare(A[r], pivot) >= 0)
+                r--;
+            A[l] = A[r];
+            while (l < r && compare(A[l], pivot) <= 0)
+                l++;
+            A[r] = A[l];
+        }
+        A[l] = pivot;
+        return l;
+    }
+
+    private int compare(int[] p1, int[] p2) {
+        return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
+    }
+
 // 295. Find Median from Data Stream #TopInterviewQuestion
 // I keep two heaps (or priority queues)/ Max-heap / small has the smaller half of the numbers.
 // Min-heap / large has the larger half of the numbers. This gives me direct access to the one or two middle values
 // (they're the tops of the heaps), so getting the median takes O(1) time. And adding a number takes O(log n) time.
 // add operation is O(logn)
 // find median is O(1)
+
+    /*
+    Approach: I keep two heaps (or priority queues)/ Max-heap / small has the smaller half of the numbers.
+              Min-heap / large has the larger half of the numbers. This gives me direct access to the one or two middle values
+             (they're the tops of the heaps), so getting the median takes O(1) time. And adding a number takes O(log n) time.
+             add operation is O(logn)
+
+    Why we do push pop push
+    The invariant of the algorithm is two heaps, small and large, each represent half of the current list.
+    The length of smaller half is kept to be n / 2 at all time and the length of the larger half is either n / 2 or n / 2 + 1 depend on n's parity.
+
+    This way we only need to peek the two heaps' top number to calculate median.
+
+    Any time before we add a new number, there are two scenarios, (total n numbers, k = n / 2):
+
+    (1) length of (small, large) == (k, k)
+    (2) length of (small, large) == (k, k + 1)
+    After adding the number, total (n + 1) numbers, they will become:
+
+    (1) length of (small, large) == (k, k + 1)
+    (2) length of (small, large) == (k + 1, k + 1)
+    Here we take the first scenario for example, we know the large will gain one more item and small will remain the same size,
+    but we cannot just push the item into large. What we should do is we push the new number into small and pop the maximum item
+    from small then push it into large (all the pop and push here are heappop and heappush). By doing this kind of operations for
+    the two scenarios we can keep our invariant.
+
+    Therefore to add a number, we have 3 O(log n) heap operations. Luckily the heapq provided us a function "heappushpop"
+    which saves some time by combine two into one. The document says:
+
+    Push item on the heap, then pop and return the smallest item from the heap. The combined action runs more efficiently than heappush()
+    followed by a separate call to heappop().
+
+    Alltogether, the add operation is O(logn), The findMedian operation is O(1).
+
+     */
+
         private PriorityQueue<Integer> small = new PriorityQueue<>(
                 Collections.reverseOrder()); // will keep smaller elements
         private PriorityQueue<Integer> large = new PriorityQueue<>(); // will keep bigger elements
@@ -10173,7 +10830,7 @@ public String decodeString(String s) {
                         return 1;
                 }
             });
-            PriorityQueue<MergedContainer> queue2 = new PriorityQueue<MergedContainer>();
+            //PriorityQueue<MergedContainer> queue2 = new PriorityQueue<MergedContainer>();
             for (int i = 0; i < array.length; i++) {
                 for (int j = 0; j < array[0].length; j++) {
                     queue.add(array[i][j]);
@@ -10207,7 +10864,6 @@ public String decodeString(String s) {
                     //					return 0;
                     //				else
                     //					return 1;
-
                     Integer a = o1.val;
                     Integer b = o2.val;
                     return a.compareTo(b);
@@ -10326,9 +10982,176 @@ public String decodeString(String s) {
 
             return dummy.next;
         }
-        // Backtracking Questions
 
-        // Q130 Surrounded Regions #TopInterviewQuestion
+        // Backtracking Questions
+// Q329. Longest Increasing Path in a matrix
+//    Given an m x n integers matrix, return the length of the longest increasing path in matrix.
+//    From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary
+//    (i.e., wrap-around is not allowed).
+
+// Solution
+//To get max length of increasing sequences:
+//
+//    Do DFS from every cell
+//    Compare every 4 direction and skip cells that are out of boundary or smaller
+//    Get matrix max from every cell's max
+//    Use matrix[x][y] <= matrix[i][j] so we don't need a visited[m][n] array
+//    The key is to cache the distance because it's highly possible to revisit a cell
+
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int[][] cache = new int[matrix.length][matrix[0].length];
+        int max = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                int length = findSmallAround(i, j, matrix, cache, Integer.MIN_VALUE);
+                if (length > max) {
+                    max = Math.max(length, max);
+                }
+            }
+        }
+        return max;
+    }
+
+    private int findSmallAround(int i, int j, int[][] matrix, int[][] cache, int pre) {
+        // if out of bond OR current cell value larger than previous cell value.
+        if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || matrix[i][j] <= pre) {
+            return 0;
+        }
+        // if calculated before, no need to do it again
+        if (cache[i][j] != 0) {
+            return cache[i][j];
+        } else {
+            int cur = matrix[i][j];
+            int up = findSmallAround(i - 1, j, matrix, cache, cur);
+            int down = findSmallAround(i + 1, j, matrix, cache, cur);
+            int left = findSmallAround(i, j - 1, matrix, cache, cur);
+            int right = findSmallAround(i, j + 1, matrix, cache, cur);
+            cache[i][j] = Math.max(left, Math.max(right, Math.max(up, down))) + 1;
+            return cache[i][j];
+        }
+    }
+
+    //BFS time complexity O(N) n is the size of the grid
+// 994. Rotting Oranges
+//You are given an m x n grid where each cell can have one of three values:
+//
+//0 representing an empty cell,
+//1 representing a fresh orange, or
+//2 representing a rotten orange.
+//Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+//Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.
+
+//Example 1:
+//Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
+//Output: 4
+//Example 2:
+//
+//Input: grid = [[2,1,1],[0,1,1],[1,0,1]]
+//Output: -1
+//Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
+
+    public int orangesRotting(int[][] grid) {
+        if(grid.length==0) return 0;
+        List<int[]> rotted = new ArrayList();
+        int fresh = 0;
+        int ans = 0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==2) rotted.add(new int[]{i,j});
+                if(grid[i][j]==1) fresh++;
+            }
+        }
+        if(fresh==0) return 0;
+        while(rotted.size()>0){
+            List<int[]> temp =new ArrayList();
+            for(int[] coor:rotted){
+                int i=coor[0], j=coor[1];
+                if(i-1>=0&&grid[i-1][j]==1){
+                    temp.add(new int[]{i-1,j});
+                    grid[i-1][j]=2;
+                    fresh--;
+                }
+                if(i+1<grid.length&&grid[i+1][j]==1){
+                    temp.add(new int[]{i+1,j});
+                    grid[i+1][j]=2;
+                    fresh--;
+                }
+                if(j-1>=0&&grid[i][j-1]==1){
+                    temp.add(new int[]{i,j-1});
+                    grid[i][j-1]=2;
+                    fresh--;
+                }
+                if(j+1<grid[0].length&&grid[i][j+1]==1){
+                    temp.add(new int[]{i,j+1});
+                    grid[i][j+1]=2;
+                    fresh--;
+                }
+            }
+            rotted=temp;
+            ans++;
+        }
+        if(fresh>0) return -1;
+        return --ans;
+    }
+
+    //DFS
+    class Pair<K,V>{
+        int key,value;
+
+        public int getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return value;
+        }
+        public Pair(int i, int j){
+            key = i;
+            value = j;
+        }
+    }
+    public int orangesRotting2(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        Queue<Pair<Integer, Integer>> q = new ArrayDeque<>();
+        int freshCount = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) freshCount++;
+                if (grid[i][j] == 2) q.offer(new Pair<>(i, j));
+            }
+        }
+        int minutes = 0;
+        while (freshCount > 0 && !q.isEmpty()) {
+            minutes++;
+            int size = q.size();
+            while (freshCount > 0 && size-- > 0) {
+                Pair<Integer, Integer> pair = q.poll();
+                int i = pair.getKey();
+                int j = pair.getValue();
+                if (check(grid, i + 1, j, q)) freshCount--;
+                if (check(grid, i - 1, j, q)) freshCount--;
+                if (check(grid, i, j + 1, q)) freshCount--;
+                if (check(grid, i, j - 1, q)) freshCount--;
+            }
+        }
+        return freshCount == 0 ? minutes : -1;
+    }
+
+    boolean check(int[][] grid, int i, int j, Queue<Pair<Integer, Integer>> q) {
+        int m = grid.length;
+        int n = grid[0].length;
+        if (i < 0 || m <= i || j < 0 || j >= n || grid[i][j] != 1) return false;
+        grid[i][j] = 2;
+        q.offer(new Pair<>(i, j));
+        return true;
+    }
+
+
+    // Q130 Surrounded Regions #TopInterviewQuestion
         // Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
         // A region is captured by flipping all 'O's into 'X's in that surrounded region.
         // For example,
@@ -10443,45 +11266,6 @@ public String decodeString(String s) {
             dfs(board, i, j + 1);
         }
 
-        // Q329. Longest Increasing Path in a matrix
-        public int longestIncreasingPath(int[][] matrix) {
-            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-                return 0;
-            }
-            int[][] cache = new int[matrix.length][matrix[0].length];
-            int max = 0;
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length; j++) {
-                    int length = findSmallAround(i, j, matrix, cache, Integer.MIN_VALUE);
-                    if (length > max) {
-                        max = Math.max(length, max);
-
-                    }
-                }
-            }
-
-            return max;
-        }
-
-        private int findSmallAround(int i, int j, int[][] matrix, int[][] cache, int pre) {
-            // if out of bond OR current cell value larger than previous cell value.
-            if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || matrix[i][j] <= pre) {
-                return 0;
-            }
-            // if calculated before, no need to do it again
-            if (cache[i][j] != 0) {
-                return cache[i][j];
-            } else {
-                int cur = matrix[i][j];
-                int up = findSmallAround(i - 1, j, matrix, cache, cur);
-                int down = findSmallAround(i + 1, j, matrix, cache, cur);
-                int left = findSmallAround(i, j - 1, matrix, cache, cur);
-                int right = findSmallAround(i, j + 1, matrix, cache, cur);
-                cache[i][j] = Math.max(left, Math.max(right, Math.max(up, down))) + 1;
-                return cache[i][j];
-            }
-        }
-
         // Q200 Number of islands #TopInterviewQuestion
         // Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
         // An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
@@ -10515,8 +11299,64 @@ public String decodeString(String s) {
             DFSMarking(grid, i, j - 1);
         }
 
-        // 695. Max Area of Island
-        // Q695 maximum area of an island
+// bfs approach for the above question
+        public int numIslandsBFS(char[][] islandGrid) {
+
+            int h = islandGrid.length;
+            if (h == 0)
+                return 0;
+            int l = islandGrid[0].length;
+            int islands = 0;
+
+            boolean[][] visited = new boolean[islandGrid.length][islandGrid[0].length];
+
+            for (int i = 0; i < h; i++) {
+                for (int j = 0; j < l; j++) {
+                    visited[i][j] = false;
+                }
+            }
+
+            Queue<String> queue = new LinkedList<>();
+            List<Integer> sizeIslands = new ArrayList<>();
+            for (int i = 0; i < h; i++) {
+                for (int j = 0; j < l; j++) {
+                    if (!visited[i][j] && islandGrid[i][j] == '1') {
+                        int currentSize = 0;
+                        queue.add(i + "," + j);
+                        BFS(queue, islandGrid, visited, currentSize);
+                        sizeIslands.add(currentSize);
+                        islands++;
+                    }
+                }
+            }
+            return islands;
+        }
+
+        public void BFS(Queue<String> queue, char[][] islandGrid, boolean[][] visited,int currentSizeOfIsland) {
+
+            int H = islandGrid.length;
+            int L = islandGrid[0].length;
+
+            while (queue.isEmpty() == false) {
+
+                String x = queue.remove();
+                int row = Integer.parseInt(x.split(",")[0]);
+                int col = Integer.parseInt(x.split(",")[1]);
+
+                if(row<0 || col<0 || row>=H || col>=L || visited[row][col] || islandGrid[row][col]!='1')
+                    continue;
+
+                visited[row][col]=true;
+                currentSizeOfIsland++;
+                queue.add(row + "," + (col-1)); //go left
+                queue.add(row + "," + (col+1)); //go right
+                queue.add((row-1) + "," + col); //go up
+                queue.add((row+1) + "," + col); //go down
+            }
+        }
+
+        // 695. Max Area of Island Max Area of an Island
+        // Q695 maximum area of an island  maximum area of island
         // Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected
         // 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
         // Find the maximum area of an island in the given 2D array. (If there is no island, the maximum area is 0.)
@@ -10538,7 +11378,7 @@ public String decodeString(String s) {
             return 0;
         }
 
-        // Q22 generate parenthesis #TopInterviewQuestion
+        // Q22 generate parenthesis #TopInterviewQuestion #parentheses #parenthesis
         // Given n pairs of parentheses, write a function to generate all
         // combinations of well-formed parentheses.
         // For example, given n = 3, a solution set is:
@@ -10724,6 +11564,7 @@ public String decodeString(String s) {
             visited[x][y] = false;
         }
 
+//        ## BACKTRACKING
         // Q78 Subsets #TopInterviewQuestion
         // Given a set of distinct integers, nums, return all possible subsets (the power set).
         // Input: nums = [1,2,3]
@@ -10757,6 +11598,35 @@ public String decodeString(String s) {
             }
         }
 
+    // Q90 Subsets II
+    // Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
+    // Example 1:
+    // Input: nums = [1,2,2]
+    // Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+    public List<List<Integer>> subsetsWithDup(int[] num) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> empty = new ArrayList<Integer>();
+        result.add(empty);
+        Arrays.sort(num);
+
+        for (int i = 0; i < num.length; i++) {
+            int dupCount = 0;
+            while (((i + 1) < num.length) && num[i + 1] == num[i]) {
+                dupCount++;
+                i++;
+            }
+            int prevNum = result.size();
+            for (int j = 0; j < prevNum; j++) {
+                List<Integer> element = new ArrayList<Integer>(result.get(j));
+                for (int t = 0; t <= dupCount; t++) {
+                    element.add(num[i]);
+                    result.add(new ArrayList<Integer>(element));
+                }
+            }
+        }
+        return result;
+    }
+
         // Combination of a String and subset is the same
         static void combine(String str) {
             int length = str.length();
@@ -10772,7 +11642,8 @@ public String decodeString(String s) {
                 output.deleteCharAt(output.length() - 1);
             }
         }
-        // Combination Sum
+
+        // Q39. Combination Sum
         // Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where
         // the candidate numbers sums to T. Each number in C may only be used once in the combination.
         // Note: All numbers (including target) will be positive integers. The solution set must not contain duplicate
@@ -10806,7 +11677,116 @@ public String decodeString(String s) {
             }
         }
 
-        //	Parition Equal Subset Sum
+
+        /*
+Q713. Subarray Product Less Than K
+Given an array of integers nums and an integer k, return the number of contiguous subarrays where the product of
+all the elements in the subarray is strictly less than k.
+
+Example 1:
+Input: nums = [10,5,2,6], k = 100
+Output: 8
+Explanation: The 8 subarrays that have product less than 100 are:
+[10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]
+Note that [10, 5, 2] is not included as the product of 100 is not strictly less than k.
+
+ */
+
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+        if(k<=1) return 0;
+        int left = 0, right = 0, prod = 1, ans = 0;
+        while(right<nums.length) {
+            prod = prod * nums[right];
+            while(prod >= k) {
+                prod = prod/nums[left];
+                left++;
+            }
+            ans = ans + (right - left + 1);
+            right++;
+        }
+        return ans;
+    }
+
+// Q698. Partition to K Equal Sum Subsets facebook
+// Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k
+// non-empty subsets whose sums are all equal.
+
+//Example 1:
+
+//Input: nums = [4, 3, 2, 3, 5, 2, 1], k = 4
+//Output: True
+//Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+    private boolean backtrack(int[] arr, int count, int currSum, int k, int targetSum, boolean[] taken) {
+        int n = arr.length;
+
+        // We made k - 1 subsets with target sum and last subset will also have target sum.
+        if (count == k - 1) {
+            return true;
+        }
+
+        // Current subset sum exceeds target sum, no need to proceed further.
+        if (currSum > targetSum) {
+            return false;
+        }
+
+        // When current subset sum reaches target sum then one subset is made.
+        // Increment count and reset current subset sum to 0.
+        if (currSum == targetSum) {
+            return backtrack(arr, count + 1, 0, k, targetSum, taken);
+        }
+
+        // Try not picked elements to make some combinations.
+        for (int j = 0; j < n; ++j) {
+            if (!taken[j]) {
+                // Include this element in current subset.
+                taken[j] = true;
+
+                // If using current jth element in this subset leads to make all valid subsets.
+                if (backtrack(arr, count, currSum + arr[j], k, targetSum, taken)) {
+                    return true;
+                }
+
+                // Backtrack step.
+                taken[j] = false;
+            }
+        }
+
+        // We were not able to make a valid combination after picking each element from the array,
+        // hence we can't make k subsets.
+        return false;
+    }
+
+    public boolean canPartitionKSubsets(int[] arr, int k) {
+        int totalArraySum = 0;
+        int n = arr.length;
+
+        for (int i = 0; i < n; ++i) {
+            totalArraySum += arr[i];
+        }
+
+        // If total sum not divisible by k, we can't make subsets.
+        if (totalArraySum % k != 0) {
+            return false;
+        }
+
+        int targetSum = totalArraySum / k;
+        boolean[] taken = new boolean[n];
+
+        return backtrack(arr, 0, 0, k, targetSum, taken);
+    }
+
+    // Q416. Partition Equal Subset Sum.  #split #subset #sum
+// Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets
+// such that the sum of elements in both subsets is equal.
+// Note:
+// 1.	Each of the array element will not exceed 100.
+// 2.	The array size will not exceed 200.
+// Example 1:
+// Input: [1, 5, 11, 5]
+// Output: true
+// Explanation: The array can be partitioned as [1, 5, 5] and [11].
+    // below solution doesnt work
         public boolean canPartition(int[] nums) {
             int sum = 0;
             for (int i = 0; i < nums.length; i++) {
@@ -10931,31 +11911,7 @@ public String decodeString(String s) {
             return true;
         }
 
-        // Q90 Subsets II
-        // Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
-        public List<List<Integer>> subsetsWithDup(int[] num) {
-            List<List<Integer>> result = new ArrayList<List<Integer>>();
-            List<Integer> empty = new ArrayList<Integer>();
-            result.add(empty);
-            Arrays.sort(num);
 
-            for (int i = 0; i < num.length; i++) {
-                int dupCount = 0;
-                while (((i + 1) < num.length) && num[i + 1] == num[i]) {
-                    dupCount++;
-                    i++;
-                }
-                int prevNum = result.size();
-                for (int j = 0; j < prevNum; j++) {
-                    List<Integer> element = new ArrayList<Integer>(result.get(j));
-                    for (int t = 0; t <= dupCount; t++) {
-                        element.add(num[i]);
-                        result.add(new ArrayList<Integer>(element));
-                    }
-                }
-            }
-            return result;
-        }
 
         // increasing subsequence
         // Given an integer array, your task is to find all the different possible increasing subsequences of the given array,
@@ -10983,7 +11939,55 @@ public String decodeString(String s) {
             }
         }
 
-        public static void main(String[] args) {
+    //    Q334 Increasing triplet subsequence #NOTaTopInterviewQuestion #FacebookTwice
+//    Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k].
+//    If no such indices exists, return false.
+//    Example 1:
+//
+//    Input: nums = [1,2,3,4,5]
+//    Output: true
+//    Explanation: Any triplet where i < j < k is valid.
+
+    public boolean increasingTriplet(int[] nums) {
+        // start with two largest values, as soon as we find a number bigger than both, while both have been updated, return true.
+        int small = Integer.MAX_VALUE, big = Integer.MAX_VALUE;
+        for (int n : nums) {
+            if (n <= small) {
+                small = n;
+            } // update small if n is smaller than both ..// c1 is min seen so
+            // far (it's a candidate for 1st element)
+            else if (n <= big) { // here when x > c1, i.e. x might be either c2 or c3
+                big = n;
+            } // update big only if greater than small but smaller than big .. x is better than the current c2, store it
+            else
+                return true; // return if you find a number bigger than both the increasing subsequence of 3 elements exists
+        }
+        return false;
+    }
+
+// Q674 longest continuous increase subsequence #GoodQuestion #faceBookQuestion
+//        Given an unsorted array of integers nums, return the length of the longest continuous increasing subsequence (i.e. subarray). The subsequence must be strictly increasing.
+//    A continuous increasing subsequence is defined by two indices l and r (l < r) such that it is [nums[l], nums[l + 1], ..., nums[r - 1], nums[r]] and for each l <= i < r, nums[i] < nums[i + 1].
+
+//    Example 1:
+//    Input: nums = [1,3,5,4,7]
+//    Output: 3
+//    Explanation: The longest continuous increasing subsequence is [1,3,5] with length 3.
+//    Even though [1,3,5,7] is an increasing subsequence, it is not continuous as elements 5 and 7 are separated by element 4
+
+    public int findLengthOfLCIS(int[] nums) {
+        int res = 0, cnt = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0 || nums[i - 1] < nums[i])
+                res = Math.max(res, ++cnt);
+            else
+                cnt = 1;
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) {
             String b[] = { "geeksforgeeks", "geeks", "geek", "geezer" };
             // System.out.println(isHappy(19));
             // System.out.println(removeduplicatesfromSortedArray(a,a.length));
@@ -11484,6 +12488,7 @@ public String decodeString(String s) {
         // Given a Binary Search Tree and a target number, return true
         // if there exist two elements in the BST such that their sum is equal to the given target.
 
+//  Approach: its more of doing the traversal and putting it in a set and check every item if the second element is present in the set or not by doing dfs
         public boolean findTarget(TreeNode root, int k) {
             HashSet<Integer> set = new HashSet<>();
             return dfs(root, set, k);
@@ -11997,6 +13002,19 @@ public String decodeString(String s) {
                 findNums[i] = map.getOrDefault(findNums[i], -1);
             return findNums;
         }
+    public int[] nextGreaterElemen2t(int[] findNums, int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for(int i = nums.length-1; i>=0; i--){
+            while(!stack.empty() && nums[i]>stack.peek()) stack.pop();
+            map.put(nums[i], (stack.empty())? -1 : stack.peek());
+            stack.push(nums[i]);
+        }
+        for(int i = 0; i<findNums.length; i++){
+            findNums[i] = map.get(findNums[i]);
+        }
+        return findNums;
+    }
 
         // Q492 construct the rectangle
         // For a web developer, it is very important to know how to design a web
@@ -13034,28 +14052,26 @@ public String decodeString(String s) {
             return n - l;
         }
 
-        // Bulb Switcher
-        // There are n bulbs that are initially off. You first turn on all the
-        // bulbs.
-        // Then, you turn off every second bulb. On the third round, you toggle
-        // every third bulb
-        // (turning on if it's off or turning off if it's on). For the ith round,
-        // you toggle every i bulb.
-        // For the nth round, you only toggle the last bulb. Find how many bulbs are
-        // on after n rounds.
-        // Example:
-        // Given n = 3.
-        // At first, the three bulbs are [off, off, off].
+// Q319. Bulb Switcher
+// There are n bulbs that are initially off. You first turn on all the bulbs.
+// Then, you turn off every second bulb. On the third round, you toggle every third bulb
+// (turning on if it's off or turning off if it's on). For the ith round, you toggle every i bulb.
+// For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.
+// Example:
+// Given n = 3.
+// At first, the three bulbs are [off, off, off].
         // After first round, the three bulbs are [on, on, on].
         // After second round, the three bulbs are [on, off, on].
         // After third round, the three bulbs are [on, off, off].
         //
         // So you should return 1, because there is only one bulb is on.
-        // explanation : see the LeetcodePrograms
+        // explanation : https://leetcode.com/problems/bulb-switcher/discuss/994823/Step-by-Step-Thought-Process
         double bulbSwitch(int n) {
             return Math.sqrt(n);
         }
 
+
+        // dont know what the below question is
         // Additive Number
         // Additive number is a string whose digits can form additive sequence.
         //
@@ -13106,12 +14122,32 @@ public String decodeString(String s) {
         }
 
         // Repeated DNA sequence
-        // All DNA is composed of a series of nucleotides abbreviated as A, C, G,
-        // and T, for example: "ACGAATTCCG".
-        // When studying DNA, it is sometimes useful to identify repeated sequences
-        // within the DNA.
-        // Write a function to find all the 10-letter-long sequences (substrings)
-        // that occur more than once in a DNA molecule.
+        // All DNA is composed of a series of nucleotides abbreviated as A, C, G and T, for example: "ACGAATTCCG".
+        // When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.
+        // Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
+        public List<String> findRepeatedDnaSequences2(String s) {
+            if(s == null || s.length() < 10) {
+                return Collections.emptyList();
+            }
+            int start = 0;
+            int end = 10;
+            Set<String> set = new HashSet<>();
+            Set<String> result = new HashSet<>();
+            StringBuilder builder = new StringBuilder(s);
+            while(end <= s.length()) {
+                //String curr = s.substring(start,end);
+                //builder is faster, so using builder below
+                String curr = builder.substring(start,end);
+                if(set.contains(curr)) {
+                    result.add(curr);
+                }
+                set.add(curr);
+                start++;
+                end++;
+            }
+            return new ArrayList<>(result);
+        }
+        // or
         public List<String> findRepeatedDnaSequences(String s) {
             Set seen = new HashSet(), repeated = new HashSet();
             for (int i = 0; i + 9 < s.length(); i++) {
@@ -13121,6 +14157,7 @@ public String decodeString(String s) {
             }
             return new ArrayList(repeated);
         }
+
         // Candy
         // There are N children standing in a line. Each child is assigned a rating
         // value.

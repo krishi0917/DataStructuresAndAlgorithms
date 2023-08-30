@@ -3,7 +3,24 @@ package LeetcodePrograms;
 public class MinimumEditDistance {
 
     /**
-     * Uses recursion to find minimum edits
+     * 72. Edit Distance
+
+     * Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
+     * You have the following three operations permitted on a word:
+
+     * Insert a character
+     * Delete a character
+     * Replace a character
+     * Example 1:
+     *
+     * Input: word1 = "horse", word2 = "ros"
+     * Output: 3
+     * Explanation:
+     * horse -> rorse (replace 'h' with 'r')
+     * rorse -> rose (remove 'r')
+     * rose -> ros (remove 'e')
+     *
+     * dynamic solution is better
      */
     public int recEditDistance(char[]  str1, char str2[], int len1,int len2){
 
@@ -18,12 +35,14 @@ public class MinimumEditDistance {
 
     /**
      * Uses bottom up DP to find the edit distance
+     * see the tushar raheja link of the video and youll understand
+     * https://www.youtube.com/watch?v=We3YDTzNXEk&t=319s&ab_channel=TusharRoy-CodingMadeSimple
      */
     public int dynamicEditDistance(char[] str1, char[] str2){
         int temp[][] = new int[str1.length+1][str2.length+1];
 
         for(int i=0; i < temp[0].length; i++){
-            temp[0][i] = i;
+            temp[0][i] = i; // since the other side is null/empty we need the whole length for every that row/column
         }
 
         for(int i=0; i < temp.length; i++){
@@ -33,8 +52,10 @@ public class MinimumEditDistance {
         for(int i=1;i <=str1.length; i++){
             for(int j=1; j <= str2.length; j++){
                 if(str1[i-1] == str2[j-1]){
+                    // if characters are same, we dont need to take that in picture and use the one which was on the diagonal before this
                     temp[i][j] = temp[i-1][j-1];
                 }else{
+                    // if characters are different take the minimum of all three and add 1 to it
                     temp[i][j] = 1 + min(temp[i-1][j-1], temp[i-1][j], temp[i][j-1]);
                 }
             }

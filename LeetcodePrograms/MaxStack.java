@@ -1,60 +1,52 @@
 package LeetcodePrograms;
 import java.util.*;
 
-//I have checked a few other solutions. None of them are implemented with strict O(logN) time. One common solution is to use PriorityQueue,
-// which is a bad use case. Because in pop(), when you try to do pq.remove(elem), this step will take O(n). I also see other solution trying
-// to delay the remove, which does not remove the element immediately in popMax(), but later remove it in pop() when the "deleted" element is
-// visited. This solution is only average O(logN), as the worst case will be O(n) when you keep pushing ascending numbers, then keep popMax()
-// until only one element remain, then call pop(). The pop() will take O(n).
-// A better solution will be using TreeMap and Doubly Linked List. TreeMap acts like a priority queue, but it
-// provides O(logN) write. Doubly Linked List provides O(1) push() and pop()
+// the below solution is the java tree map and doubly linkedin list
+// this is a good approach where every number is stored in the Linkeded List with head and tail in it
+// and in a treemap with key as number and value as the node. Treemap will be sorted so pop max can pop out in O(1)
+// A better solution will be using TreeMap and Doubly Linked List. TreeMap acts like a priority queue, but it provides O(logN) write.
+// Doubly Linked List provides O(1) push() and pop()
 
-//This soultion provides O(logN) time for push(), as the TreeMap need to rebalance when insert. And O(logN) for pop() and popMax(), as TreeMap need to rebalance when remove an element. (Note when there are a lot of duplucate elements pushed, the time for these two operations are actually O(1) average, since the remove() is not invoked every time.)
-//top() and peekMax() are obviously O(1).
+
+// bascially you keep doubly linked list to get access directly to that node and pop becomes because treemap is O(log n) for all the operations
+// time compelxity is O(log n) for all the operations except O(1)
+
 public class MaxStack {
-    private static class ListNode {
-        public ListNode prev, next;
-        public int value;
+    Node head;
+    Node tail;
+    TreeMap<Integer, List<Node>> map;
 
-        public ListNode(int val) {
-            this.value = val;
-        }
-    }
-
-    private final ListNode head;
-    private final TreeMap<Integer, LinkedList<ListNode>> map = new TreeMap<>();
-
-    /** initialize your data structure here. */
     public MaxStack() {
-        head = new ListNode(0);
-        head.next = head.prev = head;
+        head = new Node(0);
+        tail = new Node(0);
+        head.next = tail;
+        tail.pre = head;
+        map = new TreeMap<>();
     }
 
     public void push(int x) {
-        ListNode node = new ListNode(x);
-        node.next = head;
-        node.prev = head.prev;
-        head.prev.next = node;
-        head.prev = node;
-        map.computeIfAbsent(x, k -> new LinkedList<>()).add(node);
+        Node newNode = new Node(x);
+        newNode.pre = tail.pre;
+        newNode.next = tail;
+        tail.pre.next = newNode;
+        tail.pre = newNode;
+        if(!map.containsKey(x))
+            map.put(x, new ArrayList<Node>());
+        map.get(x).add(newNode);
     }
 
     public int pop() {
-        ListNode tail = head.prev;
-        if (tail == head) {
-            return 0;   // no element exist
-        }
-        deleteNode(tail);
-        // since it's pop(), we are always sure that the last element in the map's value list will be the tail
-        map.get(tail.value).removeLast();
-        if (map.get(tail.value).isEmpty()) {
-            map.remove(tail.value);
-        }
-        return tail.value;
+        int value = tail.pre.val;
+        removeNode(tail.pre);
+        int listSize = map.get(value).size();
+        map.get(value).remove(listSize - 1);
+        if(listSize == 1)
+            map.remove(value);
+        return value;
     }
 
     public int top() {
-        return head.prev.value;
+        return tail.pre.val;
     }
 
     public int peekMax() {
@@ -62,17 +54,41 @@ public class MaxStack {
     }
 
     public int popMax() {
-        int max = peekMax();
-        ListNode node = map.get(max).removeLast();
-        deleteNode(node);
-        if (map.get(max).isEmpty()) {
-            map.remove(max);
-        }
-        return max;
+        int maxVal = map.lastKey();
+        int listSize = map.get(maxVal).size();
+        Node node = map.get(maxVal).remove(listSize - 1);
+        removeNode(node);
+        if(listSize == 1)
+            map.remove(maxVal);
+        return maxVal;
     }
 
-    private void deleteNode(ListNode node) {
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
+    private void removeNode(Node n){
+        Node preNode = n.pre;
+        Node nextNode = n.next;
+        preNode.next = nextNode;
+        nextNode.pre = preNode;
+    }
+
+    class Node{
+        Node pre;
+        Node next;
+        int val;
+        public Node(int x){
+            this.val = x;
+            this.pre = null;
+            this.next = null;
+        }
+    }
+    public static void main(String []args ){
+        MaxStack maxStack2 = new MaxStack();
+        maxStack2.push(2);
+        maxStack2.push(5);
+        maxStack2.push(3);
+        maxStack2.push(1);
+        System.out.println(maxStack2.popMax());
+        System.out.println(maxStack2.pop());
+        System.out.println(maxStack2.pop());
+        System.out.println(maxStack2.popMax());
     }
 }

@@ -3,6 +3,11 @@ import java.util.*;
 
 //programcreek solution
 public class LRUCache {
+//	The LRU cache is a hash table of keys and double linked nodes. The hash table makes the time of get() to be O(1).
+//	The list of double linked nodes make the nodes adding/removal operations O(1).
+//	The key to solve this problem is using a double linked list which enables us to quickly move nodes.
+
+
 	class Node{
 		int key;
 		int value;
@@ -87,6 +92,12 @@ public class LRUCache {
 		if(head == null){
 			head = tail;
 		}
+	}
+
+	public static void main (String []args){
+		LRUCache lruCache = new LRUCache(5);
+		lruCache.put(2,3);
+		lruCache.get(2);
 	}
 
 

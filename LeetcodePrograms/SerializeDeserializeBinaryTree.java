@@ -56,17 +56,15 @@ public class SerializeDeserializeBinaryTree {
     public static void main(String []args){
         SerializeDeserializeBinaryTree binaryTree = new SerializeDeserializeBinaryTree();
         TreeNode tree = new TreeNode(1);
-//        tree.root = new TreeNode(1);
         tree.left = new TreeNode(2);
-        tree.left.right = new TreeNode(2);
-//        tree.right = new TreeNode(3);
-//        tree.left.left = new TreeNode(4);
-//        tree.left.right = new TreeNode(5);
-        String x = binaryTree.serialize2(tree);
-        System.out.println(x);
-        TreeNode tree2 = binaryTree.deserialize2(x);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(4);
+        tree.left.right = new TreeNode(5);
+        String x = binaryTree.serialize(tree);
+        System.out.println("expected 1,2,4,X,X,5,X,X,3,X,X, and the actual is " + x);
+        TreeNode tree2 = binaryTree.deserialize(x);
         System.out.println(tree2);
-//            System.out.println(x);
+
     }
 
     // Encodes a tree to a single string. //inorder traversal
@@ -97,6 +95,8 @@ public class SerializeDeserializeBinaryTree {
         }
         return sb.toString();
     }
+
+    // below method(2 queues) is better and easy to explain. first go with this
 
     // Decodes your encoded data to tree.
     // in decoding there are 2 queues one for pushing the main element and then second is used for the left and right

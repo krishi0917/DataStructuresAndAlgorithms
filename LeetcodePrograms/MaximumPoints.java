@@ -2,10 +2,6 @@ package LeetcodePrograms;
 
 import java.util.*;
 
-
-/**
- * Created by rkhurana on 6/16/18.
- */
 // Q149 Max Points on a line  ( maximum points on a plane )   #TopInterviewQuestion
 // Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
 
@@ -82,7 +78,7 @@ public class MaximumPoints {
                     max = count + duplicate;
                 }
             }
-            max = Math.max(vertical + duplicate, max);
+            max = Math.max(vertical + duplicate, max); // since if the elements are on the same line, we are not calculating the slope. Hence we have to check that in the end if that surposses the current maximum result
             result.clear();
         }
         return max;
@@ -147,7 +143,7 @@ public class MaximumPoints {
 
         int[][] point = { { 1, 1 }, { 3, 2 }, { 5, 3 }, { 4, 1 }, { 2, 3 }, { 1, 4 } };
         MaximumPoints maxPoints = new MaximumPoints();
-        System.out.println(maxPoints.maxPointsFinalSolution(point));
+        System.out.println(maxPoints.maxPoints2(points));
 
     }
 }
