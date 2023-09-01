@@ -10,6 +10,7 @@ given a 2d array of integers, write a boolean function to search for a value in 
 public class Navan_2dSortedArray {
 
     // first way
+    // navigating every line and doing binary search in every line.
     public boolean checkElementPresentOrNotFirstWay(int[][]matrix, int element){
         boolean foundElement = false;
         for(int i = 0 ; i < matrix.length ; i++){
@@ -37,6 +38,7 @@ public class Navan_2dSortedArray {
         return false;
     }
 
+    // do the column wise binary search first and then once the first element of the row is found do the binary search in that row to find if the element exist in the row or not
     // second way;
     public boolean checkElementPresentOrNotSeconWay(int[][]matrix, int element) {
         int arr[] = new int[matrix.length];
@@ -59,32 +61,28 @@ public class Navan_2dSortedArray {
                 start = mid + 1;
             }
         }
-
-        if(mid < element ){
-            int tempArr[] = new int[matrix[mid].length];
+       int tempArr[] = arr[mid] < element ? matrix[mid] : matrix[mid-1];
             int start1 = 0;
-            int end1 = arr.length-1;
+            int end1 = tempArr.length-1;
             int mid1 = -1;
             while(start1 <= end1){
                 mid1 = (start1 + end1 )/2;
-                if(arr[mid1] == element ){
+                if(tempArr[mid1] == element ){
                     System.out.println("found element within binary search in second turn");
                     return true;
-                }else if(arr[mid1] > element){
+                }else if(tempArr[mid1] > element){
                     end1 = mid1 - 1;
                 }else{
                     start1 = mid1 + 1;
                 }
             }
-        }
         return false;
-
     }
 
         public static void main(String []args){
         Navan_2dSortedArray sortedArray = new Navan_2dSortedArray();
         int [][]matrix = {{10,20,30,40}, {50,60},{70,80,90}};
-        int element = 60;
+        int element = 85;
         System.out.println(sortedArray.checkElementPresentOrNotSeconWay(matrix, element));
     }
 }
