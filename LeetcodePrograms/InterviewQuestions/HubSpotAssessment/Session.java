@@ -1,12 +1,9 @@
 package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
-
 import java.util.List;
-
 public class Session {
     long duration;
     List<String> pages;
     long startTime;
-
     public Session(long d, List<String> p , long sTime){
         duration = d;
         pages = p;

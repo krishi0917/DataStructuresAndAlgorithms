@@ -1,5 +1,6 @@
 package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
+//input file
 public class Event {
     private String url;
     private String visitorId;
