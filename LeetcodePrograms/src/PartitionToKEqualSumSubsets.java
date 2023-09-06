@@ -1,55 +1,156 @@
 package LeetcodePrograms.src;
 
-public class PartitionToKEqualSumSubsets {
-    public boolean canPartitionKSubsets(int[] nums, int k) {
-        int sum = 0;
-        for(int num:nums)
-            sum += num;
-        if(k <= 0 || sum%k != 0)
-            return false;
-       // int[] visited = new int[nums.length];
-       // return canPartition(nums, visited, 0, k, 0, 0, sum/k);
-        return partition(0,nums, new boolean[nums.length],k,0,sum/k);
-    }
 
-    private boolean partition(int iterationStart, int[]arr, boolean[]used, int k , int inProgressBucketSum, int targetBucketSum){
-        if(k==1) // if there is only 1 bucket left, meaning the other buckets are full and this one will automatically be true
+// multiple approaches  are given in leetcode. check the submissions
+
+//    698. Partition to K Equal Sum Subsets
+//    Given an integer array nums and an integer k, return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.
+//        Example 1:
+//        Input: nums = [4,3,2,3,5,2,1], k = 4
+//        Output: true
+//        Explanation: It is possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+import java.util.Arrays;
+
+// Approach: basic backtrack approach. you keep current sum, trget sum, taken boolean array and the count . once you get count == k-1, meaning you have
+// covered all the elements and you can return
+public class PartitionToKEqualSumSubsets {
+    private boolean backtrack(int[] arr, int count, int currSum, int k, int targetSum, boolean[] taken) {
+        int n = arr.length;
+
+        // We made k - 1 subsets with target sum and last subset will also have target sum.
+        if (count == k - 1) {
             return true;
-        if(inProgressBucketSum == targetBucketSum){ // if this bucket is full and satisfied the requirements. meaning now to look over the new buckets and reset the sum to 0
-            return partition(0,arr,used,k-1,0, targetBucketSum);
         }
 
-        for(int i = iterationStart ; i < arr.length ; i++ ) {
-            if (!used[i]) {
-                used[i] = true;
-                if (partition(i + 1, arr, used, k, inProgressBucketSum + arr[i], targetBucketSum)) {
+        // Current subset sum exceeds target sum, no need to proceed further.
+        if (currSum > targetSum) {
+            return false;
+        }
+
+        // When current subset sum reaches target sum then one subset is made.
+        // Increment count and reset current subset sum to 0.
+        if (currSum == targetSum) {
+            return backtrack(arr, count + 1, 0, k, targetSum, taken);
+        }
+
+        // Try not picked elements to make some combinations.
+        for (int j = 0; j < n; ++j) {
+            if (!taken[j]) {
+                // Include this element in current subset.
+                taken[j] = true;
+
+                // If using current jth element in this subset leads to make all valid subsets.
+                if (backtrack(arr, count, currSum + arr[j], k, targetSum, taken)) {
                     return true;
                 }
-                used[i] = false;
+
+                // Backtrack step.
+                taken[j] = false;
             }
         }
+
+        // We were not able to make a valid combination after picking each element from the array,
+        // hence we can't make k subsets.
         return false;
     }
 
-    private boolean canPartition(int[] nums, int[] visited, int start_index, int k, int cur_sum, int cur_num, int target){
-        if(k==1) // if there is only 1 bucket left, meaning the other buckets are full and this one will automatically be true
+    public boolean canPartitionKSubsets(int[] arr, int k) {
+        int totalArraySum = 0;
+        int n = arr.length;
+
+        for (int i = 0; i < n; ++i) {
+            totalArraySum += arr[i];
+        }
+
+        // If total sum not divisible by k, we can't make subsets.
+        if (totalArraySum % k != 0) {
+            return false;
+        }
+
+        int targetSum = totalArraySum / k;
+        boolean[] taken = new boolean[n];
+
+        return backtrack(arr, 0, 0, k, targetSum, taken);
+    }
+    public static void main(String[]args){
+
+    }
+
+// optimized backtracking
+// so basically in the last approach we were starting our search from 0th index and not from the element from the last picked element.
+// This approach will do that and we will sort the array in descending order so that the elements that were skipped before, will continue to be skipped
+
+// more explanation in solution section of https://leetcode.com/problems/partition-to-k-equal-sum-subsets/solution/
+    private boolean backtrack(int[] arr, int index, int count, int currSum, int k, int targetSum, boolean[] taken) {
+
+        int n = arr.length;
+
+        // We made k - 1 subsets with target sum and last subset will also have target sum.
+        if (count == k - 1) {
             return true;
-        if(cur_sum == target && cur_num>0)
-            return canPartition(nums, visited, 0, k-1, 0, 0, target);
-        for(int i = start_index; i<nums.length; i++){
-            if(visited[i] == 0){
-                visited[i] = 1;
-                if(canPartition(nums, visited, i+1, k, cur_sum + nums[i], cur_num++, target))return true;
-                visited[i] = 0;
+        }
+
+        // No need to proceed further.
+        if (currSum > targetSum) {
+            return false;
+        }
+
+        // When curr sum reaches target then one subset is made.
+        // Increment count and reset current sum.
+        if (currSum == targetSum) {
+            return backtrack(arr, 0, count + 1, 0, k, targetSum, taken);
+        }
+
+        // Try not picked elements to make some combinations.
+        for (int j = index; j < n; ++j) {
+            if (!taken[j]) {
+                // Include this element in current subset.
+                taken[j] = true;
+
+                // If using current jth element in this subset leads to make all valid subsets.
+                if (backtrack(arr, j + 1, count, currSum + arr[j], k, targetSum, taken)) {
+                    return true;
+                }
+
+                // Backtrack step.
+                taken[j] = false;
             }
         }
+
+        // We were not able to make a valid combination after picking each element from the array,
+        // hence we can't make k subsets.
         return false;
     }
 
-    public static void main(String []args){
-        int []nums =  {4,3,2,3,5,2,1};
-        int k = 4;
-        PartitionToKEqualSumSubsets partitionToKEqualSumSubsets = new PartitionToKEqualSumSubsets();
-        System.out.println(partitionToKEqualSumSubsets.canPartitionKSubsets(nums,k));
+    void reverse(int[] arr) {
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    public boolean canPartitionKSubsets2(int[] arr, int k) {
+        int totalArraySum = 0;
+        int n = arr.length;
+
+        for (int i = 0; i < n; ++i) {
+            totalArraySum += arr[i];
+        }
+
+        // If total sum not divisible by k, we can't make subsets.
+        if (totalArraySum % k != 0) {
+            return false;
+        }
+
+        // Sort in decreasing order.
+        Arrays.sort(arr);
+        reverse(arr);
+
+        int targetSum = totalArraySum / k;
+        boolean[] taken = new boolean[n];
+
+        return backtrack(arr, 0, 0, 0, k, targetSum, taken);
     }
 }

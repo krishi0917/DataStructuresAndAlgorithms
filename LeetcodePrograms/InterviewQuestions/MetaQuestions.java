@@ -1,7 +1,5 @@
 package LeetcodePrograms.InterviewQuestions;
 
-import LeetcodePrograms.LeetCode;
-
 import java.util.*;
 
 public class MetaQuestions {
