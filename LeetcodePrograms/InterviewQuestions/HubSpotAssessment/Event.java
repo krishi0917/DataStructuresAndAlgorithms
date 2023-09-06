@@ -1,6 +1,5 @@
 package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
-//input file
 public class Event {
     private String url;
     private String visitorId;
@@ -27,6 +26,12 @@ public class Event {
     }
 
     public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Event(String url, String visitorId, long timestamp){
+        this.url = url;
+        this.visitorId = visitorId;
         this.timestamp = timestamp;
     }
 }

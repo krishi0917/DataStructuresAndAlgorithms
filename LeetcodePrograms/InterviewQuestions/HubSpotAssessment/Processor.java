@@ -1,17 +1,9 @@
 package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
 
 import java.util.*;
-// visitor can have multiple sessions
-// a session is a group of events from a single visitor with no more than 10 mins between each consecutive event
 
-// The visitors in sessionsByUser can be in any order.
-// sessions needs to be in chronological order ----> sort by startTime
-// each session, url should be in chronological order
-// 10 mins = 600000 milliseconds
 public class Processor {
-    public Map<String,List<Session>> processEvents(RawEvent events){
-        List<Event> eventList = events.getEvents();
-
+    public Map<String, List<Session>> processEvents(List<Event> eventList){
         // sort by timestamp
         Collections.sort(eventList, new Comparator<Event>() {
 
@@ -21,48 +13,53 @@ public class Processor {
                 return v1.compareTo(v2);
             }
         });
-        // Intermittent timestamps to compare and calculate duration
-        Map<String,Long> visitorIdToLastTimestampMap = new HashMap<>();
 
-        Map<String,Long> visitorIdToFirstTimestampMap = new HashMap<>();
-        Map<String,List<Session>> visitorIdToSessionsMap = new LinkedHashMap<>(); // key is visitorId
+        // Intermittent visitor to timestamp map to compare and calculate duration
+        Map<String,Long> visitorToRecentTimeMap = new HashMap<>();
+        Map<String,Long> visitorToFirstTimeMap = new HashMap<>();
+        Map<String,List<Session>> visitorToSessionsMap = new LinkedHashMap<>();
 
         for(Event event : eventList){
             String currentUrl = event.getUrl();
             String currentVisitorId = event.getVisitorId();
             long currentTimestamp = event.getTimestamp();
 
-            if(visitorIdToSessionsMap.containsKey(currentVisitorId)){
-                long lastTimestamp = visitorIdToLastTimestampMap.get(currentVisitorId);
-                if(currentTimestamp - lastTimestamp <= 600000){
+            // visitor coming again
+            if(visitorToSessionsMap.containsKey(currentVisitorId)){
 
-                    // url will be added in the same session, duration & visitorIdToIntermediateTimestampMap will be updated
-                    List<Session> tempSessionList = visitorIdToSessionsMap.get(currentVisitorId);
+                long lastTimestamp = visitorToRecentTimeMap.get(currentVisitorId);
+                if(currentTimestamp - lastTimestamp <= 600000){ // needs to be added in the same session
+                    List<Session> tempSessionList = visitorToSessionsMap.get(currentVisitorId);
                     Session lastSession = tempSessionList.get(tempSessionList.size() - 1);
                     tempSessionList.remove(tempSessionList.size() - 1);
                     List<String> currentUrlList = lastSession.getPages();
                     currentUrlList.add(currentUrl);
                     lastSession.setPages(currentUrlList);
-                    lastSession.duration = currentTimestamp - visitorIdToFirstTimestampMap.get(currentVisitorId);
+                    lastSession.duration = currentTimestamp - visitorToFirstTimeMap.get(currentVisitorId);
                     tempSessionList.add(lastSession);
-                    visitorIdToSessionsMap.put(currentVisitorId, tempSessionList);
+                    visitorToSessionsMap.put(currentVisitorId, tempSessionList);
                 }else{
+                    //difference in current and recent > 60000, hence a new session is created in the same visitor with the duration = 0, currentTimestamp and currentUtl
                     List<String> tempPageList = new ArrayList<>();
                     tempPageList.add(currentUrl);
-                    visitorIdToSessionsMap.get(currentVisitorId).add(new Session(0L,tempPageList, currentTimestamp));
+                    visitorToSessionsMap.get(currentVisitorId).add(new Session(0L,tempPageList, currentTimestamp));
+                    visitorToFirstTimeMap.put(currentVisitorId, currentTimestamp);
                 }
-                visitorIdToLastTimestampMap.put(currentVisitorId, currentTimestamp);
+                visitorToRecentTimeMap.put(currentVisitorId, currentTimestamp);
             }else{
+                // visitor coming for the first time, create a new session with the duration = 0, currentTimestamp and currentUrl
                 List<String> pageList = new ArrayList<>();
                 pageList.add(currentUrl);
-                Session s = new Session(0L,pageList, currentTimestamp);
                 List<Session> sessionList = new ArrayList<>();
-                sessionList.add(s);
-                visitorIdToSessionsMap.put(currentVisitorId, sessionList);
-                visitorIdToLastTimestampMap.put(currentVisitorId,currentTimestamp); //might not be required
-                visitorIdToFirstTimestampMap.put(currentVisitorId, currentTimestamp);
+                sessionList.add(new Session(0L,pageList, currentTimestamp));
+                visitorToSessionsMap.put(currentVisitorId, sessionList);
+
+                // create an entry in visitorToRecentTimeMap and visitorToFirstTimeMap with currentTimestamp as its a new visitor
+                visitorToRecentTimeMap.put(currentVisitorId, currentTimestamp);
+                visitorToFirstTimeMap.put(currentVisitorId, currentTimestamp);
             }
         }
-        return visitorIdToSessionsMap;
+
+        return visitorToSessionsMap;
     }
 }

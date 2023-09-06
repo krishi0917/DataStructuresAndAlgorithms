@@ -1,13 +1,10 @@
 package LeetcodePrograms.InterviewQuestions.HubSpotAssessment;
-import java.util.ArrayList;
-import java.util.List;
-public class SessionsByUser {
-    List<Visitor> visitorList;
 
-    public SessionsByUser(){
-        visitorList = new ArrayList<>();
-    }
-    public void Add(Visitor v){
-        visitorList.add(v);
+import java.util.*;
+
+public class SessionsByUser{
+    Map<String,List<Session>> sessionsByUser;
+    public SessionsByUser(Map<String, List<Session>> sessionsByUser) {
+        this.sessionsByUser = sessionsByUser;
     }
 }
