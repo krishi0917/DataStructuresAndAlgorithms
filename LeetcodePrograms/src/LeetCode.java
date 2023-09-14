@@ -335,12 +335,10 @@
 // [3,6] -> (3 + 6 <= 9)
 
 package LeetcodePrograms.src;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -371,39 +369,11 @@ public class LeetCode {
         return max;
     }
 
-    // Q35 search insert position a very easy question #bs
-    // Given a sorted array and a target value, return the index if the target is found.
-    // If not, return the index where it would be if it were inserted in order.
-    public int searchInsert(int[] A, int target) {
-        int low = 0, high = A.length - 1;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (A[mid] == target)
-                return mid;
-            else if (A[mid] > target)
-                high = mid - 1;
-            else
-                low = mid + 1;
-        }
-        return low;
-    }
-    //both same above and below
-    public int searchInsert2(int[] nums, int target) {
-        int low = 0, high = nums.length;
-        while(low < high) {
-            int mid = low + (high - low) / 2;
-            if(nums[mid] < target)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-        return low;
-    }
     // Q219 Contain duplicates II  #HardlyAsked
     // Given an array of integers and an integer k, find out whether there are two distinct indices
-    // i and j in the array such that nums[i] = nums[j]
-    // and the absolute difference between i and j is at most k.
+    // i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
 
+    // Approach
     // we can use hashset as well as we are not looking to return indices
     // this solution : Iterate through array and use HashTable to save number[i] as a key and i as a value.
     // If the map already contains number[i] - subtract map.get(number[i]) from i and return true if result is
@@ -420,25 +390,13 @@ public class LeetCode {
         return false;
     }
 
-    // Another way of doing it
-    public boolean containsNearbyDuplicate2(int[] nums, int k) {
-        Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (i > k)
-                set.remove(nums[i - k - 1]);
-            if (!set.add(nums[i]))
-                return true;
-        }
-        return false;
-    }
-
     // Q36 Valid Sudoku #TopInterviewQuestion
     // Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
     // The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
-
-    // The underlying data structure for HashSet is hashtable. So amortize (average or usual case) time complexity for add,
+// Approach
+// The underlying data structure for HashSet is hashtable. So amortize (average or usual case) time complexity for add,
 // remove and look-up (contains method) operation of HashSet takes O(1) time.
-
+// Approach
 //    put the string word r or c or b in the middle of row/col/block & v
     public boolean isValidSudoku2(char[][] board) {
         Set<String> set = new HashSet<>();
@@ -461,7 +419,7 @@ public class LeetCode {
         return true;
     }
 
-// Q1 two sum 2 sum working solution .. accepted in LeetcodePrograms ..twosum #TopInterviewQuestion
+// Q1 two sum 2 sum working solution ..twosum #TopInterviewQuestion
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
@@ -473,7 +431,7 @@ public class LeetCode {
         }
         for (int i = 0; i < nums.length - 1; i++) {
             if (map.containsKey(target - nums[i]) && i != map.get(target - nums[i])) {
-//               hashmap containsKey and and map.get both has O(1) complexity
+//               hashmap containsKey and map.get both has O(1) complexity
                 resultIndex[0] = i;
                 resultIndex[1] = map.get(target - nums[i]);
                 return resultIndex;
@@ -482,7 +440,7 @@ public class LeetCode {
         return resultIndex;
     }
 
-    // Q167 two sum II - input array is sorted .. accepted in LeetcodePrograms
+    // Q167 two sum II - input array is sorted
     // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
     // You may assume that each input would have exactly one solution, and you may not use the same element twice.
     public int[] twoSum2(int[] numbers, int target) {
@@ -498,11 +456,10 @@ public class LeetCode {
         return new int[]{start + 1, end + 1};
     }
 
-    // Q9 Palindrome Number #GoodQuestion #palindrome
-    // For those that are confused with the argument whether this algorithm is O(N) or O(lgN):
-    // This algorithm is O(N) where N is the number of digits. At the same time it is O(lnX), where X is the input
-    // value. Now, stop arguing about the time complexity and concentrate on coding.
+    // Q9 Palindrome Number #palindrome
     // Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+
+    // Complexity This algorithm is O(N) where N is the number of digits. At the same time it is O(lnX), where X is the input value.
     public boolean isPalindrome(int x) {
         if (x < 0)
             return false;
@@ -518,10 +475,9 @@ public class LeetCode {
     // time complexity (Log to the base 10 (N))/2
 // compare half of the digits in x, so don't need to deal with overflow.
     public boolean isPalindrome2(int x) {
-        if (x < 0 || (x != 0 && x % 10 == 0)) //a good point
+        if (x < 0 || (x != 0 && x % 10 == 0))
 // As discussed above, when x < 0, x is not a palindrome.
-// Also if the last digit of the number is 0, in order to be a palindrome,
-// the first digit of the number also needs to be 0. Only 0 satisfy this property.
+// Also if the last digit of the number is 0, in order to be a palindrome, the first digit of the number also needs to be 0. Only 0 satisfy this property.
             return false;
         int rev = 0;
         while (x > rev) {
@@ -563,7 +519,7 @@ public class LeetCode {
     }
 
     // time complexity O(n) space O(1)
-    // Q31 next permutation ... #GoodQuestion #permutation
+    // Q31 next permutation #permutation
     // [6，3，4，9，8，7，1]
     //      i-1 i     k
     // (1) leftward find the first decreasing number @ index i - 1, (4)
@@ -636,23 +592,6 @@ public class LeetCode {
             return result;
         }
 
-    // Another cute way of doing the above same code
-    public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        List<Integer> row, pre = null;
-        for (int i = 0; i < numRows; ++i) {
-            row = new ArrayList<Integer>();
-            for (int j = 0; j <= i; ++j)
-                if (j == 0 || j == i)
-                    row.add(1);
-                else
-                    row.add(pre.get(j - 1) + pre.get(j));
-            pre = row;
-            res.add(row);
-        }
-        return res;
-    }
-
     // Q119 Pascal's Triangle II
     // Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
     public List<Integer> getRow(int numRows) {
@@ -684,9 +623,8 @@ public class LeetCode {
 
     // Q7 Reverse Integer #TopInterviewQuestion
     // Given a 32-bit signed integer, reverse digits of an integer.
-    // Assume we are dealing with an environment which could only store integers
-    // within the 32-bit signed integer
-    // range: [−231, 231 − 1]. For the purpose of this problem,
+    // Assume we are dealing with an environment which could only store integers within the
+    // 32-bit signed integer range: [−231, 231 − 1]. For the purpose of this problem,
     // assume that your function returns 0 when the reversed integer overflows.
 
     // this is the best method
@@ -705,8 +643,7 @@ public class LeetCode {
 
 //    OR As we form a new integer, it is possible that the number is out of range.
 //    We can use the following code to assign the newly formed integer. When it is out of range,
-//    throw an exception.
-//            try{
+//    throw an exception. try{
 //        result = ...;
 //    }catch(InputMismatchException exception){
 //        System.out.println("This is not an integer");
@@ -750,6 +687,7 @@ public class LeetCode {
     // or 9 for positive a and -9 for negative a. The test condition works here because the edge cases mentioned
     // above won't happen due to the fact that the input itself is a signed integer. If the input is something
     // else, say a string (see String to Integer (atoi)), the test condition above will fail the edge cases.
+
     // Q8 String to integer (atoi) #TopInterviewQuestion
     public int myAtoi(String str) {
         int index = 0;
@@ -878,54 +816,25 @@ public class LeetCode {
     }
 
     // Q14 longest common prefix #TopInterviewQuestion  vertical scaling solution is good
-    // have to check for the complexity
     // Write a function to find the longest common prefix string amongst an array of strings.
     public static String longestCommonPrefix(String[] strs) {
         StringBuilder result = new StringBuilder();
-        if (strs != null && strs.length > 0) {
-            Arrays.sort(strs);
-            char[] a = strs[0].toCharArray();
-            char[] b = strs[strs.length - 1].toCharArray();
-            for (int i = 0; i < a.length; i++) {
-                if ( b[i] == a[i]) {
-                    result.append(b[i]);
-                } else {
-                    return result.toString();
-                }
+        Arrays.sort(strs);
+        char[] a = strs[0].toCharArray();
+        char[] b = strs[strs.length - 1].toCharArray();
+        for (int i = 0; i < a.length; i++) {
+            if ( b[i] == a[i]) {
+                result.append(b[i]);
+            } else {
+                return result.toString();
             }
-            return result.toString();
         }
         return result.toString();
     }
 
-    // or
-
-    public String longestCommonPrefix3(String[] strs) {
-        StringBuilder result = new StringBuilder();
-        if (strs != null && strs.length > 0) {
-            Arrays.sort(strs);
-            char[] a = strs[0].toCharArray();
-            char[] b = strs[strs.length - 1].toCharArray();
-            for (int i = 0; i < a.length; i++) {
-                if (b.length > i && b[i] == a[i]) {
-                    result.append(b[i]);
-                } else {
-                    return result.toString();
-                }
-            }
-            return result.toString();
-        }
-        return result.toString();
-    }
-
-    //    or horizontal scaling
-    //    what is the time complexity.
-    //    m is the lenght of the longest string
-    //    n is the length of the strs
+    //    or horizontal scaling, what is the time complexity.
+    //    m is the length of the longest string n is the length of the strs
     //    so O(n* m* mm) because indexOf is mm, the substring is O(m) am I right ?
-    //
-    //    I think ...
-    //
     //    O(n * m * (m + m)), which is O(n * m * 2m), which is O(n * m^2)
     //    Because for n strings it does m times indexOf (which is O(m)) and m times substring (which is O(m))
     public String longestCommonPrefix4(String[] strs) {
@@ -967,7 +876,7 @@ public class LeetCode {
         return strs[0];
     }
 
-    // Q20 Valid Parentheses #TopInterviewQuestion
+    // Q20 Valid Parentheses #TopInterviewQuestion #parentheses
     public boolean isValidParentheses(String s) {
         Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {
@@ -983,81 +892,14 @@ public class LeetCode {
         return stack.isEmpty();
     }
 
-    // Time Complexity O(n)
-    // Q98 Validate Binary Search Tree #TopInterviewQuestion
-    // Given a binary tree, determine if it is a valid binary search tree (BST).
-    public boolean isValidBST(TreeNode root) {
-
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
-        if (root == null)
-            return true;
-        if (root.val >= maxVal || root.val <= minVal)
-            return false;
-        return isValidBST(root.left, minVal, root.val) && isValidBST(root.right, root.val, maxVal);
-    }
-
-    public boolean isValidBSTIterative(TreeNode root) { // #GoodQuestion
-        if (root == null)
-            return true;
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode pre = null;
-        while (root != null || !stack.isEmpty()) {
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            if (pre != null && root.val <= pre.val)
-                return false;
-            pre = root;
-            root = root.right;
-        }
-        return true;
-    }
-
-    public class validateBinarySearchTree {
-        // Root of the Binary Tree
-        Node root;
-
-        // To keep tract of previous node in Inorder Traversal
-        Node prev;
-
-        boolean isBST() {
-            prev = null;
-            return isBST(root);
-        }
-
-        /* Returns true if given search tree is binary
-           search tree (efficient version) */
-        boolean isBST(Node node) {
-            // traverse the tree in inorder fashion and
-            // keep a track of previous node
-            if (node != null) {
-                if (!isBST(node.left))
-                    return false;
-
-                // allows only distinct values node
-                if (prev != null && node.data <= prev.data)
-                    return false;
-                prev = node;
-                return isBST(node.right);
-            }
-            return true;
-        }
-    }
-
     // Q80 remove duplicates from the sorted array II  #HardlyAsked
     // What if duplicates are allowed at most twice?
-    // I think both Remove Duplicates from Sorted Array I and II could be solved in a consistent
-    // and more general way by allowing the duplicates to appear k times (k = 1 for problem I and k = 2 for problem II).
+
     // Here is my way: we need a count variable to keep how many times the duplicated element appears,
     // if we encounter a different element, just set counter to 1, if we encounter a duplicated one,
     // we need to check this count, if it is already k, then we need to skip it,
     // otherwise, we can keep this element. The following is the implementation and can pass both OJ:
-    public static int removeDuplicates(int A[], int n, int k) {
+    public static int removeDuplicates(int A[], int n, int k) { // k could be 1 or 2
         if (n <= k)
             return n;
         int i = 1, j = 1;
@@ -1086,8 +928,22 @@ public class LeetCode {
         return i;
     }
 
-    // Q27 Remove Element
-    // Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+    // Q26. remove duplicates from sorted array #TopInterviewQuestion #inline
+    // Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+    // Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+    public static int removeduplicatesfromSortedArray(int A[], int n) {
+        int count = 0;
+        for (int i = 1; i < n; i++) {
+            if (A[i] == A[i - 1])
+                count++;
+            else
+                A[i - count] = A[i]; // overwriting the duplicated element with the next new element
+        }
+        return n - count;
+    }
+
+    // Q27 Remove Element #inline
+    // Given an array nums and a value val, remove all instances of that value in-place inline and return the new length.
     // Do not allocate extra space for another array, you must do this by modifying the input array in-place
     // with O(1) extra memory. The order of elements can be changed. It doesn't matter what you leave beyond the new length.
     public int removeElement1(int[] A, int elem) {
@@ -1100,6 +956,7 @@ public class LeetCode {
         }
         return m;
     }
+
 
     // Remove all the instances of a particular element
     public int removeElement(int[] A, int elem) {
@@ -1122,8 +979,7 @@ public class LeetCode {
         return list.size();
     }
 
-
-    // Q28 Implement strStr() #TopInterviewQuestion  look for KMP algorithm that will make it in O(n+m) complexity
+    // Q28 Implement strStr()  look for KMP algorithm that will make it in O(n+m) complexity
     // #KMPAlgorithm NeedsAttention
     // function to find the first occurrence of the substring needle in the string haystack
     public int strStr(String haystack, String needle) { // haystack.lastIndexOf(needle);
@@ -1148,23 +1004,6 @@ public class LeetCode {
         return haystack.indexOf(needle);  //this is o(n square)
     }
 
-    // Given a sorted array and a target value, return the index if the target
-    // is found. If not, return the index where it would be if it were inserted in order.
-    public static int SearchInsertPosition(int A[], int target) {
-        // binary search and return low
-        int low = 0, high = A.length - 1;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (A[mid] == target)
-                return mid;
-            else if (A[mid] > target)
-                high = mid - 1;
-            else
-                low = mid + 1;
-        }
-        return low;
-    }
-
     // Q38 Count and Say #TopInterviewQuestion
     // 1
     // 11
@@ -1176,36 +1015,7 @@ public class LeetCode {
     // 1113213211
     // 31131211131221
     // 13211311123113112211
-    public String countAndSay(int n) {
-        if (n <= 0)
-            return null;
 
-        String result = "1";
-        int i = 1;
-
-        while (i < n) {
-            StringBuilder sb = new StringBuilder();
-            int count = 1;
-            for (int j = 1; j < result.length(); j++) {
-                if (result.charAt(j) == result.charAt(j - 1)) {
-                    count++;
-                } else {
-                    sb.append(count);
-                    sb.append(result.charAt(j - 1));
-                    count = 1;
-                }
-            }
-
-            sb.append(count);
-            sb.append(result.charAt(result.length() - 1));
-            result = sb.toString();
-            i++;
-        }
-
-        return result;
-    }
-
-    // Another way of doing this question (easy approach)
     public String countAndSay2(int n) {
         String s = "1";
         for (int i = 1; i < n; i++) {
@@ -1250,25 +1060,8 @@ Output: true
 
 
 // Q152 Maximum Product SubArray  Max Product Subarray #TopInterviewQuestion
-// a very good explanation of the below solution
-//    Let me reason the solution.
-//    There are 2 possibilities - either the number of -ve numbers is even or odd.
-//    If they are even, then obviously we would want to include all of them(in fact the whole array(unless for zeros))
-//    to maximise the product. This is because multiplying an even number of -ve numbers would make the result +ve.
-//
-//    If they are odd, then we would want to exclude at most(to maximise the product) one -ve number from our product.
-//    So, now the question is, which -ve number to exclude? There are 2 possibilities - first -ve num or last -ve num.
-//    a. Note that, you cannot exclude a -ve number that is not the first or the last, because, if you do so, you will
-//    need to exclude all(because you are breaking the product at this point) other -ve nums following that -ve number
-//    and then that needn't result in the maximum product.
-//    b. Remember, that our goal is to leave out only 1 -ve number so that we can maximise our product.
-//    c. Note: We are leaving out one -ve number,
-//    so that we are able to make the number of -ve nums even. Having said all that, now the question is whether to
-//    exclude the first -ve num or the last -ve num in the array. We can only know the answer by trying both.
-//    d. By taking the product from the beginning of the array, you forcefully include the first -ve number and exclude the last -ve number
-//    e. vice-versa for taking the product from the end
 
-// Short version of explanation
+// Approach
 // When there are even number of negative integers, both pass will give correct result. When there are odd number of
 // integers, then we have to discard one of them, either the most left, or the most right one (consider there is no
 // zeros ). Then you just tried both and see which case is bigger. Another good thing is that how you handle zero,
@@ -1306,7 +1099,6 @@ Output: true
     {
         int max_so_far = a[0];
         int curr_max = a[0];
-
         for (int i = 1; i < size; i++)
         {
             curr_max = Math.max(a[i], curr_max+a[i]);
@@ -1316,8 +1108,7 @@ Output: true
     }
 
     public int maxSubArraySumNoIndices(int a[]) {
-        int size = a.length;
-        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+        int size = a.length; int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
         for (int i = 0; i < size; i++) {
             max_ending_here = max_ending_here + a[i];
             if (max_so_far < max_ending_here)
@@ -1329,8 +1120,7 @@ Output: true
     }
 
     public int maxSubArraySumWithIndices(int a[], int size) {
-        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
-                start =0, end = 0, s=0;
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0, start =0, end = 0, s=0;
         for (int i=0; i< size; i++ ) {
             max_ending_here += a[i];
             if (max_so_far < max_ending_here) {
@@ -1344,57 +1134,8 @@ Output: true
                 s = i + 1;
             }
         }
-        System.out.println("Maximum contiguous sum is "
-                +max_so_far );
-        System.out.println( "Starting index "+start
-                + "Ending index " + end);
         return max_so_far;
     }
-
-//    254. Factor Combinations
-//    Numbers can be regarded as the product of their factors.
-//    For example, 8 = 2 x 2 x 2 = 2 x 4.
-//    Given an integer n, return all possible combinations of its factors. You may return the answer in any order.
-//    Note that the factors should be in the range [2, n - 1].
-//    Example 1:
-//    Input: n = 1
-//    Output: []
-//    Example 2:
-//
-//    Input: n = 12
-//    Output: [[2,6],[3,4],[2,2,3]]
-
-    public List<List<Integer>> getFactors(int n) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        helper(result, new ArrayList<Integer>(), n, 2);
-        return result;
-    }
-
-    public void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
-        if (n <= 1) {
-            if (item.size() > 1) {
-                result.add(new ArrayList<Integer>(item));
-            }
-            return;
-        }
-
-        for (int i = start; i <= n; ++i) {
-            if (n % i == 0) {
-                item.add(i);
-                helper(result, item, n/i, i);
-                item.remove(item.size()-1);
-            }
-        }
-    }
-
-//    325. Maximum Size Subarray Sum Equals k
-//    Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
-//    Note:    The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
-//    Example 1:
-//    Input: nums = [1, -1, 5, -2, 3], k = 3
-//    Output: 4
-//    Explanation: The subarray [1, -1, 5, -2] sums to 3 and is the longest.
-
 
 // Q70 Climbing stairs problem #TopInterviewQuestion
 // You are climbing a stair case. It takes n steps to reach to the top.
@@ -1487,22 +1228,18 @@ Output: true
             A[k--] = B[j--];
     }
 
-// Q243 Shortest word distance
+// Q243 Shortest word distance #Linkedin
 // Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
     public int shortestDistance(String[] words, String word1, String word2) {
         int p1 = -1, p2 = -1, min = Integer.MAX_VALUE;
-
         for (int i = 0; i < words.length; i++) {
             if (words[i].equals(word1))
                 p1 = i;
-
             if (words[i].equals(word2))
                 p2 = i;
-
             if (p1 != -1 && p2 != -1)
                 min = Math.min(min, Math.abs(p1 - p2));
         }
-
         return min;
     }
 
@@ -1511,7 +1248,6 @@ Output: true
 // and return the shortest distance between these two words in the list. Your method will be called repeatedly many times with different
 // parameters. Duplicates are been taken care of in this method
     private Map<String, List<Integer>> wordDistanceMap;
-
     public void WordDistance2constructor(String[] words) {
         wordDistanceMap = new HashMap<>(); //list to include all the duplicate values index's
         for(int i = 0; i < words.length; i++) {
@@ -1543,154 +1279,6 @@ Output: true
         return ret;
     }
 
-    // Q101 Symmetric Tree #TopInterviewQuestion  Mirror Image Reflection
-    public boolean isSymmetric(TreeNode root) {
-        return root == null || isSymmetricHelp(root.left, root.right);
-    }
-
-    private boolean isSymmetricHelp(TreeNode left, TreeNode right) {
-        if (left == null || right == null)
-            return left == right;
-        if (left.val != right.val)
-            return false;
-        return isSymmetricHelp(left.left, right.right) && isSymmetricHelp(left.right, right.left);
-    }
-
-    public boolean isSymmetricQueue(TreeNode root) {
-        if (root == null)
-            return true;
-        Queue<TreeNode> q = new LinkedList();
-        q.add(root.left);
-        q.add(root.right);
-        while (!q.isEmpty()) {
-            TreeNode left = q.poll();
-            TreeNode right = q.poll();
-            if (left == null && right == null)
-                continue;
-            if (left == null || right == null || left.val != right.val)
-                return false;
-            q.add(left.left);
-            q.add(right.right);
-            q.add(left.right);
-            q.add(right.left);
-        }
-        return true;
-    }
-
-    public boolean isSymmetricStack(TreeNode root) {
-        if (root == null) return true;
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root.left);
-        stack.push(root.right);
-        while (!stack.empty()) {
-            TreeNode n1 = stack.pop(), n2 = stack.pop();
-            if (n1 == null && n2 == null) continue;
-            if (n1 == null || n2 == null || n1.val != n2.val) return false;
-            stack.push(n1.left);
-            stack.push(n2.right);
-            stack.push(n1.right);
-            stack.push(n2.left);
-        }
-        return true;
-    }
-
-    // Q104 Maximum depth of Binary tree #TopInterviewQuestion
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
-    }
-
-    public int maxDepthNonRecursive(TreeNode root) {
-        if (root == null)
-            return 0;
-        int depth = 0;
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.offer(root);
-        while (!nodes.isEmpty()) {
-            int size = nodes.size();
-            depth++;
-            while (size-- > 0) {
-                TreeNode node = nodes.poll();
-                if (node.left != null)
-                    nodes.offer(node.left);
-                if (node.right != null)
-                    nodes.offer(node.right);
-            }
-        }
-        return depth;
-    }
-
-// Q111 Minimum Depth of a tree :  Given a binary tree, find its minimum depth.
-// The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
-// BFS is much better here, rather than a DFS approach.
-// Sure, the solution here is short in terms of lines of code and looks nice, but it's far from optimal.
-// If you have a tree where say the root's left subtree has a depth of 500 and the right subtree has a depth of 1,
-// the code is going to traverse all the way down the 500 left subtree first before finally traversing the right
-// subtree with a measly depth of 1 and figuring out "d'oh!" that's the min depth.
-// With BFS, instead of traversing 501 nodes to figure out the min depth, you could've just traversed two.
-// Now imagine if the left subtree comprised of tens of thousands of nodes ...
-    public int minDepth(TreeNode root) {
-        if (root == null)
-            return 0;
-        if (root.left == null)
-            return 1 + minDepth(root.right);
-        if (root.right == null)
-            return 1 + minDepth(root.left);
-        return 1 + Math.min(minDepth(root.left), minDepth(root.right));
-    }
-
-    // below question has the O(n) complexity but still the queue solution is better as you dont have to traverse the
-    // whole tree(which may have 500 nodes) when you have on the left only one node
-    public int minDepth2(TreeNode root) {
-        if(root == null)
-            return 0;
-
-        // leaf node
-        if(root.left == null && root.right == null)
-            return 1;
-
-        // leaf nodes are in right subtree
-        if(root.left == null)
-            return minDepth2(root.right) + 1;
-
-        // leaf nodes are in left subtree
-        if(root.right == null)
-            return minDepth2(root.left) + 1;
-
-        // left/right subtrees both contains leaf nodes
-        int left = minDepth2(root.left);
-        int right = minDepth2(root.right);
-        return Math.min(left, right) + 1;
-    }
-
-    public int minDepthNonRecursive(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        if (root == null) {
-            return 0;
-        }
-        int depth = 1;
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                root = queue.poll();
-                if (root.left == null && root.right == null) {
-                    return depth;
-                }
-                if (root.left != null) {
-                    queue.offer(root.left);
-                }
-                if (root.right != null) {
-                    queue.offer(root.right);
-                }
-            }
-            depth++;
-        }
-        return depth;
-    }
-
     // Q121 Best time to Buy and Sell stocks #TopInterviewQuestion
     // Say you have an array for which the ith element is the price of a given stock on day i.
     // If you were only permitted to complete at most one transaction
@@ -1709,11 +1297,6 @@ Output: true
                     profit = prices[i] - min;
                 }
             }
-            // No else..just the if statement
-            // if (prices[i] - min > profit)
-            // {
-            // profit = prices[i] - min;
-            // }
         }
         return profit;
     }
@@ -1814,10 +1397,8 @@ Output: true
         StringBuilder result = new StringBuilder();
         while (n > 0) {
             n--;
-            // result.insert(0, (char)('A' + n % 26)); //either insert it at the
-            // 0th position or append it and later on reverse it.
+            // result.insert(0, (char)('A' + n % 26)); //either insert it at the 0th position or append it and later on reverse it.
             result.append((char) ('A' + n % 26));
-
             // e.g. if n is 25, n%26 = 25, so 'A' + 25 = 'Z'
             // e.g. if n is 26, n%26 = 0, so 'A' + 0 = 'A'.
             // e.g. if n is 27, n%26 = 1, so 'A' + 1 = 'B'
@@ -1880,7 +1461,7 @@ Output: true
         return result;
     }
 
-// Q172 factorial trailing zeros #MicrosoftAsked(6months-1year) #TpInterviewQuestion
+// Q172 factorial trailing zeros
 // Given an integer n, return the number of trailing zeroes in n!.
 // 10 is the product of 2 and 5. In n!, we need to know how many 2 and 5, and the number of zeros is the minimum of the number of 2 and the number of 5.
 // Since multiple of 2 is more than multiple of 5, the number of zeros is dominant by the number of 5.
@@ -1892,7 +1473,6 @@ Output: true
         }
         return r;
     }
-
 
     // Q189 rotate array #TopInterviewQuestion
     // Given an array, rotate the array to the right by k steps, where k is non-negative.
@@ -1918,19 +1498,6 @@ Output: true
             nums[end] = temp;
             start++;
             end--;
-        }
-    }
-
-    // rotate array on the right 3rd solution
-    // smart rotation
-    public void rotateRight3(int[] nums, int k) {
-        //(3) move k times
-        while (k-- > 0) {
-            int tmp = nums[nums.length - 1];
-            for (int i = nums.length - 1; i > 0; i--) {
-                nums[i] = nums[i - 1];
-            }
-            nums[0] = tmp;
         }
     }
 
@@ -1963,9 +1530,9 @@ Output: true
         return true;
     }
     // Alternate Solution and a very good solution based on Floyds Cycle Detection Algorithm   #NeedsAttention
-    //    Surprisingly, we can apply the Floyd Cycle Detection (the one we used in Detect Linked List Cycle) on this problem: think of what is a cycle in this case
-    //    from a number A, we can get to another B using the ways given in this case
-    //    from number B, when we doing the transformation, we will eventually get back to B again ---> this forms a cycle (infinite loop)
+    // Surprisingly, we can apply the Floyd Cycle Detection (the one we used in Detect Linked List Cycle) on this problem: think of what is a cycle in this case
+    // from a number A, we can get to another B using the ways given in this case
+    // from number B, when we doing the transformation, we will eventually get back to B again ---> this forms a cycle (infinite loop)
     //
     //            for example:
     //            1^2 + 1^2 = 2
@@ -1998,29 +1565,10 @@ Output: true
             slow = digitSquareSum(slow);
             fast = digitSquareSum(fast);
             fast = digitSquareSum(fast);
-            if(fast == 1)  // this part should be done inside because this way we are voiding extra loops if it is
-                // outside
+            if(fast == 1)  // this part should be done inside because this way we are voiding extra loops if it is outside
                 return true;
         } while(slow != fast);
         return false;
-    }
-
-// better to leave the below solution
-// In order to find a rule to break out the loop, I start calculating 2 and find a loop at 4, then 3,5,6,9 will all go into that loop.
-// So in 1-9, only 1 and 7 are happy numbers. Also I find all numbers' calculation will goes into a single digit at some time. So what
-// I did is just calculate happy sum and when it is a single digit, check if it is 1 or 7 ^.^
-
-    public boolean isHappy5(int n) {
-        if(n == 1 || n == 7)
-            return true;
-        else if(n < 10) return false;
-        int m = 0;
-        while(n != 0){
-            int tail = n % 10;
-            m += tail * tail;
-            n = n/10;
-        }
-        return isHappy5(m);
     }
 
     // Magic number is when you replace the number by the sum of its digits,
@@ -2037,7 +1585,6 @@ Output: true
         return isMagicNumber(sumOfDigits);
     }
     
-    //WILL SEE IT TOMORROW
     // Q287 find the duplicate number #TopInterviewQuestion // both the below solutions are amazing
     // Given an array nums containing n + 1 integers where each integer is
     // between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is only one
@@ -2049,14 +1596,6 @@ Output: true
     // and count all the numbers equal to or less than mid. Then if the count is  more than mid, the search space will be [1 mid]
     // otherwise [mid+1 n]. I do this until search space is only one number.
 
-//    My understanding of this algo is that:   #NeedsAttention
-//    you perceive the indices as the values.
-//    Then count the number of values lesser than the mid
-//    If the if the count is lesser than mid, we assume the duplicate number should be on the higher side of the number scale.
-//    so we make low = mid + 1
-//    else we assume the duplicate number should be on the lower end of the number scale.
-//    so we make high = mid - 1
-//
 //    We continue until low <=hight no longer holds true
 
     // time complexity O(n log n)
@@ -2100,24 +1639,6 @@ Output: true
         return slow;
     }
 
-    public int findDuplicate2(int[] nums) {
-        int n = nums.length;
-        for (int i = 0; i < nums.length; i++)
-            nums[i]--;
-        int slow = n - 1;
-        int fast = n - 1;
-        do {
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-        } while (slow != fast);
-        slow = n - 1;
-        while (slow != fast) {
-            slow = nums[slow];
-            fast = nums[fast];
-        }
-        return slow + 1;
-    }
-
     // if asked for the above solution that you cannot modify then the solution will be like this
     public int findDuplicate3(int[] nums) {
         int n = nums.length;
@@ -2152,27 +1673,8 @@ Output: true
         return n == 1;
     }
 
-    // Q258 add digits #GoodQuestion  #HardlyAsked
+    // Q258 add digits #GoodQuestion
     // Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
-    public int addDigits(int num) {
-        int cur = num;
-        int sum = 0;
-        boolean oneDigit = false;
-        while (!oneDigit) {
-            while (cur/10 != 0) {
-                sum += cur%10;
-                cur = cur/10;
-            }
-            sum += cur;
-            if (sum/10 == 0)
-                oneDigit = true;
-            else {
-                cur = sum;
-                sum = 0;
-            }
-        }
-        return sum;
-    }
     public int addDigits3(int num) {
         while (num > 9) {
             int temp = 0;
@@ -2193,9 +1695,7 @@ Output: true
     }
 
 // Amazing solution for the above same question
-//	explanation of the below solution
 // First you should understand:
-
 // 10^k % 9 = 1
 // a*10^k % 9 = a % 9
 // Then let's use an example to help explain.
@@ -2210,26 +1710,7 @@ Output: true
 //	Then x % 9 = ( 2+ 3 + 4 + 5 + 6) % 9, note that x = 2* 10000 + 3 * 1000 + 4 * 100 + 5 * 10 + 6
 //
 //	So we have 23456 % 9 = (2 + 3 + 4 + 5 + 6) % 9
-
-// another explanation
-//    N=(a[0] * 1 + a[1] * 10 + ...a[n] * 10 ^n),and a[0]...a[n] are all between [0,9]
 //
-//    we set M = a[0] + a[1] + ..a[n]
-//
-//    and another truth is that:
-//  1 % 9 = 1
-//  10 % 9 = 1
-//
-//            100 % 9 = 1
-//
-//    so N % 9 = a[0] + a[1] + ..a[n]
-//
-//    means N % 9 = M
-//
-//    so N = M (% 9)
-//
-//    as 9 % 9 = 0,so we can make (n - 1) % 9 + 1 to help us solve the problem when n is 9.as N is 9, ( 9 - 1) % 9 + 1 = 9
-
     public int addDigits2(int num) {
         if (num == 0){
             return 0;
@@ -2242,21 +1723,7 @@ Output: true
         }
     }
 
-// Q26. remove duplicates from sorted array #TopInterviewQuestion #inline
-// Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
-// Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
-    public static int removeduplicatesfromSortedArray(int A[], int n) {
-        int count = 0;
-        for (int i = 1; i < n; i++) {
-            if (A[i] == A[i - 1])
-                count++;
-            else
-                A[i - count] = A[i]; // overwriting the duplicated element with the next new element
-        }
-        return n - count;
-    }
-
-    // Q283 move zeroes #TopInterviewQuestion
+    // Q283 move zeroes #TopInterviewQuestion inline #inline
     // Shifting zeros on the right. Shift non-zero values as far forward as possible Fill remaining space with zeros
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length == 0)
@@ -8074,6 +7541,92 @@ Output: true
             }
         }
 
+// #backtracking related questions
+
+//    254. Factor Combinations
+//    Numbers can be regarded as the product of their factors. For example, 8 = 2 x 2 x 2 = 2 x 4.
+//    Given an integer n, return all possible combinations of its factors. You may return the answer in any order.
+//    Note that the factors should be in the range [2, n - 1].
+//    Example 1:
+//    Input: n = 1
+//    Output: []
+//    Example 2:
+//
+//    Input: n = 12
+//    Output: [[2,6],[3,4],[2,2,3]]
+
+    public List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(result, new ArrayList<Integer>(), n, 2);
+        return result;
+    }
+
+    public void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
+        if (n <= 1) {
+            if (item.size() > 1) {
+                result.add(new ArrayList<Integer>(item));
+            }
+            return;
+        }
+
+        for (int i = start; i <= n; ++i) {
+            if (n % i == 0) {
+                item.add(i);
+                helper(result, item, n/i, i);
+                item.remove(item.size()-1);
+            }
+        }
+    }
+
+
+// # Binary search questions #binarysearch
+
+    // Q35 search insert position #bs
+    // Given a sorted array and a target value, return the index if the target is found.
+    // If not, return the index where it would be if it were inserted in order.
+    public int searchInsert(int[] A, int target) {
+        int low = 0, high = A.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (A[mid] == target)
+                return mid;
+            else if (A[mid] > target)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return low;
+    }
+    //both same above and below
+    public int searchInsert2(int[] nums, int target) {
+        int low = 0, high = nums.length;
+        while(low < high) {
+            int mid = low + (high - low) / 2;
+            if(nums[mid] < target)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        return low;
+    }
+
+// Given a sorted array and a target value, return the index if the target
+// is found. If not, return the index where it would be if it were inserted in order.
+public static int SearchInsertPosition(int A[], int target) {
+    // binary search and return low
+    int low = 0, high = A.length - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (A[mid] == target)
+            return mid;
+        else if (A[mid] > target)
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+    return low;
+}
+
 // #Interval Questions
 
     // Q252 Meeting Rooms I
@@ -8309,8 +7862,295 @@ Output: true
         }
         return new Interval(-1, -1);
     }
+/*
+    You are given two lists of intervals, A and B.
+    In A, the intervals are sorted by their starting points. None of the intervals within A overlap.
+            Likewise, in B, the intervals are sorted by their starting points. None of the intervals within B overlap.
+    Return the intervals that overlap between the two lists.
+
+            Example:
+    A: {[0,4], [7,12]}
+    B: {[1,3], [5,8], [9,11]}
+    Return:
+    {[1,3], [7,8], [9,11]}
+*/
+    public static List<Interval> findAllOverlappingSlots(List<Interval> interval1, List<Interval> interval2, int duration){
+        int length1 = interval1.size();
+        int length2 = interval2.size();
+        List<Interval> result = new ArrayList<>();
+        int i =0 ,j=0;
+        while(i < length1 && j < length2){
+            if(interval1.get(i).start > interval2.get(j).end){
+                j++;
+            }else if (interval2.get(j).start > interval1.get(i).end){
+                i++;
+            }else{
+                int end = Math.min (interval1.get(i).end , interval2.get(j).end);
+                int start = Math.max (interval1.get(i).start , interval2.get(j).start);
+                Interval temp = new Interval(start,end);
+                result.add(temp);
+                //whichever ends first will be removed from consideration as the next interval in the series might still overlap
+                if(interval1.get(i).end < interval2.get(j).end)
+                    i++;
+                else
+                    j++;
+            }
+        }
+        return result;
+    }
+    /*
+    435. Non-overlapping Intervals
+    Given an array of intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the
+    rest of the intervals non-overlapping.
+    Example 1:
+    Input: intervals = [[1,2],[2,3],[3,4],[1,3]]
+    Output: 1
+    Explanation: [1,3] can be removed and the rest of the intervals are non-overlapping.
+*/
+    // approach
+    /*Intuition:
+    Minimum number of intervals to remove .
+    Which is nothing but maximum number of intervals we can should keep.
+    Then it comes under Maximum Meeting we can attend.
+    In Detail Explanation:
+    Imagine we have a set of meetings, where each meeting is represented by an interval [start_time, end_time].
+    The goal is to find the maximum number of non-overlapping meetings we can attend.
+
+    Sorting by end times (cmp function):
+    The function first sorts the intervals based on their end times in ascending order using the custom comparator cmp.
+    This sorting is crucial because it allows us to prioritize intervals that finish early, giving us more opportunities
+    to accommodate additional meetings later on.
+
+    Initializing variables:
+    The function initializes two variables, prev and count. The prev variable is used to keep track of the index of the last processed interval,
+    and count is used to store the number of non-overlapping meetings found so far. We start count with 1 because the first interval is considered
+    non-overlapping with itself.
+
+    Greedy approach:
+    The function uses a greedy approach to find the maximum number of non-overlapping meetings. It iterates through the sorted intervals starting
+    from the second interval (index 1) because we've already counted the first interval as non-overlapping. For each interval at index i,
+    it checks if the start time of the current interval (intervals[i][0]) is greater than or equal to the end time of the previous interval
+    (intervals[prev][1]). If this condition is true, it means the current interval does not overlap with the previous one, and we can safely
+    attend this meeting. In that case, we update prev to the current index i and increment count to reflect that we have attended one more meeting.
+
+    Return result:
+    Finally, the function returns the number of intervals that need to be removed to make the remaining intervals non-overlapping.
+    Since we want to maximize the number of meetings we can attend, this value is calculated as n - count, where n is the total number of intervals.
+    */
+
+    public int eraseOverlapIntervals(int[][] intervals) {
+        int n = intervals.length;
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+
+        int prev = 0;
+        int count = 1;
+
+        for (int i = 1; i < n; i++) {
+            if (intervals[i][0] >= intervals[prev][1]) {
+                prev = i;
+                count++;
+            }
+        }
+        return n - count;
+    }
+
 
 //    #Tree Related Questions #BinaryTree Related Questions #BinaryTreeRelatedQuestion #Binary Tree Related Question
+
+    // Q101 Symmetric Tree #TopInterviewQuestion  Mirror Image Reflection
+    public boolean isSymmetric(TreeNode root) {
+        return root == null || isSymmetricHelp(root.left, root.right);
+    }
+
+    private boolean isSymmetricHelp(TreeNode left, TreeNode right) {
+        if (left == null || right == null)
+            return left == right;
+        if (left.val != right.val)
+            return false;
+        return isSymmetricHelp(left.left, right.right) && isSymmetricHelp(left.right, right.left);
+    }
+
+    public boolean isSymmetricQueue(TreeNode root) {
+        if (root == null)
+            return true;
+        Queue<TreeNode> q = new LinkedList();
+        q.add(root.left);
+        q.add(root.right);
+        while (!q.isEmpty()) {
+            TreeNode left = q.poll();
+            TreeNode right = q.poll();
+            if (left == null && right == null)
+                continue;
+            if (left == null || right == null || left.val != right.val)
+                return false;
+            q.add(left.left);
+            q.add(right.right);
+            q.add(left.right);
+            q.add(right.left);
+        }
+        return true;
+    }
+
+    // Q104 Maximum depth of Binary tree #TopInterviewQuestion
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+
+    public int maxDepthNonRecursive(TreeNode root) {
+        if (root == null)
+            return 0;
+        int depth = 0;
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.offer(root);
+        while (!nodes.isEmpty()) {
+            int size = nodes.size();
+            depth++;
+            while (size-- > 0) {
+                TreeNode node = nodes.poll();
+                if (node.left != null)
+                    nodes.offer(node.left);
+                if (node.right != null)
+                    nodes.offer(node.right);
+            }
+        }
+        return depth;
+    }
+
+    // Q111 Minimum Depth of a tree :  Given a binary tree, find its minimum depth.
+// The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+// BFS is much better here, rather than a DFS approach.
+// Sure, the solution here is short in terms of lines of code and looks nice, but it's far from optimal.
+// If you have a tree where say the root's left subtree has a depth of 500 and the right subtree has a depth of 1,
+// the code is going to traverse all the way down the 500 left subtree first before finally traversing the right
+// subtree with a measly depth of 1 and figuring out "d'oh!" that's the min depth.
+// With BFS, instead of traversing 501 nodes to figure out the min depth, you could've just traversed two.
+// Now imagine if the left subtree comprised of tens of thousands of nodes ...
+    public int minDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        if (root.left == null)
+            return 1 + minDepth(root.right);
+        if (root.right == null)
+            return 1 + minDepth(root.left);
+        return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+    }
+
+    // below question has the O(n) complexity but still the queue solution is better as you dont have to traverse the
+    // whole tree(which may have 500 nodes) when you have on the left only one node
+    public int minDepth2(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        // leaf node
+        if(root.left == null && root.right == null)
+            return 1;
+
+        // leaf nodes are in right subtree
+        if(root.left == null)
+            return minDepth2(root.right) + 1;
+
+        // leaf nodes are in left subtree
+        if(root.right == null)
+            return minDepth2(root.left) + 1;
+
+        // left/right subtrees both contains leaf nodes
+        int left = minDepth2(root.left);
+        int right = minDepth2(root.right);
+        return Math.min(left, right) + 1;
+    }
+
+    public int minDepthNonRecursive(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root == null) {
+            return 0;
+        }
+        int depth = 1;
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                root = queue.poll();
+                if (root.left == null && root.right == null) {
+                    return depth;
+                }
+                if (root.left != null) {
+                    queue.offer(root.left);
+                }
+                if (root.right != null) {
+                    queue.offer(root.right);
+                }
+            }
+            depth++;
+        }
+        return depth;
+    }
+
+    // Time Complexity O(n)
+    // Q98 Validate Binary Search Tree #TopInterviewQuestion #bst
+    // Given a binary tree, determine if it is a valid binary search tree (BST).
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
+        if (root == null)
+            return true;
+        if (root.val >= maxVal || root.val <= minVal)
+            return false;
+        return isValidBST(root.left, minVal, root.val) && isValidBST(root.right, root.val, maxVal);
+    }
+
+    public boolean isValidBSTIterative(TreeNode root) { // #GoodQuestion
+        if (root == null)
+            return true;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pre != null && root.val <= pre.val)
+                return false;
+            pre = root;
+            root = root.right;
+        }
+        return true;
+    }
+
+    public class validateBinarySearchTree {
+        // Root of the Binary Tree
+        Node root;
+
+        // To keep tract of previous node in Inorder Traversal
+        Node prev;
+
+        boolean isBST() {
+            prev = null;
+            return isBST(root);
+        }
+
+        /* Returns true if given search tree is binary search tree (efficient version) */
+        boolean isBST(Node node) {
+            // traverse the tree in inorder fashion and
+            // keep a track of previous node
+            if (node != null) {
+                if (!isBST(node.left))
+                    return false;
+
+                // allows only distinct values node
+                if (prev != null && node.data <= prev.data)
+                    return false;
+                prev = node;
+                return isBST(node.right);
+            }
+            return true;
+        }
+    }
 
     // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook
     // Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.

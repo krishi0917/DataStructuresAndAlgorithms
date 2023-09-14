@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions;
 
 import java.io.*;
 import java.util.*;

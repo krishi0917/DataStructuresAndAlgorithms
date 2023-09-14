@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions;
 import java.util.*;
 public class Aloha4CodingSolution {
     public class Main {

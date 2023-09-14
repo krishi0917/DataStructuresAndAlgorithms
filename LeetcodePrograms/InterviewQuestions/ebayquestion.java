@@ -1,14 +1,12 @@
 package LeetcodePrograms.InterviewQuestions;
 
 /*
-
 Write a utility to flat a Given data structure of Input Map<Key,Object> to Output Map<String,String>.
 
 The Key in the input Map is a String,
 The Value in the Input Map can be a String or anothee Map<String,Object>
 
 Example
-
 Given the following map:
 
 {

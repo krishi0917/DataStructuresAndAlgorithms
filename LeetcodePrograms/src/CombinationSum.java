@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class backtracktryinh {
+// Combination Sum
+public class CombinationSum {
     public static List<List<Integer>> combinationSum(int[] nums, int target) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(nums);
@@ -28,6 +29,6 @@ public class backtracktryinh {
     public static void main(String []args){
         int []nums = {2,3,6,7};
         int target = 7;
-        System.out.println(backtracktryinh.combinationSum(nums,target));
+        System.out.println(CombinationSum.combinationSum(nums,target));
     }
 }
