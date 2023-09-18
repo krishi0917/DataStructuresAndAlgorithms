@@ -344,6 +344,49 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class LeetCode {
 
+    // Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
+    public static List<String> lengthOfLongestSubstring2(String s) {
+        List<String> maxLengthStrings = new ArrayList<>();
+        if (s.length()==0) return null;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max=0;
+        for (int i=0, j=0; i<s.length(); ++i){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1); // j is the point from where the next string will start
+            }
+            map.put(s.charAt(i),i);
+
+            // for storing the biggest string
+            if(i-j+1 > max){
+                maxLengthStrings.clear();
+                maxLengthStrings.add(s.substring(j,i+1));
+            }
+            if(i-j+1 == max){
+                //maxLengthString.clear();
+                maxLengthStrings.add(s.substring(j,i+1));
+            }
+
+            max = Math.max(max,i-j+1);
+            System.out.println("max string " + s.substring(j,i+1));
+        }
+        // return max if you just need the length else return the list
+        return maxLengthStrings;
+    }
+
+    // can do the above same thing using ascii solution
+    public int lengthOfLongestSubstring3(String s) {
+
+        int len = s.length(), max = 0;
+        int[] chars = new int[128];
+
+        for (int i = 0, j = 0; i < len; i++) {
+            j = Math.max(j, chars[s.charAt(i)]);
+            max = Math.max(max, i - j + 1);
+            chars[s.charAt(i)] = i + 1;
+        }
+        return max;
+    }
+
 // Q32. Longest Valid Parenthesis #parentheses
 // Given a string containing just the characters '(' and ')', find the
 // length of the longest valid (well-formed) parentheses substring.
@@ -1916,133 +1959,6 @@ Output: true
         }
     }
 
-    // Q226 Invert binary tree #GoogleQuestion
-    // Note this tree doesn't traverse it from bottom to top it just inverts it
-    //    4
-    //  /   \
-    // 2    7
-    // / \ / \
-    // 1 3 6 9
-    // to
-    //    4
-    //  /   \
-    //  7    2
-    // / \ / \
-    // 9 6 3 1
-
-    //this below solution might crash your system so better to use stack data structure
-    // Queue Solution is better
-    public TreeNode invertTree(TreeNode root) {
-        if (root == null)
-            return null;
-        TreeNode tmp = root.left;
-        root.left = invertTree(root.right);
-        root.right = invertTree(tmp);
-        return root;
-    }
-
-    public TreeNode invertTree3(TreeNode root) {
-
-        if (root == null) {
-            return null;
-        }
-
-        final Deque<TreeNode> stack = new LinkedList<>();
-        stack.push(root);
-
-        while(!stack.isEmpty()) {
-            final TreeNode node = stack.pop();
-            final TreeNode left = node.left;
-            node.left = node.right;
-            node.right = left;
-
-            if(node.left != null) {
-                stack.push(node.left);
-            }
-            if(node.right != null) {
-                stack.push(node.right);
-            }
-        }
-        return root;
-    }
-
-    // asked in facebook thats why just have a look ... level order traversal
-    // question is hardly been asked
-    public TreeNode invertTree2(TreeNode root) {
-        if(root == null) return root;
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            TreeNode node = queue.poll();
-            TreeNode tmp = node.left;
-            node.left = node.right;
-            node.right = tmp;
-            if(node.left != null)
-                queue.offer(node.left);
-            if(node.right != null)
-                queue.offer(node.right);
-        }
-        return root;
-    }
-
-    // Q257 Binary Tree Paths   #facebookfavouriteQuestion
-    // Given a binary tree, return all root-to-leaf paths.
-    // For example, given the following binary tree:
-    //  1
-    // / \
-    // 2 3
-    // \
-    // 5
-    // All root-to-leaf paths are:
-    //
-    // ["1->2->5", "1->3"]
-    // easy stack solution
-    public List<String> binaryTreePaths(TreeNode root) {
-        List<String> answer = new ArrayList<String>();
-        if (root != null)
-            searchBT(root, "", answer);
-        return answer;
-    }
-
-    private void searchBT(TreeNode root, String path, List<String> answer) {
-        if (root.left == null && root.right == null)
-            answer.add(path + root.val);
-        if (root.left != null)
-            searchBT(root.left, path + root.val + "->", answer);
-        if (root.right != null)
-            searchBT(root.right, path + root.val + "->", answer);
-    }
-
-    // Above question without recursion
-    public List<String> binaryTreePathsNonRecursive(TreeNode root) {
-        List<String> ret = new ArrayList<>();
-        if (root == null) {
-            return ret;
-        }
-        Stack<TreeNode> stack = new Stack<>();
-        Stack<String> path_stack = new Stack<>();
-        stack.push(root);
-        path_stack.push(root.val + "");
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            String path = path_stack.pop();
-
-            if (node.right == null && node.left == null) {
-                ret.add(path);
-            } else {
-                if (node.left != null) {
-                    stack.push(node.left);
-                    path_stack.push(path + "->" + node.left.val);
-                }
-                if (node.right != null) {
-                    stack.push(node.right);
-                    path_stack.push(path + "->" + node.right.val);
-                }
-            }
-        }
-        return ret;
-    }
-
     // Q278 first bad version
 //	'left + right' may cause the Integer Overflow, meaning that left+right > 2147483647
     public static int firstBadVersion(int n) {
@@ -2074,49 +1990,6 @@ Output: true
             }
         }
         return last;
-    }
-
-    // Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
-    public static List<String> lengthOfLongestSubstring2(String s) {
-        List<String> maxLengthStrings = new ArrayList<>();
-        if (s.length()==0) return null;
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-        int max=0;
-        for (int i=0, j=0; i<s.length(); ++i){
-            if (map.containsKey(s.charAt(i))){
-                j = Math.max(j,map.get(s.charAt(i))+1); // j is the point from where the next string will start
-            }
-            map.put(s.charAt(i),i);
-
-            // for storing the biggest string
-            if(i-j+1 > max){
-                maxLengthStrings.clear();
-                maxLengthStrings.add(s.substring(j,i+1));
-            }
-            if(i-j+1 == max){
-                //maxLengthString.clear();
-                maxLengthStrings.add(s.substring(j,i+1));
-            }
-
-            max = Math.max(max,i-j+1);
-            System.out.println("max string " + s.substring(j,i+1));
-        }
-        // return max if you just need the length else return the list
-        return maxLengthStrings;
-    }
-
-    // can do the above same thing using ascii solution
-    public int lengthOfLongestSubstring3(String s) {
-
-        int len = s.length(), max = 0;
-        int[] chars = new int[128];
-
-        for (int i = 0, j = 0; i < len; i++) {
-            j = Math.max(j, chars[s.charAt(i)]);
-            max = Math.max(max, i - j + 1);
-            chars[s.charAt(i)] = i + 1;
-        }
-        return max;
     }
 
     // Q6 zig zag conversion .. zigzag conversion #GoodQuestion
@@ -2480,86 +2353,6 @@ Output: true
             sum += singleSum; //add to sum after processing the whole layer
         }
         return sum;
-    }
-
-// #GoogleFavouriteQuestion #Facebook
-// Q222 Count complete tree nodes
-// Given a complete binary tree, count the number of nodes.
-// its taking the advantage of the property of a perfect binary tree. If it is perfect binary tree,
-// number of nodes will be 2 raised to the power of height - 1
-// thats why in the solution left and right nodes height is been calculated and compared.
-// if it is equal then use the above formula else apply the standard formula
-
-//    if you see a complete binary tree
-//    zero depth has 2 power 0 element
-//    first depth has 2 power 1 elements
-//    second depth has 2 power 2 elements
-//    third depth has 2 power 3 elements
-//
-// meaning count of binary tree depending on the height would be ( 2 power h ) - 1 .. its a geometric progression
-// for calculating the hieght we can always go on the left side and not on the right side, because we know elements on
-// the left side will always be more than right side. thus , that complexity would be O(log n)
-//
-//  very good explanation https://www.youtube.com/watch?v=_kJepUdgYMc
-
-    int countNodes(TreeNode root) {
-        if (root == null)
-            return 0;
-        int hl = 0, hr = 0;
-        TreeNode l = root, r = root;
-        while (l != null) {
-            hl++;
-            l = l.left;
-        }
-        while (r != null) {
-            hr++;
-            r = r.right;
-        }
-        if (hl == hr)
-            return (int) (Math.pow(2, hl) - 1);
-        return 1 + countNodes(root.left) + countNodes(root.right);
-    }
-
-    //second solution is better
-//    consider h is the total hieght of the tree and x is the height of the right subtree
-//    // so there will be 2 cases
-//    first when x == h - 1 --> meaning left subtree is full complete and your right subtree is a part of the calculation
-//            so formula used will be (2 power h) - 1 , add 1 for root node and go recursive on right side
-//    secondd when x != h - 1 --> meaning last node belongs to the left subtree that means your right subtree is a full subtree of height h-2
-//        so now the formula is 2 power ( h -1 )  - 1 + 1 + recursive on left side
-
-// time complexity Since I halve the tree in every recursive step, I have O(log(n)) steps. Finding a height costs O(log(n)). So overall O(log(n)^2).
-    int height(TreeNode root){
-        if(root == null) return -1;
-
-        return height(root.left) + 1;
-    }
-
-    public int countNodesRecursive(TreeNode root) {
-        int h = height(root);
-        if(h < 0) return 0;
-
-        int right_h = height(root.right);
-        if(right_h == h - 1)
-            return (1 << h) // this is meaning 2 power h
-                + countNodesRecursive(root.right);
-        else return (1 << (h - 1)) // meaning 2 power h - 1
-                + countNodesRecursive(root.left);
-    }
-
-    public int countNodesIterative(TreeNode root) {
-        int nodes = 0, h = height(root);
-        while (root != null) {
-            if (height(root.right) == h - 1) {
-                nodes += 1 << h;
-                root = root.right;
-            } else {
-                nodes += 1 << h-1;
-                root = root.left;
-            }
-            h--;
-        }
-        return nodes;
     }
 
     // Q49 group anagrams #TopInterviewQuestion
@@ -7956,6 +7749,213 @@ public static int SearchInsertPosition(int A[], int target) {
 
 
 //    #Tree Related Questions #BinaryTree Related Questions #BinaryTreeRelatedQuestion #Binary Tree Related Question
+
+    // #GoogleFavouriteQuestion #Facebook
+// Q222 Count complete tree nodes
+// Given a complete binary tree, count the number of nodes.
+// its taking the advantage of the property of a perfect binary tree. If it is perfect binary tree,
+// number of nodes will be 2 raised to the power of height - 1
+// thats why in the solution left and right nodes height is been calculated and compared.
+// if it is equal then use the above formula else apply the standard formula
+
+//    if you see a complete binary tree
+//    zero depth has 2 power 0 element
+//    first depth has 2 power 1 elements
+//    second depth has 2 power 2 elements
+//    third depth has 2 power 3 elements
+//
+// meaning count of binary tree depending on the height would be ( 2 power h ) - 1 .. its a geometric progression
+// for calculating the hieght we can always go on the left side and not on the right side, because we know elements on
+// the left side will always be more than right side. thus , that complexity would be O(log n)
+//
+//  very good explanation https://www.youtube.com/watch?v=_kJepUdgYMc
+
+    int countNodes(TreeNode root) {
+        if (root == null)
+            return 0;
+        int hl = 0, hr = 0;
+        TreeNode l = root, r = root;
+        while (l != null) {
+            hl++;
+            l = l.left;
+        }
+        while (r != null) {
+            hr++;
+            r = r.right;
+        }
+        if (hl == hr)
+            return (int) (Math.pow(2, hl) - 1);
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
+    //second solution is better
+//    consider h is the total hieght of the tree and x is the height of the right subtree
+//    // so there will be 2 cases
+//    first when x == h - 1 --> meaning left subtree is full complete and your right subtree is a part of the calculation
+//            so formula used will be (2 power h) - 1 , add 1 for root node and go recursive on right side
+//    secondd when x != h - 1 --> meaning last node belongs to the left subtree that means your right subtree is a full subtree of height h-2
+//        so now the formula is 2 power ( h -1 )  - 1 + 1 + recursive on left side
+
+    // time complexity Since I halve the tree in every recursive step, I have O(log(n)) steps. Finding a height costs O(log(n)). So overall O(log(n)^2).
+    int height(TreeNode root){
+        if(root == null) return -1;
+
+        return height(root.left) + 1;
+    }
+
+    public int countNodesRecursive(TreeNode root) {
+        int h = height(root);
+        if(h < 0) return 0;
+
+        int right_h = height(root.right);
+        if(right_h == h - 1)
+            return (1 << h) // this is meaning 2 power h
+                    + countNodesRecursive(root.right);
+        else return (1 << (h - 1)) // meaning 2 power h - 1
+                + countNodesRecursive(root.left);
+    }
+
+    public int countNodesIterative(TreeNode root) {
+        int nodes = 0, h = height(root);
+        while (root != null) {
+            if (height(root.right) == h - 1) {
+                nodes += 1 << h;
+                root = root.right;
+            } else {
+                nodes += 1 << h-1;
+                root = root.left;
+            }
+            h--;
+        }
+        return nodes;
+    }
+    
+    // Q226 Invert binary tree #GoogleQuestion
+    // Note this tree doesn't traverse it from bottom to top it just inverts it
+    //    4
+    //  /   \
+    // 2    7
+    // / \ / \
+    // 1 3 6 9
+    // to
+    //    4
+    //  /   \
+    //  7    2
+    // / \ / \
+    // 9 6 3 1
+
+    //this below solution might crash your system so better to use stack data structure
+    // Queue Solution is better
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null)
+            return null;
+        TreeNode tmp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(tmp);
+        return root;
+    }
+
+    public TreeNode invertTree3(TreeNode root) {
+
+        if (root == null) {
+            return null;
+        }
+
+        final Deque<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+
+        while(!stack.isEmpty()) {
+            final TreeNode node = stack.pop();
+            final TreeNode left = node.left;
+            node.left = node.right;
+            node.right = left;
+
+            if(node.left != null) {
+                stack.push(node.left);
+            }
+            if(node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        return root;
+    }
+
+    // asked in facebook thats why just have a look ... level order traversal
+    // question is hardly been asked
+    public TreeNode invertTree2(TreeNode root) {
+        if(root == null) return root;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            TreeNode tmp = node.left;
+            node.left = node.right;
+            node.right = tmp;
+            if(node.left != null)
+                queue.offer(node.left);
+            if(node.right != null)
+                queue.offer(node.right);
+        }
+        return root;
+    }
+
+    // Q257 Binary Tree Paths   #facebookfavouriteQuestion
+    // Given a binary tree, return all root-to-leaf paths.
+    // For example, given the following binary tree:
+    //  1
+    // / \
+    // 2 3
+    // \
+    // 5
+    // All root-to-leaf paths are:
+    //
+    // ["1->2->5", "1->3"]
+    // easy stack solution
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> answer = new ArrayList<String>();
+        if (root != null)
+            searchBT(root, "", answer);
+        return answer;
+    }
+
+    private void searchBT(TreeNode root, String path, List<String> answer) {
+        if (root.left == null && root.right == null)
+            answer.add(path + root.val);
+        if (root.left != null)
+            searchBT(root.left, path + root.val + "->", answer);
+        if (root.right != null)
+            searchBT(root.right, path + root.val + "->", answer);
+    }
+
+    // Above question without recursion
+    public List<String> binaryTreePathsNonRecursive(TreeNode root) {
+        List<String> ret = new ArrayList<>();
+        if (root == null) {
+            return ret;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<String> path_stack = new Stack<>();
+        stack.push(root);
+        path_stack.push(root.val + "");
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            String path = path_stack.pop();
+
+            if (node.right == null && node.left == null) {
+                ret.add(path);
+            } else {
+                if (node.left != null) {
+                    stack.push(node.left);
+                    path_stack.push(path + "->" + node.left.val);
+                }
+                if (node.right != null) {
+                    stack.push(node.right);
+                    path_stack.push(path + "->" + node.right.val);
+                }
+            }
+        }
+        return ret;
+    }
 
     // Q101 Symmetric Tree #TopInterviewQuestion  Mirror Image Reflection
     public boolean isSymmetric(TreeNode root) {
