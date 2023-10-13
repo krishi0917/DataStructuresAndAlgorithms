@@ -21,7 +21,6 @@ public class AddandSearchWord {
                 children = new HashMap<>();
                 endOfWord = false;
             }
-
         }
 
         private TrieNode root;

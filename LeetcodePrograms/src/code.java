@@ -1,11 +1,6 @@
 package LeetcodePrograms.src;
 
 import java.util.Random;
-
-
-/**
- * @author Rishi Khurana
- */
 public class code {
     public static void findRandomWeghts(int []arr,double []weights){
         if(null == arr || arr.length == 0 || arr.length !=weights.length ){

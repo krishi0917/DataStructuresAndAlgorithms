@@ -1,9 +1,7 @@
 package LeetcodePrograms.src;
 
 import java.util.*;
-
 /**
- * @author Rishi Khurana
  * 298. Binary Tree Longest Consecutive Sequence
  * Given a binary tree, find the length of the longest consecutive sequence path.
  *
@@ -26,7 +24,6 @@ public class BinaryTreeLongestConsecutiveSequence {
         helper(root.left, cur, root.val + 1);
         helper(root.right, cur, root.val + 1);
     }
-    
     
     class Pair1{
         Pair1(TreeNode node , int size){
