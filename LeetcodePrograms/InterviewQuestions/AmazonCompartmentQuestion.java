@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-/**
- * @author Rishi Khurana
- */
 public class AmazonCompartmentQuestion {
     public static List<Integer> numberOfItems(String s, List<Integer> startIndices, List<Integer> endIndices) {
         List<Integer> list = new ArrayList<>();

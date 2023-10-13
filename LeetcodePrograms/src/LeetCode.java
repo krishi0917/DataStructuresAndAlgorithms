@@ -334,6 +334,9 @@
 // [3,5,6] -> (3 + 6 <= 9)
 // [3,6] -> (3 + 6 <= 9)
 
+
+// palindrome , permutation, parenthesis, interval, matrix,
+
 package LeetcodePrograms.src;
 
 import java.io.*;
@@ -387,9 +390,8 @@ public class LeetCode {
         return max;
     }
 
-// Q32. Longest Valid Parenthesis #parentheses
-// Given a string containing just the characters '(' and ')', find the
-// length of the longest valid (well-formed) parentheses substring.
+// Q32. Longest Valid Parenthesis #parentheses #parenthesis
+// Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
     public static int longestValidParentheses2(String s) {
         Stack<Integer> stack = new Stack<>();
         int max = 0;
@@ -410,6 +412,22 @@ public class LeetCode {
             }
         }
         return max;
+    }
+
+    // Q20 Valid Parentheses #TopInterviewQuestion #parentheses
+    public boolean isValidParentheses(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '{')
+                stack.push('}');
+            else if (c == '[')
+                stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c)
+                return false;
+        }
+        return stack.isEmpty();
     }
 
     // Q219 Contain duplicates II  #HardlyAsked
@@ -501,7 +519,6 @@ public class LeetCode {
 
     // Q9 Palindrome Number #palindrome
     // Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
-
     // Complexity This algorithm is O(N) where N is the number of digits. At the same time it is O(lnX), where X is the input value.
     public boolean isPalindrome(int x) {
         if (x < 0)
@@ -612,6 +629,50 @@ public class LeetCode {
             last--;
         }
     }
+
+    // Q60 permutation sequence #GoodQuestion #HardlsyAsked (Only Google) #permutation
+    // The set [1,2,3,…,n] contains a total of n! unique permutations.
+    // By listing and labeling all of the permutations in order,
+    // We get the following sequence (ie, for n = 3):
+    // "123"
+    // "132"
+    // "213"
+    // "231"
+    // "312"
+    // "321"
+    // Given n and k, return the kth permutation sequence.
+    // Note: Given n will be between 1 and 9 inclusive.
+    // very intersting question and clearly explained in
+    // https://discuss.leetcode.com/topic/17348/explain-like-i-m-five-java-solution-in-o-n
+    public String getPermutation(int n, int k) {
+        int pos = 0;
+        List<Integer> numbers = new ArrayList<>();
+        int[] factorial = new int[n + 1];
+        StringBuilder sb = new StringBuilder();
+
+        // create an array of factorial lookup
+        int sum = 1;
+        factorial[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            sum *= i;
+            factorial[i] = sum;
+        }
+        // factorial[] = {1, 1, 2, 6, 24, ... n!}
+        // create a list of numbers to get indices
+        for (int i = 1; i <= n; i++) {
+            numbers.add(i);
+        }
+        // numbers = {1, 2, 3, 4}
+        k--;
+        for (int i = 1; i <= n; i++) {
+            int index = k / factorial[n - i];
+            sb.append(String.valueOf(numbers.get(index)));
+            numbers.remove(index);
+            k -= index * factorial[n - i];
+        }
+        return String.valueOf(sb);
+    }
+
 
     // Q118 Pascal Triangle #TopInterviewQuestion
     // Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. This solution is better
@@ -919,21 +980,7 @@ public class LeetCode {
         return strs[0];
     }
 
-    // Q20 Valid Parentheses #TopInterviewQuestion #parentheses
-    public boolean isValidParentheses(String s) {
-        Stack<Character> stack = new Stack<>();
-        for (char c : s.toCharArray()) {
-            if (c == '(')
-                stack.push(')');
-            else if (c == '{')
-                stack.push('}');
-            else if (c == '[')
-                stack.push(']');
-            else if (stack.isEmpty() || stack.pop() != c)
-                return false;
-        }
-        return stack.isEmpty();
-    }
+
 
     // Q80 remove duplicates from the sorted array II  #HardlyAsked
     // What if duplicates are allowed at most twice?
@@ -1883,7 +1930,7 @@ Output: true
         return sb.reverse().toString();
     }
 
-    // next prime number
+    // next prime number #prime
     public static int nextPrime(int n) {
         boolean isPrime = false;
         int start = 2;
@@ -1902,7 +1949,7 @@ Output: true
         return n;
     }
 
-    // Q204 Count Primes #TopInterviewQuestion
+    // Q204 Count Primes #TopInterviewQuestion #prime
     // the below two method is useful for counting the number of primes lesser than the given number
     public static int countNumberofPrime(int n) {
         int start = 2;
@@ -1915,7 +1962,7 @@ Output: true
         return count;
     }
 
-    public static boolean isPrime(int number) {
+    public static boolean isPrime(int number) { // #prime
         for (int i = 2; i < number; i++) {
             if (number % i == 0) {
                 return false; // number is divisible so its not prime
@@ -2119,7 +2166,125 @@ Output: true
         return ans;
     }
 
-    // Q48 Rotate Image #TopInterviewQuestion
+
+    // Q221 Maximal square #GoodQuestion  #SecondWayIsBetter  #Google #matrix
+// Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+//    https://www.youtube.com/watch?v=aYnEO53H4lw
+    // For example, given the following matrix:
+    // 1 0 1 0 0
+    // 1 0 1 1 1
+    // 1 1 1 1 1
+    // 1 0 0 1 0
+    // Return 4.
+    public int maximalSquare(char[][] a) {
+        if (a.length == 0)
+            return 0;
+        int m = a.length, n = a[0].length, result = 0;
+        int[][] b = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (a[i - 1][j - 1] == '1') {
+                    // minimum of all the three (i,j-1),(i-1,j-1),(i-1,j) + 1
+                    b[i][j] = Math.min(Math.min(b[i][j - 1], b[i - 1][j - 1]), b[i - 1][j]) + 1;
+                    result = Math.max(b[i][j], result); // update result
+                }
+            }
+        }
+        return result * result;
+    }
+
+//    3 base conditions
+//    if i or j = 0 then table[i][j] = matrix [i][j]
+//    else if matrix [i][j]= 0 then table [i][j] = 0 ;
+//    else table [i] [j] = Min (matrix[i-1][j] ,matrix[i][j-1] , matrix[i-1][j-1]) + 1
+
+    private static int maximumSizeSquareSubmatrixWithAllOnes(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return 0;
+
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int max = 0;
+
+        // matrix to  keep track the size of a square which its bottom right corner is i,j
+        int S[][] = new int[row][col];
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                if (i == 0 || j == 0)
+                    S[i][j] = matrix[i][j] - '0';
+                else if (matrix[i][j] == '0')
+                    S[i][j] = 0;
+                else {
+                    S[i][j] = Math.min(S[i][j-1], Math.min(S[i-1][j], S[i-1][j-1])) + 1;
+                }
+
+                //replace the largest square if necessary
+                if (max < S[i][j])
+                    max = S[i][j];
+            }
+        }
+        return max*max;
+
+    }
+
+    // Maximal rectangle #matrix
+    // Given a 2D binary matrix filled with 0's and 1's, find the largest square
+    // containing only 1's and return its area. For example, given the following matrix:
+    // 1 0 1 0 0
+    // 1 0 1 1 1
+    // 1 1 1 1 1
+    // 1 0 0 1 0
+    // Return 6.
+    public static int maximum(char input[][]) {
+        int temp[] = new int[input[0].length];
+        int maxArea = 0;
+        int area;
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < temp.length; j++) {
+                if (input[i][j] == 0) {
+                    temp[j] = 0;
+                } else {
+                    temp[j] += input[i][j];
+                }
+            }
+            area = maxHistogram(temp);
+            if (area > maxArea) {
+                maxArea = area;
+            }
+        }
+        return maxArea;
+    }
+
+// Q64 Minimum path sum in a matrix #GoodQuestion #matrix
+// Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which
+// minimizes the sum of all numbers along its path.
+// Note: You can only move either down or right at any point in time.
+// Example 1:
+// [[1,3,1],
+// [1,5,1],
+// [4,2,1]]
+// Given the above grid map, return 7. Because the path 1→3→1→1→1 minimizes the sum.
+// how about finding the exact path via we got the elements #NeedsAttention
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;// row
+        int n = grid[0].length; // column
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j != 0) {
+                    grid[i][j] = grid[i][j] + grid[i][j - 1];
+                } else if (i != 0 && j == 0) {
+                    grid[i][j] = grid[i][j] + grid[i - 1][j];
+                } else if (i == 0 && j == 0) {
+                    grid[i][j] = grid[i][j];
+                } else {
+                    grid[i][j] = Math.min(grid[i][j - 1], grid[i - 1][j]) + grid[i][j];
+                }
+            }
+        }
+        return grid[m - 1][n - 1];
+    }
+
+
+    // Q48 Rotate Image #TopInterviewQuestion #matrix
     // The idea was firstly transpose the matrix and then flip it symmetrically
     // 1 2 3      1 4 7                         7 4 1
     // 4 5 6 ---> 2 5 8 (after transpose) --- > 8 5 2
@@ -2170,6 +2335,334 @@ Output: true
         }
     }
 
+    // Q54 Spiral Matrix #TopInterviewQuestion #matrix
+    // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+    private static void spiralOrder(int[][] arr, int row, int column) {
+        int T = 0;
+        int B = row - 1;
+        int L = 0;
+        int R = column - 1;
+        int direction = 0;
+        while (T <= B && L <= R) {
+            if (direction == 0) {
+                for (int i = L; i <= R; i++) {
+                    System.out.print(arr[T][i] + "  ");
+                }
+                T++;
+            }
+
+            else if (direction == 1) {
+                for (int i = T; i <= B; i++) {
+                    System.out.print(arr[i][R] + "  ");
+
+                }
+                R--;
+            }
+
+            else if (direction == 2) {
+                for (int i = R; i >= L; i--) {
+                    System.out.print(arr[B][i] + "  ");
+
+                }
+                B--;
+            }
+
+            else if (direction == 3) {
+                for (int i = B; i >= T; i--) {
+                    System.out.print(arr[i][L] + "  ");
+
+                }
+                L++;
+            }
+            direction = (direction + 1) % 4;
+        }
+    }
+
+    // generate matrix  Spiral Matrix II
+    // Given an integer n, generate a square matrix filled with elements from 1 // to n2 in spiral order.
+    // For example, Given n = 3,
+    // You should return the following matrix:
+    // [ [ 1, 2, 3 ],
+    //   [ 8, 9, 4 ],
+    //   [ 7, 6, 5 ] ]
+    public static int[][] generateMatrix(int n) {
+        int[][] ret = new int[n][n];
+        int left = 0, top = 0;
+        int right = n - 1, down = n - 1;
+        int count1 = 1;
+        while (left <= right) {
+            for (int j = left; j <= right; j++) {
+                ret[top][j] = count1++;
+            }
+            top++;
+            for (int i = top; i <= down; i++) {
+                ret[i][right] = count1++;
+            }
+            right--;
+            for (int j = right; j >= left; j--) {
+                ret[down][j] = count1++;
+            }
+            down--;
+            for (int i = down; i >= top; i--) {
+                ret[i][left] = count1++;
+            }
+            left++;
+        }
+        return ret;
+    }
+
+    // Q463 Island Perimeter #GoodQuestion #matrix
+// You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.
+// Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
+// and there is exactly one island (i.e., one or more connected land cells). The island doesn't have "lakes"
+// (water inside that isn't connected to the water around the island). One cell is a square with side length 1.
+// The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island
+
+// Solution add 4 for each land and remove 2 for each internal edge
+// the description of this problem implies there may be an "pattern" in calculating the perimeter of the islands.
+//and the pattern is islands * 4 - neighbours * 2, since every adjacent islands made two sides disappeared(as
+// picture below).
+//the next problem is: how to find the neighbours without missing or recounting? i was inspired by the problem:
+// https://leetcode.com/problems/battleships-in-a-board/
+    //+--+     +--+                   +--+--+
+    //|  |  +  |  |          ->       |     |
+    //+--+     +--+                   +--+--+
+    //4 + 4 - ? = 6  -> ? = 2
+    // still solution 1 is better
+
+    public static int islandPerimeter(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+        int result = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    result += 4;
+                    if (i > 0 && grid[i - 1][j] == 1)
+                        result -= 2;
+                    if (j > 0 && grid[i][j - 1] == 1)
+                        result -= 2;
+                }
+            }
+        }
+        return result;
+    }
+
+    //    The idea is each time, we encounter a boundary, count++;
+//    Iterative:
+    public int islandPerimeter4(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int count = 0;
+        int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 1){
+                    for(int[] d:  dir){
+                        int x = i + d[0], y = j + d[1];
+                        if(x < 0 || y < 0 || x == m || y == n || grid[x][y] == 0){
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    //    Recursive:
+    public int islandPerimeter5(int[][] grid) {
+        int m = grid.length;
+        if(m == 0) return 0;
+        int n = grid[0].length;
+        int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
+
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 1){
+                    return helper(grid, dir, i, j);
+                }
+            }
+        }
+        return 0;
+    }
+
+    int helper(int[][] grid, int[][] dir, int i, int j){
+        int m = grid.length, n = grid[0].length;
+        grid[i][j] = -1;
+        int count = 0;
+        for(int[] d: dir){
+            int x = i + d[0];
+            int y = j + d[1];
+            if(x < 0 || y < 0 || x >= m || y >= n || grid[x][y] == 0){
+                count++;
+            } else {
+                if(grid[x][y] == 1){
+                    count += helper(grid, dir, x, y);
+                }
+            }
+        }
+        return count;
+    }
+
+    //    the above solution has O(N^2) complexity even in best case(when map is huge but island is small)
+//    but dfs in such case will rock mine one
+    int res1=0;
+    public int islandPerimeter6(int[][] grid) {
+        int n=grid.length,m=grid[0].length;
+        boolean[][] b=new boolean[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1){
+                    dfs(grid,i,j,n,m,b);
+                    return res1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    void dfs(int[][] grid,int x,int y,int n,int m, boolean[][] b){
+        if(x<0||x>=n||y<0||y>=m||grid[x][y]==0) {
+            res1++;
+            return;
+        }
+        if(b[x][y]){
+            return;
+        }
+        b[x][y]=true;
+        dfs(grid,x,y+1,n,m,b);
+        dfs(grid,x,y-1,n,m,b);
+        dfs(grid,x-1,y,n,m,b);
+        dfs(grid,x+1,y,n,m,b);
+    }
+
+
+    // Q74 Search a 2D Matrix -- Q240 Search a 2D Matrix || #TopInterviewQuestion #matrix
+// Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+// Integers in each row are sorted from left to right. The first integer of each row is greater than the last integer
+// of the previous row.
+
+// start from top-rightmost element in matrix (matrix[0][n-1]) and remove row if target is greater than matrix[0][n-1]
+// or remove column if target is lesser than matrix[0][n-1]. repeat step 1 until you find the element!
+
+    // time complexity O(m + n )
+    // this solution works for both the questions
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
+            return false;
+        }
+        int col = matrix[0].length - 1;
+        int row = 0;
+        while (col >= 0 && row <= matrix.length - 1) {
+            if (target == matrix[row][col]) {
+                return true;
+            } else if (target < matrix[row][col]) {
+                col--;
+            } else if (target > matrix[row][col]) {
+                row++;
+            }
+        }
+        return false;
+    }
+
+//     for this kind of matrix
+//    matrix = [
+    //            [1,   3,  5,  7],
+    //            [10, 11, 16, 20],
+    //            [23, 30, 34, 50]
+    //            ]
+
+    // this has a better complexity than the above one O(log m + log n ) --> O(log m*n)
+    public boolean searchMatrix2(int[][] matrix, int target) {
+
+        int row_num = matrix.length;
+        int col_num = matrix[0].length;
+
+        int begin = 0, end = row_num * col_num - 1;
+
+        while(begin <= end){
+            int mid = (begin + end) / 2;
+            int mid_value = matrix[mid/col_num][mid%col_num]; // first [] will tell which row, second [] will tell
+            // which column
+
+            if( mid_value == target){
+                return true;
+
+            }else if(mid_value < target){
+                //Should move a bit further, otherwise dead loop.
+                begin = mid+1;
+            }else{
+                end = mid-1;
+            }
+        }
+
+        return false;
+    }
+
+    // Q73 Set Matrix Zeroes #TopInterviewQuestion #matrix
+    // Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
+    public static void setZero(int[][] matrix) {
+        boolean[] row = new boolean[matrix.length];
+        boolean[] column = new boolean[matrix[0].length];
+        Arrays.fill(row, false);
+        Arrays.fill(column, false);
+        int m = matrix.length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    column[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (row[i] || column[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    //set matrix zero with O(1) complexity
+    void setZeroes(int[][] matrix) {
+        boolean isZeroCol = false;
+        boolean isZeroRow = false;
+        for (int i = 0; i < matrix.length; i++) { //check the first column
+            if (matrix[i][0] == 0) {
+                isZeroCol = true;
+                break;
+            }
+        }
+        for (int i = 0; i < matrix[0].length; i++) { //check the first row
+            if (matrix[0][i] == 0) {
+                isZeroRow = true;
+                break;
+            }
+        }
+        for (int i = 1; i < matrix.length; i++) { //check except the first row and column
+            for (int j = 1; j < matrix[0].length; j++)
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+        }
+        for (int i = 1; i < matrix.length; i++) { //process except the first row and column
+            for (int j = 1; j < matrix[0].length; j++)
+                if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                    matrix[i][j] = 0;
+        }
+        if (isZeroCol) { //handle the first column
+            for (int i = 0; i < matrix.length; i++)
+                matrix[i][0] = 0;
+        }
+        if (isZeroRow) { //handle the first row
+            for (int i = 0; i < matrix[0].length; i++)
+                matrix[0][i] = 0;
+        }
+    }
+
+
     // Q17 letter combination of a phone number  #NeedsAttention on Non-Recursive Sol
     // #TopInterviewQuestion  #FacebookQuestion
 
@@ -2204,7 +2697,7 @@ Output: true
         return ans;
     }
 
-    // BackTracking solution for the above question //this method is good
+    // BackTracking solution for the above question //this method is good #backtracking
     // time complexity will be the same as that of iterative
     // Time complexity is O(k^n), where k is the biggest number of letters a digit can map (k=4) and n is the length of the digit string.
     // Space will be same as time complexity
@@ -2472,67 +2965,6 @@ Output: true
         return (sb.length() == 0) ? "0" : sb.toString();
     }
 
-// Q74 Search a 2D Matrix -- Q240 Search a 2D Matrix || #TopInterviewQuestion
-// Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
-// Integers in each row are sorted from left to right. The first integer of each row is greater than the last integer
-// of the previous row.
-
-// start from top-rightmost element in matrix (matrix[0][n-1]) and remove row if target is greater than matrix[0][n-1]
-// or remove column if target is lesser than matrix[0][n-1]. repeat step 1 until you find the element!
-
-    // time complexity O(m + n )
-    // this solution works for both the questions
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
-            return false;
-        }
-        int col = matrix[0].length - 1;
-        int row = 0;
-        while (col >= 0 && row <= matrix.length - 1) {
-            if (target == matrix[row][col]) {
-                return true;
-            } else if (target < matrix[row][col]) {
-                col--;
-            } else if (target > matrix[row][col]) {
-                row++;
-            }
-        }
-        return false;
-    }
-
-//     for this kind of matrix
-//    matrix = [
-    //            [1,   3,  5,  7],
-    //            [10, 11, 16, 20],
-    //            [23, 30, 34, 50]
-    //            ]
-
-    // this has a better complexity than the above one O(log m + log n ) --> O(log m*n)
-    public boolean searchMatrix2(int[][] matrix, int target) {
-
-        int row_num = matrix.length;
-        int col_num = matrix[0].length;
-
-        int begin = 0, end = row_num * col_num - 1;
-
-        while(begin <= end){
-            int mid = (begin + end) / 2;
-            int mid_value = matrix[mid/col_num][mid%col_num]; // first [] will tell which row, second [] will tell
-            // which column
-
-            if( mid_value == target){
-                return true;
-
-            }else if(mid_value < target){
-                //Should move a bit further, otherwise dead loop.
-                begin = mid+1;
-            }else{
-                end = mid-1;
-            }
-        }
-
-        return false;
-    }
 // Q55 jump game #TopInterviewQuestion
 // Given an array of non-negative integers,you are initially positioned at the first index of the array. Each element in
 // the array represents your maximum jump length at that position. Determine if you are able to reach the last index.
@@ -2578,68 +3010,6 @@ Output: true
         return res.isEmpty() ? "/" : res;
     }
 
-    // Q73 Set Matrix Zeroes #TopInterviewQuestion
-    // Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
-    public static void setZero(int[][] matrix) {
-        boolean[] row = new boolean[matrix.length];
-        boolean[] column = new boolean[matrix[0].length];
-        Arrays.fill(row, false);
-        Arrays.fill(column, false);
-        int m = matrix.length;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] == 0) {
-                    row[i] = true;
-                    column[j] = true;
-                }
-            }
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (row[i] || column[j]) {
-                    matrix[i][j] = 0;
-                }
-            }
-        }
-    }
-
-    //set matrix zero with O(1) complexity
-    void setZeroes(int[][] matrix) {
-        boolean isZeroCol = false;
-        boolean isZeroRow = false;
-        for (int i = 0; i < matrix.length; i++) { //check the first column
-            if (matrix[i][0] == 0) {
-                isZeroCol = true;
-                break;
-            }
-        }
-        for (int i = 0; i < matrix[0].length; i++) { //check the first row
-            if (matrix[0][i] == 0) {
-                isZeroRow = true;
-                break;
-            }
-        }
-        for (int i = 1; i < matrix.length; i++) { //check except the first row and column
-            for (int j = 1; j < matrix[0].length; j++)
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
-                }
-        }
-        for (int i = 1; i < matrix.length; i++) { //process except the first row and column
-            for (int j = 1; j < matrix[0].length; j++)
-                if (matrix[i][0] == 0 || matrix[0][j] == 0)
-                    matrix[i][j] = 0;
-        }
-        if (isZeroCol) { //handle the first column
-            for (int i = 0; i < matrix.length; i++)
-                matrix[i][0] = 0;
-        }
-        if (isZeroRow) { //handle the first row
-            for (int i = 0; i < matrix[0].length; i++)
-                matrix[0][i] = 0;
-        }
-    }
 
 // Q75 sort colors #TopInterviewQuestion
 // Given an array with n objects colored red, white or blue, sort them so that objects of the same color
@@ -2686,7 +3056,8 @@ Output: true
         }
     }
 
-    // Q61 Rotate List (#Microsft #Amazon asked 4 times in last 6mnths)
+
+    // Q61 Rotate List (#Microsft #Amazon asked 4 times in last 6mnths) // #linkedlist
     // Given a linked list, rotate the list to the right by k places, where k is non-negative.
     // My solution has O(n) time complexity and O(1) memory. The basic idea is to connect the list into a circle.
     // First, count the length of list while going through the list to find the end of it.
@@ -2716,7 +3087,7 @@ Output: true
         return head;
     }
 
-    // Q19 Remove Nth Node From End of List #TopInterviewQuestion
+    // Q19 Remove Nth Node From End of List #TopInterviewQuestion  // #linkedlist
     // Given a linked list, remove the nth node from the end of list and return its head.
 
     // A one pass solution can be done using pointers.Move one pointer fast --> n+1 places forward,
@@ -2757,7 +3128,7 @@ Output: true
         h1.next=h1.next.next;   // the one after the h1 need to be removed
         return head;
     }
-    // Q116 populating next right pointers in each node #TopInterviewQuestion
+    // Q116 populating next right pointers in each node #TopInterviewQuestion #binarytree
     // perfect binary tree..that means every parent has two children
     // both solution O(1) space & O(n) time
     public void connect3(TreeLinkNode root) {
@@ -2791,7 +3162,7 @@ Output: true
     }
 
 // recursive approach
-// Q117 populating next right pointers in each node 2
+// Q117 populating next right pointers in each node 2 #binarytree
 // doesnt need to be a perfect binary tree
 //very well explained by iDeserve https://www.youtube.com/watch?v=G46cenlnXvI&t=478s
     public void connect(TreeLinkNode root) {
@@ -2854,7 +3225,7 @@ Output: true
 
     }
 
-    // Q138 Copy List with random pointer #TopInterviewQuestion
+    // Q138 Copy List with random pointer #TopInterviewQuestion #linkedlist
     // linked list is given such that each node contains an additional random
     // pointer which could point to any node in the list or null. Return a deep copy of the list.
     // We can solve this problem by doing the following steps: copy every node, i.e., duplicate every node, and insert
@@ -2972,7 +3343,7 @@ Output: true
         return result.trim();
     }
 
-    // Q143 reorder list   #FaceBookQuestion
+    // Q143 reorder list   #FaceBookQuestion #linkedlist
     // Given a singly linked list L: L0→L1→…→Ln-1→Ln, reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
     // You must do this in-place without altering the nodes' values.  For example,
     // Given {1,2,3,4}, reorder it to {1,4,2,3}.
@@ -3052,7 +3423,7 @@ Output: true
         }
     }
 
-    // Q147 sort a linked list using insertion sort //dint get it  #NotAsked
+    // Q147 sort a linked list using insertion sort //dint get it  #NotAsked #linkedlist
     public ListNode insertionSortList(ListNode head) {
         if (head == null) {
             return head;
@@ -3300,36 +3671,8 @@ public String decodeString(String s) {
         return low;
     }
 
-// Q64 Minimum path sum in a matrix #GoodQuestion
-// Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which
-// minimizes the sum of all numbers along its path.
-// Note: You can only move either down or right at any point in time.
-// Example 1:
-// [[1,3,1],
-// [1,5,1],
-// [4,2,1]]
-// Given the above grid map, return 7. Because the path 1→3→1→1→1 minimizes the sum.
-// how about finding the exact path via we got the elements #NeedsAttention
-    public int minPathSum(int[][] grid) {
-        int m = grid.length;// row
-        int n = grid[0].length; // column
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 && j != 0) {
-                    grid[i][j] = grid[i][j] + grid[i][j - 1];
-                } else if (i != 0 && j == 0) {
-                    grid[i][j] = grid[i][j] + grid[i - 1][j];
-                } else if (i == 0 && j == 0) {
-                    grid[i][j] = grid[i][j];
-                } else {
-                    grid[i][j] = Math.min(grid[i][j - 1], grid[i - 1][j]) + grid[i][j];
-                }
-            }
-        }
-        return grid[m - 1][n - 1];
-    }
 
-// Q333 largest BST in a binary tree #Notasked  #NeedsAttention
+// Q333 largest BST in a binary tree #Notasked  #NeedsAttention #bst
 // concept is to use postorder traversal and make sure min of right side > root and max of left side should be < than root to get the bst
 
 
@@ -3405,7 +3748,7 @@ public String decodeString(String s) {
         return Math.max(evensum, oddsum);
     }
 
-    // Q513 find bottom left tree value
+    // Q513 find bottom left tree value #binarytree
     // Given a binary tree, find the leftmost value in the last row of the tree.
     public int findLeftMostNode(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -3650,7 +3993,7 @@ public String decodeString(String s) {
         return input.empty() && output.empty();
     }
 
-// Q671 Second minimum Node in a binary tree  #Linkedin
+// Q671 Second minimum Node in a binary tree  #Linkedin #binarytree
 // Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this
 // tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node's value is the
 // smaller value among its two sub-nodes. Given such a binary tree, you need to output the second minimum value in
@@ -3692,7 +4035,7 @@ public String decodeString(String s) {
         }
     }
 
-    // Q236 lca of a Binary tree #TopInterviewQuestion
+    // Q236 lca of a Binary tree #TopInterviewQuestion #binarytree
     // It’s always not easy to explain recursive solutions but I will try..
     // There is an assumption that p and q nodes exist and are part of the tree.
     // Let’s start from the beginning, from the root node.
@@ -3773,7 +4116,7 @@ public String decodeString(String s) {
         return q;
     }
 
-    // Q235 Lowest Common Ancestor of a Binary Search Tree
+    // Q235 Lowest Common Ancestor of a Binary Search Tree #bst
     public TreeNode lowestCommonAncestorRecursive(TreeNode root, TreeNode p, TreeNode q) {
         if (p.val < root.val && q.val < root.val)
             return lowestCommonAncestorRecursive(root.left, p, q);
@@ -3795,7 +4138,7 @@ public String decodeString(String s) {
         }
     }
 
-//    236. Lowest Common Ancestor of a Binary Tree
+//    236. Lowest Common Ancestor of a Binary Tree #binarytree
 //    Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 //    According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
 //    Example 1:
@@ -3864,7 +4207,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         return count;
     }
 
-    // Q637 Average of levels in binary tree #GoodQuestion  #Facebook
+    // Q637 Average of levels in binary tree #GoodQuestion  #Facebook #binarytree
     // Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> result = new ArrayList<>();
@@ -4049,7 +4392,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     }
 
     /*
-1650. Lowest Common Ancestor of a Binary Tree III
+1650. Lowest Common Ancestor of a Binary Tree III #binarytree
 Given two nodes of a binary tree p and q, return their lowest common ancestor (LCA).
 Each node will have a reference to its parent node. The definition for Node is below:
 class Node {
@@ -4138,7 +4481,7 @@ lowest node that has both p and q as descendants (where we allow a node to be a 
         }
     }
     //this is the length of the longest path ..not the actual sum of elements in the longest path
-    // Q543 Diameter of a binary tree  #FacebookFavouriteQuestion
+    // Q543 Diameter of a binary tree  #FacebookFavouriteQuestion #binarytree
     // Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is
     // the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
     // Example: Given a binary tree
@@ -4194,7 +4537,7 @@ lowest node that has both p and q as descendants (where we allow a node to be a 
 
     }
 
-    //Facebook Famous WeWorkQuestion #TopInterviewQuestion #NeedsAttention
+    //Facebook Famous WeWorkQuestion #TopInterviewQuestion #NeedsAttention #binarytree
     // Q124 Binary Tree Maximum Path Sum   //more understandable is the second solution
     // https://www.youtube.com/watch?v=cSnETAcziS0&t=229s
     // the same way we can do the minimum path sum
@@ -4389,132 +4732,8 @@ Output: true
         return t - num;
     }
 
-// Q463 Island Perimeter #GoodQuestion
-// You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.
-// Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
-// and there is exactly one island (i.e., one or more connected land cells). The island doesn't have "lakes"
-// (water inside that isn't connected to the water around the island). One cell is a square with side length 1.
-// The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island
 
-// Solution add 4 for each land and remove 2 for each internal edge
-// the description of this problem implies there may be an "pattern" in calculating the perimeter of the islands.
-//and the pattern is islands * 4 - neighbours * 2, since every adjacent islands made two sides disappeared(as
-// picture below).
-//the next problem is: how to find the neighbours without missing or recounting? i was inspired by the problem:
-// https://leetcode.com/problems/battleships-in-a-board/
-    //+--+     +--+                   +--+--+
-    //|  |  +  |  |          ->       |     |
-    //+--+     +--+                   +--+--+
-    //4 + 4 - ? = 6  -> ? = 2
-    // still solution 1 is better
-
-    public static int islandPerimeter(int[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0].length == 0)
-            return 0;
-        int result = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == 1) {
-                    result += 4;
-                    if (i > 0 && grid[i - 1][j] == 1)
-                        result -= 2;
-                    if (j > 0 && grid[i][j - 1] == 1)
-                        result -= 2;
-                }
-            }
-        }
-        return result;
-    }
-
-//    The idea is each time, we encounter a boundary, count++;
-//    Iterative:
-    public int islandPerimeter4(int[][] grid) {
-        int m = grid.length, n = grid[0].length;
-        int count = 0;
-        int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
-            for(int i = 0; i < m; i++){
-                for(int j = 0; j < n; j++){
-                    if(grid[i][j] == 1){
-                        for(int[] d:  dir){
-                            int x = i + d[0], y = j + d[1];
-                            if(x < 0 || y < 0 || x == m || y == n || grid[x][y] == 0){
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-            return count;
-        }
-
-//    Recursive:
-    public int islandPerimeter5(int[][] grid) {
-        int m = grid.length;
-        if(m == 0) return 0;
-        int n = grid[0].length;
-        int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
-
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(grid[i][j] == 1){
-                    return helper(grid, dir, i, j);
-                }
-            }
-        }
-        return 0;
-    }
-
-    int helper(int[][] grid, int[][] dir, int i, int j){
-        int m = grid.length, n = grid[0].length;
-        grid[i][j] = -1;
-        int count = 0;
-        for(int[] d: dir){
-            int x = i + d[0];
-            int y = j + d[1];
-            if(x < 0 || y < 0 || x >= m || y >= n || grid[x][y] == 0){
-                count++;
-            } else {
-                if(grid[x][y] == 1){
-                    count += helper(grid, dir, x, y);
-                }
-            }
-        }
-        return count;
-    }
-
-//    the above solution has O(N^2) complexity even in best case(when map is huge but island is small)
-//    but dfs in such case will rock mine one
-    int res1=0;
-    public int islandPerimeter6(int[][] grid) {
-        int n=grid.length,m=grid[0].length;
-        boolean[][] b=new boolean[n][m];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(grid[i][j]==1){
-                    dfs(grid,i,j,n,m,b);
-                    return res1;
-                }
-            }
-        }
-        return 0;
-    }
-
-    void dfs(int[][] grid,int x,int y,int n,int m, boolean[][] b){
-        if(x<0||x>=n||y<0||y>=m||grid[x][y]==0) {
-            res1++;
-            return;
-        }
-        if(b[x][y]){
-            return;
-        }
-        b[x][y]=true;
-        dfs(grid,x,y+1,n,m,b);
-        dfs(grid,x,y-1,n,m,b);
-        dfs(grid,x-1,y,n,m,b);
-        dfs(grid,x+1,y,n,m,b);
-    }
-
-    // Q113 PATH SUM II
+    // Q113 PATH SUM II #binarytree
     // Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
     // For example: Given the below binary tree and sum = 22,
     //     5
@@ -4580,7 +4799,7 @@ Output: true
         return res;
     }
 
-// Q437 Path Sum III
+// Q437 Path Sum III #binarytree
 // You are given a binary tree in which each node contains an integer value. Find the number of paths that sum to a given value.
 // The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
 // The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.  So the idea is similar as Two sum, using HashTable to store ( key : the
@@ -4606,8 +4825,7 @@ Output: true
         return res;
     }
 
-//    A better solution is suggested in 17ms O(n) java prefix sum by tankztc. It use a hash map to store all the prefix sum
-//    and each time check if the any subarray sum to the target, add with some comments:
+// It use a hash map to store all the prefix sum and each time check if the any subarray sum to the target, add with some comments:
 
     public int pathSum3(TreeNode root, int sum) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -4627,126 +4845,9 @@ Output: true
         return res;
     }
 
-    // Q54 Spiral Matrix #TopInterviewQuestion
-    // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
-    private static void spiralOrder(int[][] arr, int row, int column) {
-        int T = 0;
-        int B = row - 1;
-        int L = 0;
-        int R = column - 1;
-        int direction = 0;
-        while (T <= B && L <= R) {
-            if (direction == 0) {
-                for (int i = L; i <= R; i++) {
-                    System.out.print(arr[T][i] + "  ");
-                }
-                T++;
-            }
 
-            else if (direction == 1) {
-                for (int i = T; i <= B; i++) {
-                    System.out.print(arr[i][R] + "  ");
 
-                }
-                R--;
-            }
-
-            else if (direction == 2) {
-                for (int i = R; i >= L; i--) {
-                    System.out.print(arr[B][i] + "  ");
-
-                }
-                B--;
-            }
-
-            else if (direction == 3) {
-                for (int i = B; i >= T; i--) {
-                    System.out.print(arr[i][L] + "  ");
-
-                }
-                L++;
-            }
-            direction = (direction + 1) % 4;
-        }
-    }
-
-    // generate matrix  Spiral Matrix II
-    // Given an integer n, generate a square matrix filled with elements from 1 // to n2 in spiral order.
-    // For example, Given n = 3,
-    // You should return the following matrix:
-    // [ [ 1, 2, 3 ],
-    //   [ 8, 9, 4 ],
-    //   [ 7, 6, 5 ] ]
-    public static int[][] generateMatrix(int n) {
-        int[][] ret = new int[n][n];
-        int left = 0, top = 0;
-        int right = n - 1, down = n - 1;
-        int count1 = 1;
-        while (left <= right) {
-            for (int j = left; j <= right; j++) {
-                ret[top][j] = count1++;
-            }
-            top++;
-            for (int i = top; i <= down; i++) {
-                ret[i][right] = count1++;
-            }
-            right--;
-            for (int j = right; j >= left; j--) {
-                ret[down][j] = count1++;
-            }
-            down--;
-            for (int i = down; i >= top; i--) {
-                ret[i][left] = count1++;
-            }
-            left++;
-        }
-        return ret;
-    }
-
-    // Q60 permutation sequence #GoodQuestion #HardlsyAsked (Only Google)
-    // The set [1,2,3,…,n] contains a total of n! unique permutations.
-    // By listing and labeling all of the permutations in order,
-    // We get the following sequence (ie, for n = 3):
-    // "123"
-    // "132"
-    // "213"
-    // "231"
-    // "312"
-    // "321"
-    // Given n and k, return the kth permutation sequence.
-    // Note: Given n will be between 1 and 9 inclusive.
-    // very intersting question and clearly explained in
-    // https://discuss.leetcode.com/topic/17348/explain-like-i-m-five-java-solution-in-o-n
-    public String getPermutation(int n, int k) {
-        int pos = 0;
-        List<Integer> numbers = new ArrayList<>();
-        int[] factorial = new int[n + 1];
-        StringBuilder sb = new StringBuilder();
-
-        // create an array of factorial lookup
-        int sum = 1;
-        factorial[0] = 1;
-        for (int i = 1; i <= n; i++) {
-            sum *= i;
-            factorial[i] = sum;
-        }
-        // factorial[] = {1, 1, 2, 6, 24, ... n!}
-        // create a list of numbers to get indices
-        for (int i = 1; i <= n; i++) {
-            numbers.add(i);
-        }
-        // numbers = {1, 2, 3, 4}
-        k--;
-        for (int i = 1; i <= n; i++) {
-            int index = k / factorial[n - i];
-            sb.append(String.valueOf(numbers.get(index)));
-            numbers.remove(index);
-            k -= index * factorial[n - i];
-        }
-        return String.valueOf(sb);
-    }
-
-    // Search for a Range
+    // Search for a Range #rotatedsortedarray
     // Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion #facebook
     // Given an array of integers sorted in ascending order, find the starting
     // and ending position of a given target value.
@@ -4806,7 +4907,7 @@ Output: true
     }
 
 
- // Q33 Search in rotated sorted array #TopInterviewQuestion
+ // Q33 Search in rotated sorted array #TopInterviewQuestion #rotatedsortedarray
 //	Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.(i.e.,
 // [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]). You are given a target value to search. If found in the array return its index,
 // otherwise return -1. You may assume no duplicate exists in the array.
@@ -4836,7 +4937,8 @@ Output: true
         return -1;
     }
 
-    // Q81 Search in rotated sorted array II //duplicates allowed for the same above question
+    // Q81 Search in rotated sorted array II #rotatedsortedarray
+    // duplicates allowed for the same above question
     public boolean search7(int[] nums, int target) {
         int start = 0, end = nums.length - 1, mid = -1;
         while(start <= end) {
@@ -4868,7 +4970,7 @@ Output: true
         return false;
     }
 
-// Q153 find minimum in rotated sorted array  . No Duplicates #GoodQuestion
+// Q153 find minimum in rotated sorted array  . No Duplicates #GoodQuestion #rotatedsortedarray
 // Solution	If the first element is larger than the last one, then we compute the element in the middle,
 // and compare it with the first element. If value of the element in the middle is larger than the first
 // element, we know the rotation is at the second half of this array. Else, it is in the first half in the array.
@@ -4897,7 +4999,7 @@ Output: true
         return num[low];
     }
 
-// Q154 minimum in rotated sorted array with duplicates allowed..send the lower index
+// Q154 minimum in rotated sorted array with duplicates allowed..send the lower index #rotatedsortedarray
 // We assert the loop invariant is the index of the minimum, min, is within the range [lo, hi].
 // Before the loop, min is in [0, nums.length - 1]. To satisfy the invariant, lo = 0, hi = nums.length - 1
 // If we guess mi, if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
@@ -5618,94 +5720,6 @@ Output: true
         return list;
     }
 
-    // Q221 Maximal square #GoodQuestion  #SecondWayIsBetter  #Google
-// Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
-//    https://www.youtube.com/watch?v=aYnEO53H4lw
-    // For example, given the following matrix:
-    // 1 0 1 0 0
-    // 1 0 1 1 1
-    // 1 1 1 1 1
-    // 1 0 0 1 0
-    // Return 4.
-    public int maximalSquare(char[][] a) {
-        if (a.length == 0)
-            return 0;
-        int m = a.length, n = a[0].length, result = 0;
-        int[][] b = new int[m + 1][n + 1];
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (a[i - 1][j - 1] == '1') {
-                    // minimum of all the three (i,j-1),(i-1,j-1),(i-1,j) + 1
-                    b[i][j] = Math.min(Math.min(b[i][j - 1], b[i - 1][j - 1]), b[i - 1][j]) + 1;
-                    result = Math.max(b[i][j], result); // update result
-                }
-            }
-        }
-        return result * result;
-    }
-
-//    3 base conditions
-//    if i or j = 0 then table[i][j] = matrix [i][j]
-//    else if matrix [i][j]= 0 then table [i][j] = 0 ;
-//    else table [i] [j] = Min (matrix[i-1][j] ,matrix[i][j-1] , matrix[i-1][j-1]) + 1
-
-    private static int maximumSizeSquareSubmatrixWithAllOnes(int[][] matrix) {
-            if (matrix == null || matrix.length == 0) return 0;
-
-            int row = matrix.length;
-            int col = matrix[0].length;
-            int max = 0;
-
-            // matrix to  keep track the size of a square which its bottom right corner is i,j
-            int S[][] = new int[row][col];
-            for (int i = 0; i < row; i++){
-                for (int j = 0; j < col; j++){
-                    if (i == 0 || j == 0)
-                        S[i][j] = matrix[i][j] - '0';
-                    else if (matrix[i][j] == '0')
-                        S[i][j] = 0;
-                    else {
-                        S[i][j] = Math.min(S[i][j-1], Math.min(S[i-1][j], S[i-1][j-1])) + 1;
-                    }
-
-                    //replace the largest square if necessary
-                    if (max < S[i][j])
-                        max = S[i][j];
-                }
-            }
-            return max*max;
-
-    }
-
-
-    // Maximal rectangle
-    // Given a 2D binary matrix filled with 0's and 1's, find the largest square
-    // containing only 1's and return its area. For example, given the following matrix:
-    // 1 0 1 0 0
-    // 1 0 1 1 1
-    // 1 1 1 1 1
-    // 1 0 0 1 0
-    // Return 6.
-    public static int maximum(char input[][]) {
-        int temp[] = new int[input[0].length];
-        int maxArea = 0;
-        int area;
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 0; j < temp.length; j++) {
-                if (input[i][j] == 0) {
-                    temp[j] = 0;
-                } else {
-                    temp[j] += input[i][j];
-                }
-            }
-            area = maxHistogram(temp);
-            if (area > maxArea) {
-                maxArea = area;
-            }
-        }
-        return maxArea;
-    }
-
     // Q84 Largest rectangle in histogram #TopInterviewQuestion
     public static int maxHistogram(int input[]) {
         Deque<Integer> stack = new LinkedList<Integer>();
@@ -5763,7 +5777,7 @@ Output: true
     // 2) Now sort it to find minimum middle position, which will be the best meeting point.
     // 3) Find the distance of all members from best meeting point.
 
-    public int minTotalDistance2(int[][] grid) {
+    public int minTotalDistance2(int[][] grid) { // #matrix
         int m = grid.length;
         int n = grid[0].length;
 //        List<Integer> listX = new ArrayList<Integer>();
@@ -6670,6 +6684,7 @@ Output: true
             return permutations;
         }
 
+     // #backtracking
     // Time complexity : where P(N, k) = \frac{N!}{(N - k)!} = N (N - 1) ... (N - k + 1)P(N,k)=(N−k)! N! = N(N−1)...(N−k+1) is so-called k-permutations_of_n, or partial permutation.
     // Space complexity : O(N!) since one has to keep N!
     public List<List<Integer>> permute(int[] nums) {
@@ -7219,8 +7234,7 @@ Output: true
         }
     }
 
-    private void bfs(Set<String> startSet, String endWord,
-            Map<String, List<String>> map, Set<String> dict) {
+    private void bfs(Set<String> startSet, String endWord, Map<String, List<String>> map, Set<String> dict) {
         if (startSet.size() == 0) return;
 
         Set<String> tmp = new HashSet<>();
@@ -7336,7 +7350,7 @@ Output: true
 
 // #backtracking related questions
 
-//    254. Factor Combinations
+//    254. Factor Combinations #backtracking #recursion
 //    Numbers can be regarded as the product of their factors. For example, 8 = 2 x 2 x 2 = 2 x 4.
 //    Given an integer n, return all possible combinations of its factors. You may return the answer in any order.
 //    Note that the factors should be in the range [2, n - 1].
@@ -7422,7 +7436,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
 // #Interval Questions
 
-    // Q252 Meeting Rooms I
+    // Q252 Meeting Rooms I #interval
     // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
     // determine if a person could attend all meetings. For example, Given [[0, 30],[5, 10],[15, 20]], return false.
     // If a person can attend all meetings, there must not be any overlaps between any meetings.
@@ -7495,7 +7509,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return true;
     }
 
-    // Q253 Meeting Rooms II #TopInterviewQuestion #Interval
+    // Q253 Meeting Rooms II #TopInterviewQuestion #interval
     // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
     // find the minimum number of conference rooms required.
     public int minMeetingRooms(Interval[] intervals) {
@@ -7527,7 +7541,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return count;
     }
 
-    //good solution but have to see the concept again
+    //good solution but have to see the concept again #interval
     //    He is checking how many meetings begin before the earliest-ended meeting ends.
     //    For eg:
     //    Starts 1,5,6,9,10
@@ -7557,7 +7571,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return rooms;
     }
 
-// Q56 Merge Intervals
+// Q56 Merge Intervals #interval
 // Sorting takes O(n log(n)) and merging the intervals takes O(n). So, the resulting algorithm takes O(n log(n)).
     public List<Interval> merge(List<Interval> intervals) {
         List<Interval> result = new ArrayList<>();
@@ -7588,7 +7602,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return result;
     }
 
-    // Q57 Insert Interval  #TopInterviewQuestion
+    // Q57 Insert Interval  #TopInterviewQuestion #interval
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
 
         List<Interval> result = new ArrayList<>();
@@ -7613,6 +7627,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return result;
     }
 
+    // #interval
 //      input:  slotsA = [[10, 50], [60, 120], [140, 210]]
 //              slotsB = [[0, 15], [60, 70]]  index j
 //
@@ -7656,7 +7671,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return new Interval(-1, -1);
     }
 /*
-    You are given two lists of intervals, A and B.
+    You are given two lists of intervals, A and B. #interval
     In A, the intervals are sorted by their starting points. None of the intervals within A overlap.
             Likewise, in B, the intervals are sorted by their starting points. None of the intervals within B overlap.
     Return the intervals that overlap between the two lists.
@@ -7692,7 +7707,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return result;
     }
     /*
-    435. Non-overlapping Intervals
+    435. Non-overlapping Intervals #interval
     Given an array of intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the
     rest of the intervals non-overlapping.
     Example 1:
@@ -7748,7 +7763,7 @@ public static int SearchInsertPosition(int A[], int target) {
     }
 
 
-//    #Tree Related Questions #BinaryTree Related Questions #BinaryTreeRelatedQuestion #Binary Tree Related Question
+//    #Tree Related Questions #binarytree Related Questions #BinaryTreeRelatedQuestion #Binary Tree Related Question
 
     // #GoogleFavouriteQuestion #Facebook
 // Q222 Count complete tree nodes
@@ -7830,7 +7845,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return nodes;
     }
     
-    // Q226 Invert binary tree #GoogleQuestion
+    // Q226 Invert binary tree #GoogleQuestion #binarytree #recursion
     // Note this tree doesn't traverse it from bottom to top it just inverts it
     //    4
     //  /   \
@@ -7899,7 +7914,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return root;
     }
 
-    // Q257 Binary Tree Paths   #facebookfavouriteQuestion
+    // Q257 Binary Tree Paths   #facebookfavouriteQuestion #binarytree #recursion
     // Given a binary tree, return all root-to-leaf paths.
     // For example, given the following binary tree:
     //  1
@@ -7957,7 +7972,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return ret;
     }
 
-    // Q101 Symmetric Tree #TopInterviewQuestion  Mirror Image Reflection
+    // Q101 Symmetric Tree #TopInterviewQuestion  Mirror Image Reflection #binarytree #recursion
     public boolean isSymmetric(TreeNode root) {
         return root == null || isSymmetricHelp(root.left, root.right);
     }
@@ -7991,7 +8006,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return true;
     }
 
-    // Q104 Maximum depth of Binary tree #TopInterviewQuestion
+    // Q104 Maximum depth of Binary tree #TopInterviewQuestion #binarytree #recursion
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -8019,7 +8034,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return depth;
     }
 
-    // Q111 Minimum Depth of a tree :  Given a binary tree, find its minimum depth.
+// Q111 Minimum Depth of a tree :  Given a binary tree, find its minimum depth. #binarytree
 // The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
 // BFS is much better here, rather than a DFS approach.
 // Sure, the solution here is short in terms of lines of code and looks nice, but it's far from optimal.
@@ -8090,6 +8105,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
     // Time Complexity O(n)
     // Q98 Validate Binary Search Tree #TopInterviewQuestion #bst
+    // validate bst
     // Given a binary tree, determine if it is a valid binary search tree (BST).
     public boolean isValidBST(TreeNode root) {
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
@@ -8152,7 +8168,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
     }
 
-    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook
+    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook #bst
     // Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
     // Calling next() will return the next smallest number in the BST.
     // Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
@@ -8178,7 +8194,7 @@ public static int SearchInsertPosition(int A[], int target) {
         for (; node != null; stack.push(node), node = node.left);
     }
 
-    // Q655. Print Binary Tree
+    // Q655. Print Binary Tree #binarytree
 // Print a binary tree in an m*n 2D string array following these rules:
 // The row number m should be equal to the height of the given binary tree. The column number n should always be an odd number.
 // The root node's value (in string format) should be put in the exactly middle of the first row it can be put. The column and the row where
@@ -8265,7 +8281,6 @@ public static int SearchInsertPosition(int A[], int target) {
             return res;
         }
 
-
         private int getHeight(TreeNode root) {
             if (root == null) {
                 return 0;
@@ -8274,7 +8289,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
     }
 
-    // Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion
+    // Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion #binarytree
     // The idea is simple: print the tree in pre-order traversal and use "X" to denote null node and split node
     // with ",". We can use a StringBuilder for building the string on the fly.
     // For deserializing, we use a Queue to store the pre-order traversal and since we have "X" as null node, we
@@ -8356,7 +8371,6 @@ public static int SearchInsertPosition(int A[], int target) {
     }
 
     // Decodes your encoded data to tree.
-    // Decodes your encoded data to tree.
     // in decoding there are 2 queues one for pushing the main element and then second is used for the left and right
     // of it and once the iteration of the outer queue is finished, we set the outerqueue as inner queue and then
     // another round of iteration goes
@@ -8422,7 +8436,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return root;
     }
 
-    // Q105 Construct Binary Tree from Preorder and Inorder Traversal
+    // Q105 Construct Binary Tree from Preorder and Inorder Traversal #binarytree
     // #TopInterviewQuestion
     // Preorder traversing implies that PRE[0] is the root node. Then we can find this PRE[0] in IN, say it's IN[5].
     // Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left side,
@@ -8447,7 +8461,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return root;
     }
 
-    // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
+    // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion #binarytree
     void inorderTraversal(TreeNode root) {
         if (root == null)
             return;
@@ -8470,6 +8484,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
     }
 
+    // PreOrder Traversal Pre order traversal #binarytree
     void preOrderTraversal(TreeNode root) {
         if (root == null)
             return;
@@ -8491,6 +8506,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
     }
 
+    // Post Order Traversal PostOrder Traversal #binarytree
     void postOrderTraversal(TreeNode root) {
         if (root == null)
             return;
@@ -8513,7 +8529,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
     }
 
-    // 285	Inorder Successor of a BST
+    // 285	Inorder Successor of a BST #bst
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         TreeNode succ = null;
         while (root != null) {
@@ -8526,7 +8542,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return succ;
     }
 
-    // Q230 kth smallest element in the BST #TopInterviewQuestion
+    // Q230 kth smallest element in the binary search tree #TopInterviewQuestion #bst
         // Given a binary search tree, write a function kthSmallest to find the kth
         // smallest element in it.
         public int kthSmallest(TreeNode root, int k) {
@@ -8549,7 +8565,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return -1; // never hit if k is valid
         }
 
-        // find kth largest no in a binary search tree
+        // find kth largest no in a binary search tree #bst
         void kthLargestUtil(Node node, int k, int count) {
             // Base cases, the second condition is important to avoid unnecessary recursive calls
             if (node == null || count >= k)
@@ -8571,7 +8587,7 @@ public static int SearchInsertPosition(int A[], int target) {
             this.kthLargestUtil(node.left, k, count);
         }
 
-        // Q99 Recover Binary Search Tree #GoodQuestion
+        // Q99 Recover Binary Search Tree #GoodQuestion #bst
         // Two elements of a binary search tree (BST) are swapped by mistake. Recover the tree without changing its structure.
         // approach is to do the inorder traversal, and find the two pairs where elements are not sorted,
         // when we find those, we will take the first element of the first pair and replace it with the second
@@ -8649,7 +8665,7 @@ public static int SearchInsertPosition(int A[], int target) {
             second.val = temp;
         }
 
-        // Q107 Level order traversal II #GoodQuestion
+        // Q107 Level order traversal II #GoodQuestion #binarytree
         // Given a binary tree, return the bottom-up level order traversal of its
         // nodes' values. (ie, from left to right, level by level from leaf to root).
         // For example: Given binary tree [3,9,20,null,null,15,7],
@@ -8687,7 +8703,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return result;
         }
 
-        // Q108 Convert Sorted Array to Binary Search Tree #TopInterviewQuestion
+        // Q108 Convert Sorted Array to Binary Search Tree #TopInterviewQuestion #bst
         // Given an array where elements are sorted in ascending order, convert it
         // to a height balanced BST.
         public TreeNode sortedArrayToBST(int[] num) {
@@ -8709,7 +8725,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return node;
         }
 
-// Q110 Balanced Binary Tree
+// Q110 Balanced Binary Tree #binarytree
 // Given a binary tree, determine if it is height-balanced.
 // a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
@@ -8791,7 +8807,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return true;
     }
 
-        // Q103 Binary Tree Zigzag Level Order Traversal #TopInterviewQuestion
+        // Q103 Binary Tree Zigzag Level Order Traversal #TopInterviewQuestion #binarytree
         // Given a binary tree, return the zigzag level order traversal of its
         // nodes' values.
         // (ie, from left to right, then right to left for the next level and
@@ -8874,7 +8890,7 @@ public static int SearchInsertPosition(int A[], int target) {
             }
         }
 
-        // Q100. Same Tree
+        // Q100. Same Tree #binarytree
         // Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same
         // if they are structurally identical and the nodes have the same value.
         public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -8907,7 +8923,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return true;
         }
 
-        // Q156 Binary Tree upside down #GoodQuestion #HardlyAsked #LinkedinQuestion
+        // Q156 Binary Tree upside down #GoodQuestion #HardlyAsked #LinkedinQuestion #binarytree
         // Given a binary tree where all the right nodes are either leaf nodes with
         // a sibling (a left node that shares the same parent node) or empty, flip
         // it upside down and turn it into a tree where the original right nodes
@@ -8961,7 +8977,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return prev;
         }
 
-        // Binary Tree Right Side View
+        // Binary Tree Right Side View #binarytree
         // Given a binary tree, imagine yourself standing on the right side of it,
         // return the values of the nodes you can see ordered from top to bottom.
         // The core idea of this algorithm:
@@ -9027,7 +9043,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return result;
         }
 
-        // Q112 Path sum of a binary tree
+        // Q112 Path sum of a binary tree #binarytree
         // Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the
         // values along the path equals the given sum.
         public boolean hasPathSum(TreeNode root, int sum) {
@@ -9066,7 +9082,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
     // LinkedList Related Questions
 
-        // Q203 Remove Linked List elements
+        // Q203 Remove Linked List elements ##linkedlist
         // Remove all elements from a linked list of integers that have value val.
         // Example
         // Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
@@ -9086,7 +9102,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return fakeHead.next;
         }
 
-        // Same WeWorkQuestion as before
+        // Same WeWorkQuestion as before #linkedlist
         public ListNode removeElements(ListNode head, int val) {
             if (head == null)
                 return null;
@@ -9094,7 +9110,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return head.val == val ? head.next : head;
         }
 
-        // Q141 Linked List cycle #TopInterviewQuestion
+        // Q141 Linked List cycle #TopInterviewQuestion #linkedlist
         // Given a linked list, determine if it has a cycle in it.
         public boolean hasCycle(ListNode head) {
             if (head == null)
@@ -9125,7 +9141,7 @@ public static int SearchInsertPosition(int A[], int target) {
         // So, when the slow pointer and the fast pointer encounter in the cycle, we can define a pointer "entry" that point
         // to the head, this "entry" pointer moves one step each time so as the slow pointer. When this "entry" pointer and the slow pointer both point to the same location, this location is the node where the cycle begins.
 
-        // Q142 Linked List cycle II find the start of the cycle
+        // Q142 Linked List cycle II find the start of the cycle #linkedlist
         public ListNode detectCycle(ListNode head) {
             if (head == null)
                 return null;
@@ -9147,7 +9163,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return null; // No loop
         }
 
-        // Q24 Swap nodes in pairs in the linked list  #QuestionAskedFrequently
+        // Q24 Swap nodes in pairs in the linked list  #QuestionAskedFrequently #linkedlist
         // Given a linked list, swap every two adjacent nodes and return its head.
         // For example, Given 1->2->3->4, you should return the list as 2->1->4->3.
 
@@ -9193,7 +9209,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return dummy.next;
         }
 
-        // Q160 Intersection of two LinkedLists #TopInterviewQuestion
+        // Q160 Intersection of two LinkedLists #TopInterviewQuestion #linkedlist
         // Write a program to find the node at which the intersection of two singly linked lists begins.
         // Apart from the general method which is been user for getting the intersection of two linkedlist,
         // below is one interesting method to get the intersection assigning the pointer to the other list once it reached the end
@@ -9218,7 +9234,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return node1;
         }
 
-        // Q82 Remove Duplicates from sorted list II
+        // Q82 Remove Duplicates from sorted list II #linkedlist
         // Given a sorted linked list, delete all nodes that have duplicate numbers,
         // leaving only distinct numbers from the original list. For example,
         // Given 1->2->3->3->4->4->5, return 1->2->5.
@@ -9242,7 +9258,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return dummy.next;
         }
 
-        // Q328 Odd Even Linked List #TopInterviewQuestion
+        // Q328 Odd Even Linked List #TopInterviewQuestion #linkedlist
         // Given a singly linked list, group all odd nodes together followed by the even nodes.
         // Input: 1->2->3->4->5->NULL
         // Output: 1->3->5->2->4->NULL
@@ -9261,7 +9277,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return head;
         }
 
-        // Reverse Linked List #TopInterviewQuestion
+        // Reverse Linked List #TopInterviewQuestion #linkedlist
         public void ReverseLinkedList(ListNode head) {
             ListNode current, previous, next;
             current = head;
@@ -9293,7 +9309,7 @@ public static int SearchInsertPosition(int A[], int target) {
             p.next = null;
         }
 
-        // Q92 Reverse Linked List II #GoodQuestion  #FacebookQuestion
+        // Q92 Reverse Linked List II #GoodQuestion  #FacebookQuestion #linkedlist
         // Reverse a linked list from position m to n. Do it in-place and in one-pass. For example:
         // Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL.
         public ListNode reverseBetween(ListNode head, int m, int n) {
@@ -9320,7 +9336,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return dummy.next;
         }
 
-        // Q234 Pallindrome Linked List #TopInterviewQuestion
+        // Q234 Pallindrome Linked List #TopInterviewQuestion #linkedlist #pallindrome #palindrome
         // Given a singly linked list, determine if it is a palindrome.
         // This can be solved by reversing the 2nd half and compare the two halves.
         public boolean isPalindrome(ListNode head) {
@@ -9355,7 +9371,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return prev;
         }
 
-        // Q148 Sort List (linked list) #TopInterviewQuestion  #FacebookQuestion
+        // Q148 Sort List (linked list) #TopInterviewQuestion  #FacebookQuestion #linkedlist
         // Sort a linked list in O(n log n) time using constant space complexity.
         public ListNode sortList(ListNode head) {
             if (head == null || head.next == null)
@@ -9400,7 +9416,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
         }
 
-        // Q86 partition list
+        // Q86 partition list #linkedlist
         // Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
         // You should preserve the original relative order of the nodes in each of the two partitions. For example,
         // Given 1->4->3->2->5->2 and x = 3, return 1->2->2->4->3->5.
@@ -9423,7 +9439,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return node1.next;
         }
 
-        // Q2 Add Two Numbers #TopInterviewQuestion
+        // Q2 Add Two Numbers #TopInterviewQuestion #linkedlist
         // actually its two linked listed in reverse order You are given two non-empty linked lists representing two non-negative
         // integers. The digits are stored in reverse order and each of their nodes contain a single digit.
         // Add the two numbers and return it as a linked list. You may assume the two numbers do not contain any leading zero, except
@@ -9474,7 +9490,7 @@ public static int SearchInsertPosition(int A[], int target) {
 
         // Dynamic Programming related question
 
-    // Q45 Jump Game II
+    // Q45 Jump Game II #dynamicprogramming #dp
     // Given an array of non-negative integers, you are initially positioned at the first index of the array.
     // Each element in the array represents your maximum jump length at that position.
     // Your goal is to reach the last index in the minimum number of jumps.
@@ -9522,7 +9538,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return jump;
     }
 
-    //    1312. Minimum Insertion Steps to Make a String Palindrome
+//    1312. Minimum Insertion Steps to Make a String Palindrome #palindrome #dynamicprogramming #dp
 //    Given a string s. In one step you can insert any character at any index of the string.
 //    Return the minimum number of steps to make s palindrome.
 //    A Palindrome String is one that reads the same backward as well as forward.
@@ -9552,7 +9568,7 @@ public static int SearchInsertPosition(int A[], int target) {
                 : (Math.min(findMinInsertionsRec(str, l, h - 1), findMinInsertionsRec(str, l + 1, h)) + 1);
     }
 
-    //                                      0..4
+//                                      0..4
 //                     0..3                              1..4
 //            0..2            1..3               1..3             2..4
 //        0..1    1..2     1..2     2..3     1..2    2..3    2..3    3..4
@@ -9619,7 +9635,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return T[maxIndex];
         }
 
-    // Q322 Coin Change Problem #TopInterviewQuestion
+    // Q322 Coin Change Problem #TopInterviewQuestion #dynamicprogramming #dp
         // You are given coins of different denominations and a total amount of money amount.
         // Write a function to compute the fewest number of coins that you need to  make up that amount.
         // If that amount of money cannot be made up by any combination of the coins, return -1.
@@ -9669,7 +9685,7 @@ public static int SearchInsertPosition(int A[], int target) {
             System.out.print("\n");
         }
 
-        // 322. Coin Change
+        // 322. Coin Change #dynamicprogramming #dp
         // You are given coins of different denominations and a total amount of money amount. Write a function to compute the
         // fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination
         // of the coins, return -1.
@@ -9699,7 +9715,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return dp[amount] > amount ? -1 : dp[amount];
         }
 
-        // coin change 2
+        // coin change 2 #dynamicprogramming #dp
         // Given a total and coins of certain denominations find number of ways total * can be formed from coins assuming infinity supply of coins
 
         // below solution tells you the number of ways we can achieve that total and not the combination
@@ -9730,10 +9746,9 @@ public static int SearchInsertPosition(int A[], int target) {
             return temp[coins.length][total];
         }
 
-        // Subset Sum
+    // Subset Sum #dynamicprogramming #dp
     // Given a set of non negative numbers and a total, find if there exists a  subset in this set whose sum is same as total.
     // for example: input 2,3,7,8,10 target : 17 output : true
-
     // Solution
     // go to i - 1 (one step above1) and input steps back from the current j value
         // https://www.youtube.com/watch?v=s6FhG--P7z0&t=222s
@@ -9760,7 +9775,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return T[input.length][total];
         }
 
-        // Q62 Unique Paths #TopInterviewQuestion
+        // Q62 Unique Paths #TopInterviewQuestion #dynamicprogramming #dp
         // A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
         // The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner
         // of the grid (marked 'Finish' in the diagram below). How many possible unique paths are there?
@@ -9781,7 +9796,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return map[m - 1][n - 1];
         }
 
-        // Q63 Unique Path 2
+        // Q63 Unique Path 2 #dynamicprogramming #dp #matrix
         // Now consider if some obstacles are added to the grids. How many unique paths would there be?
         // An obstacle and empty space is marked as 1 and 0 respectively in the grid.
         // For example, There is one obstacle in the middle of a 3x3 grid as illustrated below.
@@ -9812,7 +9827,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return obstacleGrid[rows - 1][cols - 1];
         }
 
-// Q44 Wild Card Matching #TopInterviewQuestion
+// Q44 Wild Card Matching #TopInterviewQuestion #dynamicprogramming #dp
 // ? : any one character
 // * : 0 or more sequence
 
@@ -9865,7 +9880,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return T[str.length][writeIndex];
         }
 
-        // Q10 Regular Expression #TopInterviewQuestion
+        // Q10 Regular Expression #TopInterviewQuestion #dynamicprogramming #dp
         // https://www.youtube.com/watch?v=l3hda49XcDE
         // * matches 0 or more occurances of character before *
         // . matches any single character
@@ -9904,19 +9919,17 @@ public static int SearchInsertPosition(int A[], int target) {
             return T[text.length][pattern.length];
         }
 
-//97. Interleaving String
-//
+// 97. Interleaving String #dynamicprogramming #dp
 //    Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
-//
-//    An interleaving of two strings s and t is a configuration where s and t are divided into n and m non-empty substrings respectively, such that:
+//    An interleaving of two strings s and t is a configuration where s and t are divided into n and m non-empty substrings
+//    respectively, such that:
 //
 //    s = s1 + s2 + ... + sn
 //            t = t1 + t2 + ... + tm
 //          |n - m| <= 1
 //    The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 + s3 + ...
 //    Note: a + b is the concatenation of strings a and b.
-
-//            Example 1:
+//    Example 1:
 //    Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
 //    Output: true
 //    Explanation: One way to obtain s3 is:
@@ -9954,9 +9967,8 @@ public static int SearchInsertPosition(int A[], int target) {
             return T[str1.length][str2.length];
         }
 
-//  Q5 longest palindromic Substring #TopInterviewQuestion
+//  Q5 longest palindromic Substring #TopInterviewQuestion #dynamicprogramming #dp
 //  Given a string s, return the longest palindromic substring in s.
-//
 //  Example 1:
 //    Input: s = "babad"
 //    Output: "bab"
@@ -10002,7 +10014,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return s.substring(palindromeBeginsAt, max_len + palindromeBeginsAt);
         }
 
-    // 1143. Longest Common Subsequence
+    // 1143. Longest Common Subsequence #dynamicprogramming #dp
     // Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
     // A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing
     // the relative order of the remaining characters.
@@ -10087,7 +10099,7 @@ public static int SearchInsertPosition(int A[], int target) {
             System.out.println(result.reverse());
         }
 
-// longest palindromic subsequence  #dekhSakteHaiEkBaar
+// longest palindromic subsequence  #dekhSakteHaiEkBaar #dynamicprogramming #dp
 //    516. Longest Palindromic Subsequence
 //    Given a string s, find the longest palindromic subsequence's length in s.
 //    A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the
@@ -10138,7 +10150,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return palindrome[0][n - 1];
         }
 
-        // longest common substring
+        // longest common substring #dynamicprogramming #dp
         public static List<String> commonSubstring(String S1, String S2) {
             Integer match[][] = new Integer[S1.length()][S2.length()];
             int len1 = S1.length();
@@ -10172,15 +10184,14 @@ public static int SearchInsertPosition(int A[], int target) {
         }
 
     /**
-     * Q72. Edit Distance
+     * Q72. Edit Distance #dynamicprogramming #dp
      * Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
      * You have the following three operations permitted on a word:
 
      * Insert a character
      * Delete a character
      * Replace a character
-     * Example 1:
-     * Input: word1 = "horse", word2 = "ros"
+     * Example 1: Input: word1 = "horse", word2 = "ros"
      * Output: 3
      * Explanation:
      * horse -> rorse (replace 'h' with 'r')
@@ -10262,8 +10273,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
 
         // Priority Queue related questions
-
-    // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion #matrix
+    // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion #matrix #priorityqueue
     // Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
     // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
     // Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
@@ -10447,8 +10457,6 @@ public static int SearchInsertPosition(int A[], int target) {
                 (a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue()
         );
 
-
-
         for(Map.Entry<String, Integer> entry: map.entrySet())
         {
             pq.offer(entry);
@@ -10462,8 +10470,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return result;
     }
 
-    // Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn)
-
+    // Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn) #priorityqueue
     //     O(N) best case / O(N^2) worst case running time + O(1) memory facebook
         public int findKthLargest(int[] nums, int k) {
             PriorityQueue<Integer> pq = new PriorityQueue<>();
@@ -10506,7 +10513,7 @@ public static int SearchInsertPosition(int A[], int target) {
                 return findKthLargest(nums, start, partitionIndex - 1, k);
         }
 
-    // K closest point using priority queue#GoodQuestion
+    // K closest point using priority queue #GoodQuestion #priorityqueue
 // the time complexity is O(NlogK),
     public Point[] findKClosestPoints(Point[] points, int k, Point target) {
         if (points == null || points.length == 0 || k < 1       || k > points.length)
@@ -10563,7 +10570,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
     }
 
-// 295. Find Median from Data Stream #TopInterviewQuestion
+// 295. Find Median from Data Stream #TopInterviewQuestion #priorityqueue
 // I keep two heaps (or priority queues)/ Max-heap / small has the smaller half of the numbers.
 // Min-heap / large has the larger half of the numbers. This gives me direct access to the one or two middle values
 // (they're the tops of the heaps), so getting the median takes O(1) time. And adding a number takes O(log n) time.
@@ -10709,7 +10716,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return null;
         }
 
-        // Q23 merge k sorted lists #TopInterviewQuestion
+        // Q23 merge k sorted lists #TopInterviewQuestion #priorityqueue
         // Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
         // Simple solution : iterate over the list and add the elements in the priority queue and then pop it
 
@@ -10787,7 +10794,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return l2;
         }
 
-        // Q21 merge two sorted (linked) lists #TopInterviewQuestion
+        // Q21 merge two sorted (linked) lists #TopInterviewQuestion #linkedlist
         public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
             if (l1 == null)
                 return l2;
@@ -10847,12 +10854,11 @@ public static int SearchInsertPosition(int A[], int target) {
                 }
 
             }
-
             return dummy.next;
         }
 
-        // Backtracking Questions
-// Q329. Longest Increasing Path in a matrix
+
+// Q329. Longest Increasing Path in a matrix #matrix #recursion
 //    Given an m x n integers matrix, return the length of the longest increasing path in matrix.
 //    From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary
 //    (i.e., wrap-around is not allowed).
@@ -10902,7 +10908,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
     }
 
-    //BFS time complexity O(N) n is the size of the grid
+    //BFS time complexity O(N) n is the size of the grid #matrix #recursion
 // 994. Rotting Oranges
 //You are given an m x n grid where each cell can have one of three values:
 //
@@ -11019,7 +11025,7 @@ public static int SearchInsertPosition(int A[], int target) {
     }
 
 
-    // Q130 Surrounded Regions #TopInterviewQuestion
+    // Q130 Surrounded Regions #TopInterviewQuestion #matrix #recursion
         // Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
         // A region is captured by flipping all 'O's into 'X's in that surrounded region.
         // For example,
@@ -11134,7 +11140,7 @@ public static int SearchInsertPosition(int A[], int target) {
             dfs(board, i, j + 1);
         }
 
-        // Q200 Number of islands #TopInterviewQuestion
+        // Q200 Number of islands #TopInterviewQuestion #matrix #recursion
         // Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
         // An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
         // You may assume all four edges of the grid are all surrounded by water.
@@ -11223,7 +11229,7 @@ public static int SearchInsertPosition(int A[], int target) {
             }
         }
 
-        // 695. Max Area of Island Max Area of an Island
+        // 695. Max Area of Island Max Area of an Island #matrix #recursion
         // Q695 maximum area of an island  maximum area of island
         // Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected
         // 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
@@ -11246,7 +11252,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return 0;
         }
 
-        // Q22 generate parenthesis #TopInterviewQuestion #parentheses #parenthesis
+        // Q22 generate parenthesis #TopInterviewQuestion #parentheses #parenthesis #backtracking #recursion
         // Given n pairs of parentheses, write a function to generate all
         // combinations of well-formed parentheses.
         // For example, given n = 3, a solution set is:
@@ -11299,7 +11305,7 @@ public static int SearchInsertPosition(int A[], int target) {
                 backtrack(list, str + ")", open, close + 1, max);
         }
 
-        // Q79 Word Search #TopInterviewQuestion
+        // Q79 Word Search #TopInterviewQuestion #matrix #recursion
         // Given a 2D board and a word, find if the word exists in the grid.
         // The word can be constructed from letters of sequentially adjacent cell,
         // where "adjacent" cells are those horizontally or
@@ -11312,7 +11318,6 @@ public static int SearchInsertPosition(int A[], int target) {
         // Given word = "ABCCED", return true.
         // Given word = "SEE", return true.
         // Given word = "ABCB", return false.
-
         // whether path exist between two points and if yes, give us the coordinates
         static boolean[][] visited;
 
@@ -11381,7 +11386,7 @@ public static int SearchInsertPosition(int A[], int target) {
             return result;
         }
 
-        // Q212 Word Search 2 using trie #TopInterviewQuestion
+        // Q212 Word Search 2 using trie #TopInterviewQuestion #trie #matrix #recursion
         // Given a 2D board and a list of words from the dictionary, find all words in the board.
         // Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those
         // horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
@@ -11433,7 +11438,7 @@ public static int SearchInsertPosition(int A[], int target) {
         }
 
 //        ## BACKTRACKING
-        // Q78 Subsets #TopInterviewQuestion
+        // Q78 Subsets #TopInterviewQuestion #backtracking
         // Given a set of distinct integers, nums, return all possible subsets (the power set).
         // Input: nums = [1,2,3]
         // Output:
@@ -11466,7 +11471,7 @@ public static int SearchInsertPosition(int A[], int target) {
             }
         }
 
-    // Q90 Subsets II
+    // Q90 Subsets II #backtracking
     // Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
     // Example 1:
     // Input: nums = [1,2,2]
@@ -11495,7 +11500,7 @@ public static int SearchInsertPosition(int A[], int target) {
         return result;
     }
 
-        // Combination of a String and subset is the same
+        // Combination of a String and subset is the same #backtracking
         static void combine(String str) {
             int length = str.length();
             StringBuffer output = new StringBuffer(length);
@@ -11511,7 +11516,7 @@ public static int SearchInsertPosition(int A[], int target) {
             }
         }
 
-        // Q39. Combination Sum
+        // Q39. Combination Sum #backtracking
         // Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where
         // the candidate numbers sums to T. Each number in C may only be used once in the combination.
         // Note: All numbers (including target) will be positive integers. The solution set must not contain duplicate
@@ -11545,21 +11550,17 @@ public static int SearchInsertPosition(int A[], int target) {
             }
         }
 
-
-        /*
+/*
 Q713. Subarray Product Less Than K
 Given an array of integers nums and an integer k, return the number of contiguous subarrays where the product of
 all the elements in the subarray is strictly less than k.
-
 Example 1:
 Input: nums = [10,5,2,6], k = 100
 Output: 8
 Explanation: The 8 subarrays that have product less than 100 are:
 [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]
 Note that [10, 5, 2] is not included as the product of 100 is not strictly less than k.
-
  */
-
     public static int numSubarrayProductLessThanK(int[] nums, int k) {
         if(k<=1) return 0;
         int left = 0, right = 0, prod = 1, ans = 0;
@@ -11580,7 +11581,6 @@ Note that [10, 5, 2] is not included as the product of 100 is not strictly less 
 // non-empty subsets whose sums are all equal.
 
 //Example 1:
-
 //Input: nums = [4, 3, 2, 3, 5, 2, 1], k = 4
 //Output: True
 //Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
@@ -11644,7 +11644,7 @@ Note that [10, 5, 2] is not included as the product of 100 is not strictly less 
         return backtrack(arr, 0, 0, k, targetSum, taken);
     }
 
-    // Q416. Partition Equal Subset Sum.  #split #subset #sum
+// Q416. Partition Equal Subset Sum.  #split #subset #sum
 // Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets
 // such that the sum of elements in both subsets is equal.
 // Note:
@@ -11706,7 +11706,7 @@ Note that [10, 5, 2] is not included as the product of 100 is not strictly less 
                     || helper(i - 1, n, sum, target); // test not adding the current integer to the sum
         }
 
-        // Q131 pallindrome partitioning //TopInterviewQuestion #NOTAskedMuch..dont know why it is topinterviewquestion
+        // Q131 palindrome partitioning #palindrome //TopInterviewQuestion #NOTAskedMuch..dont know why it is topinterviewquestion
         // Given a string s, partition s such that every substring of the partition is a palindrome.
         // Return all possible palindrome partitioning of s.
         // For example, given s = "aab",
@@ -11778,8 +11778,6 @@ Note that [10, 5, 2] is not included as the product of 100 is not strictly less 
             }
             return true;
         }
-
-
 
         // increasing subsequence
         // Given an integer array, your task is to find all the different possible increasing subsequences of the given array,

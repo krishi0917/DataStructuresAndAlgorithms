@@ -4,7 +4,9 @@ import java.util.*;
 
 https://app.coderpad.io/MG2AXQKD/playback
 
-Imagine that we are writing a backup application used to backup files from your laptop to a remote server. To save on network bandwidth, we want to identify duplicate files (i.e., files with the same contents). This way, we only need to upload duplicate files once.
+Imagine that we are writing a backup application used to backup files from your laptop to a remote server.
+To save on network bandwidth, we want to identify duplicate files (i.e., files with the same contents).
+This way, we only need to upload duplicate files once.
 
 Write a function that identifies sets of files with identical contents.
 
