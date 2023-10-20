@@ -3,176 +3,192 @@ import java.util.*;
 public class LFUCache {
 /*
     Approach:
-    map frequency list: with key as the frequency of the element with the value as doubly linked list
+    map frequency list: with key as the frequency of the element with the value as doubly linked list of all the elements having the same frequency.
+    This is required because when we have to evict the element out of two elements having the same frequency, lru will be implemented
+
     another map is the key as integer and value as the location of the node
 
     first the element comes, update the frequency map with key as frequency 1 and the value as the whole put as key value as the whole doubly linked list element
     and update the key node with key as the key of the element and value as the node position in the above map.
  */
-    final int capacity;
-    int curSize;
-    int minFrequency;
-    Map<Integer, DLLNode> cache;
-    Map<Integer, DoubleLinkedList> frequencyMap;
+  /*
+    Approach: Create a class called Node which will be a node of a DoublyLinkedList having key, value, frequency, prevNode and nextNode.
+          Use a HashMap (keyNodeMap: key -> Node) to handle data access by key.
 
-    /*.*/
-    /*
-     * @param capacity: total capacity of LFU Cache
-     * @param curSize: current size of LFU cache
-     * @param minFrequency: frequency of the last linked list (the minimum frequency of entire LFU cache)
-     * @param cache: a hash map that has key to Node mapping, which used for storing all nodes by their keys
-     * @param frequencyMap: a hash map that has key to linked list mapping, which used for storing all
-     * double linked list by their frequencies
-     * */
+          Then use a HashMap (freqNodeDLLMap: frequency -> DoublyLinkedList<Node>) to handle frequency.
+
+          Also, maintain a variable (minumumFrequency) which will store the current minimum frequency of keys in cache.
+
+          Thus if we want to add a new key, we just need to find (or create new) the likedlist by its frequency (which is 1),
+          add the item to the start of the linked list.
+          If cache is full and we need to remove an item, we will get the minimum frequency (minumumFrequency),
+          get the appropriate linkedlist from freqNodeDLLMap by it, then remove the last item of that linkedlist.
+          Also we'll use the key of that removed item to remove the item from our cache (keyNodeMap).
+          If we want to increment the freqneucy of a key, we'll get the node, remove it from its current frequency linked list
+          by joining it's prevNode and nextNode (This is why we're using DoublyLinkedList. No need to find a node by traversing
+          to remove it. If we have the node, we can just join its previous and next node to remove it.). Then add the node to
+          the linkedlist of the new (incremented) frequency.
+          Thus, the frequency ranking management will be done in O(1) time.
+
+    Complexity analysis: Time: O(1), Space: O(n).
+
+    */
+
+
+    int capacity;
+    HashMap<Integer, Node> keyNodeMap = new HashMap<>();
+    HashMap<Integer, NodeDLinkedList> freqNodeDLLMap = new HashMap<>();
+    int minumumFrequency = 1;
+
     public LFUCache(int capacity) {
         this.capacity = capacity;
-        this.curSize = 0;
-        this.minFrequency = 0;
-
-        this.cache = new HashMap<>();
-        this.frequencyMap = new HashMap<>();
     }
 
-    /**
-     * get node value by key, and then update node frequency as well as relocate that node
-     **/
     public int get(int key) {
-        DLLNode curNode = cache.get(key);
-        if (curNode == null) {
+        Node node = keyNodeMap.get(key);
+        if(node != null){                                                               //Item exists
+            incrementFrequency(node);                                                   //Increment frequency
+            return node.value;                                                          //Return value
+        }
+        else{
             return -1;
         }
-        updateNode(curNode);
-        return curNode.val;
     }
 
-    /**
-     * add new node into LFU cache, as well as double linked list
-     * condition 1: if LFU cache has input key, update node value and node position in list
-     * condition 2: if LFU cache does NOT have input key
-     * - sub condition 1: if LFU cache does NOT have enough space, remove the Least Recent Used node
-     * in minimum frequency list, then add new node
-     * - sub condition 2: if LFU cache has enough space, add new node directly
-     **/
     public void put(int key, int value) {
 
-        // corner case: check cache capacity initialization
-        if (capacity == 0) {
-            return;
-        }
+        if(capacity <= 0) return;
 
-        if (cache.containsKey(key)) {
-            DLLNode curNode = cache.get(key);
-            curNode.val = value;
-            updateNode(curNode);
-        } else {
-            curSize++;
-            if (curSize > capacity) {
-                // get minimum frequency list
-                DoubleLinkedList minFreqList = frequencyMap.get(minFrequency);
-                cache.remove(minFreqList.tail.prev.key);
-                minFreqList.removeNode(minFreqList.tail.prev);
-                curSize--;
+        if(keyNodeMap.containsKey(key)){                                                //Item exists
+
+            Node node = keyNodeMap.get(key);                                            //Get old node
+            node.value = value;                                                         //Update with new value
+            incrementFrequency(node);                                                   //Increment frequency
+            keyNodeMap.put(key, node);                                                  //Put (update) in cache
+        }
+        else{                                                                           //Item doesn't exist
+
+            Node node = new Node(key, value);                                           //Create new node
+
+            if(keyNodeMap.size() == capacity){                                          //Cache is full
+                Node removedLastNode = freqNodeDLLMap.get(minumumFrequency)
+                        .removeLastNode();                              //Remove LFU node from removedLastNode
+                keyNodeMap.remove(removedLastNode.key);                                 //Remove LFU node from cache
             }
-            // reset min frequency to 1 because of adding new node
-            minFrequency = 1;
-            DLLNode newNode = new DLLNode(key, value);
 
-            // get the list with frequency 1, and then add new node into the list, as well as into LFU cache
-            DoubleLinkedList curList = frequencyMap.getOrDefault(1, new DoubleLinkedList());
-            curList.addNode(newNode);
-            frequencyMap.put(1, curList);
-            cache.put(key, newNode);
-        }
-    }
+            incrementFrequency(node);                                                   //Add to frequency map
+            keyNodeMap.put(key, node);                                                  //Add to cache
 
-    public void updateNode(DLLNode curNode) {
-        int curFreq = curNode.frequency;
-        DoubleLinkedList curList = frequencyMap.get(curFreq);
-        curList.removeNode(curNode);
-
-        // if current list the the last list which has lowest frequency and current node is the only node in that list
-        // we need to remove the entire list and then increase min frequency value by 1
-        if (curFreq == minFrequency && curList.listSize == 0) {
-            minFrequency++;
+            minumumFrequency = 1;                                                       //Since new node is having freqency as 1,
+            //update minumumFrequency to be 1
         }
 
-        curNode.frequency++;
-        // add current node to another list has current frequency + 1,
-        // if we do not have the list with this frequency, initialize it
-        DoubleLinkedList newList = frequencyMap.getOrDefault(curNode.frequency, new DoubleLinkedList());
-        newList.addNode(curNode);
-        frequencyMap.put(curNode.frequency, newList);
     }
 
-    /*
-     * @param key: node key
-     * @param val: node value
-     * @param frequency: frequency count of current node
-     * (all nodes connected in same double linked list has same frequency)
-     * @param prev: previous pointer of current node
-     * @param next: next pointer of current node
-     * */
-    class DLLNode {
+
+    private void incrementFrequency(Node node){
+
+        int oldFrequency = node.frequency;
+
+        if(freqNodeDLLMap.containsKey(oldFrequency)){                                   //Frequency already exists
+            NodeDLinkedList oldNodeDLinkedList = freqNodeDLLMap.get(oldFrequency);      //Get frequency linkedlist
+            oldNodeDLinkedList.remove(node);                                            //Remove current node
+            if(node.frequency == minumumFrequency &&                                    //If this frequency was the minumum freq.
+                    oldNodeDLinkedList.length == 0){                                        //and no node is having this freq anymore
+                minumumFrequency++;                                                     //Increment minumum frequency
+            }
+        }
+
+        int newFrequency = oldFrequency + 1;                                            //Increment frequency
+        node.frequency = newFrequency;                                                  //Set new frequency to node
+        NodeDLinkedList newNodeDLinkedList =                                            //Get or create the LinkedList for
+                freqNodeDLLMap.getOrDefault(                                                //this new frequency
+                        newFrequency, new NodeDLinkedList()
+                );
+        newNodeDLinkedList.add(node);                                                   //Add node to the freq linkedlist
+        freqNodeDLLMap.put(newFrequency, newNodeDLinkedList);                           //Put freq linkedlist to freqNodeDLLMap
+    }
+
+
+    private class Node{
         int key;
-        int val;
+        int value;
         int frequency;
-        DLLNode prev;
-        DLLNode next;
-
-        public DLLNode(int key, int val) {
+        Node prev;
+        Node next;
+        Node(int key, int value){
             this.key = key;
-            this.val = val;
-            this.frequency = 1;
+            this.value = value;
+            this.frequency = frequency;
         }
     }
 
-    /*
-     * @param listSize: current size of double linked list
-     * @param head: head node of double linked list
-     * @param tail: tail node of double linked list
-     * */
-    class DoubleLinkedList {
-        int listSize;
-        DLLNode head;
-        DLLNode tail;
+    private class NodeDLinkedList{
 
-        public DoubleLinkedList() {
-            this.listSize = 0;
-            this.head = new DLLNode(0, 0);
-            this.tail = new DLLNode(0, 0);
-            head.next = tail;
-            tail.prev = head;
+        Node head, tail;
+        int length;
+
+        //Add a node to top
+        void add(Node node){
+
+            //Remove old pointers
+            node.prev = null;
+            node.next = null;
+
+            if(head==null){                                                               //Empty list
+                head = node;
+                tail = node;
+            }
+            else{
+                node.next = head;                                                         //Forward linking
+                head.prev = node;                                                         //Backward linking
+                head = node;
+            }
+
+            length++;
         }
 
-        /**
-         * add new node into head of list and increase list size by 1
-         **/
-        public void addNode(DLLNode curNode) {
-            DLLNode nextNode = head.next;
-            curNode.next = nextNode;
-            curNode.prev = head;
-            head.next = curNode;
-            nextNode.prev = curNode;
-            listSize++;
+        //Remove a node
+        void remove(Node node){
+
+            if(node==head){                                                               //Need to remove head node
+                if(node==tail){                                                           //Tail node is the same (list size = 1)
+                    tail=null;                                                            //Make tail null
+                }
+                head = head.next;                                                         //Make head point to the next node
+            }
+            else{                                                                         //Need to remove later node
+                node.prev.next = node.next;                                               //Forward linking
+
+                if(node==tail){                                                           //Need to remove tail node
+                    tail = node.prev;                                                     //Point tail to prev node
+                }
+                else{
+                    node.next.prev = node.prev;                                           //Backward linking
+                }
+            }
+
+            length--;
+
         }
 
-        /**
-         * remove input node and decrease list size by 1
-         **/
-        public void removeNode(DLLNode curNode) {
-            DLLNode prevNode = curNode.prev;
-            DLLNode nextNode = curNode.next;
-            prevNode.next = nextNode;
-            nextNode.prev = prevNode;
-            listSize--;
-        }
+        //Remove last node
+        Node removeLastNode(){
 
+            Node tailNode = tail;
+
+            if(tailNode != null){                                                         //LastNode exists
+                remove(tailNode);
+            }
+            return tailNode;
+        }
     }
 
     public static void main(String []args){
         LFUCache lfuCache = new LFUCache(2);
         lfuCache.put(1,1);
         lfuCache.put(2,2);
+        lfuCache.put(3,3);
         System.out.println(lfuCache.get(1));
         System.out.println(lfuCache.get(2));
         System.out.println(lfuCache.get(3));

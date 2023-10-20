@@ -3549,6 +3549,24 @@ Output: true
     boolean isValid(char a) {
         return a != '0';
     }
+    // https://www.youtube.com/watch?v=i9sHc1hL4wg&ab_channel=Pepcoding
+
+    public int numDecodings2(String s){
+        int []dp = new int[s.length() + 1]; // reason we add +1 is because we have to calculate the ways if there is 0 digit
+        dp[0] = 1; // length of zero will be 1 because there is no way to express this
+        dp[1] = s.charAt(0) == '0' ? 0 : 1; // if char at 0 is 0, no way else its 1
+        for(int i = 2 ; i <=s.length(); i++){
+            int oneDigit = Integer.valueOf(s.substring(i - 1, i));
+            int twoDigits = Integer.valueOf(s.substring(i-2,i));
+            if(oneDigit>=1){
+                dp[i] += dp[i-1];
+            }
+            if(twoDigits >= 10 && twoDigits <= 26){
+                dp[i] += dp[i-2];
+            }
+        }
+        return dp[s.length() ];
+    }
 
 //    394. Decode String
 //    Given an encoded string, return its decoded string.
@@ -3569,28 +3587,53 @@ Output: true
 // time : O(maxK*n) where maxK is max value of k & n is the size of string array.
 // Space : O(m+n) m is no of letters and n is no of digits.
 public String decodeString(String s) {
+        Stack<Character> stack = new Stack<>();
 
-    Stack<Integer> intStack = new Stack<>();
-    Stack<StringBuilder> strStack = new Stack<>();
-    StringBuilder cur = new StringBuilder();
-    int k = 0;
-    for (char ch : s.toCharArray()) {
-        if (Character.isDigit(ch)) {
-            k = k * 10 + ch - '0';
-        } else if (ch == '[') {
-            intStack.push(k);
-            strStack.push(cur);
-            cur = new StringBuilder();
-            k = 0;
-        } else if (ch == ']') {
-            StringBuilder tmp = cur;
-            cur = strStack.pop();
-            for (k = intStack.pop(); k > 0; --k)
-                cur.append(tmp);
-        } else
-            cur.append(ch);
-    }
-    return cur.toString();
+        for(char c : s.toCharArray())
+        {
+            if(c != ']')
+                stack.push(c); //push everything but ]
+
+            else
+            {
+                //step 1: if you find a closing ] then retrieve the string it encapsulates
+
+                StringBuilder sb = new StringBuilder();
+                while(!stack.isEmpty() && Character.isLetter(stack.peek()))
+                    sb.append(stack.pop());
+                sb.reverse();
+
+                String sub = sb.toString(); //this is the string contained in [ ]
+                stack.pop(); //Discard the '[';
+
+
+                //step 2: after that get the number of times it should repeat from stack
+
+                sb = new StringBuilder();
+                while(!stack.isEmpty() && Character.isDigit(stack.peek()))
+                    sb.insert(0, stack.pop());
+
+                int count = Integer.valueOf(sb.toString()); //this is the number
+
+
+                //step 3: repeat the string within the [ ] count number of times and push it back into stack
+
+                while(count > 0)
+                {
+                    for(char ch : sub.toCharArray())
+                        stack.push(ch);
+                    count--;
+                }
+            }
+        }
+
+        //final fetching and returning the value in stack
+        StringBuilder retv = new StringBuilder();
+        while(!stack.isEmpty() && Character.isLetter(stack.peek()))
+            retv.append(stack.pop());
+        retv.reverse();
+
+        return retv.toString();
 }
 
     // Q162 find peak element #TopInterviewQuestion

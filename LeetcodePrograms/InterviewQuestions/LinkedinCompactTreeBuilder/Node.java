@@ -1,8 +1,8 @@
-package LeetcodePrograms.LinkedinCompactTreeBuilder;
+package LeetcodePrograms.InterviewQuestions.LinkedinCompactTreeBuilder;
 
 import java.util.List;
 
-class Node<T> {
+public class Node<T> {
 
     private final T data;
     private final List<Node<T>> children;

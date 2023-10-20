@@ -88,20 +88,16 @@ class ebayquestion {
     }
 
     public void printMap(){
-    //    System.out.println(mapInput);
         Map<String,Object> mapInput1 ;
         mapInput1 = mapInput;
         for(String key : mapInput1.keySet()){
            Object value = mapInput1.get(key);
            sb=new StringBuilder();
-           //List<String> list = new ArrayList<>();
            if(value instanceof String){
-              // sb.append(key  );
                System.out.println(sb.toString() + "."+key +" : " + value);
            }else{
               // list.add(key);
                sb.append(key + ".");
-              // mapInput1 = (Map<String, Object>) mapInput1.get(key);
                printMapUtil((Map<String, Object>)mapInput1.get(key),sb);
            }
         }
@@ -112,12 +108,10 @@ class ebayquestion {
             Object value = mapInput.get(key);
 
             if(value instanceof String){
-               // sb.append(key  );
                 System.out.println(sb.toString() + key +" : " + value);
 
             }else{
                 sb.append(key + ".");
-              //  mapInput = (Map<String, Object>) mapInput.get(key);
                 printMapUtil((Map<String, Object>) mapInput.get(key),sb);
             }
         }

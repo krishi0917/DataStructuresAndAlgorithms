@@ -1,7 +1,7 @@
 package LeetcodePrograms.LinkedinCompactTreeBuilder;
 
 import java.util.*;
-
+import LeetcodePrograms.InterviewQuestions.LinkedinCompactTreeBuilder.*;
 public class FlattenTree implements CompactTreeBuilder
 {
     public Node bfs(Queue<Node> queue) {

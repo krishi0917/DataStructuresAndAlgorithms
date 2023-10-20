@@ -1,7 +1,7 @@
-package LeetcodePrograms.LinkedinCompactTreeBuilder;
+package LeetcodePrograms.InterviewQuestions.LinkedinCompactTreeBuilder;
 
 // https://leetcode.com/discuss/interview-question/124893/LinkedIn-or-Phone-Screen-or-Compact-Tree-Builder
-    interface CompactTreeBuilder<T> {
+    public interface CompactTreeBuilder<T> {
         /**
          * Given a root of a tree. The tree may be of any depth and width,
          * i.e. each node may have any number of child nodes.
@@ -36,6 +36,6 @@ package LeetcodePrograms.LinkedinCompactTreeBuilder;
          *  in an example for compact(A,2) above node E is an exception node:
          *  it has 1 child while any other node has either 2 or 0 children
          */
-        Node<T> compact(Node<T> root, int N);
+        Node<T> compact(Node root, int N);
     }
 
