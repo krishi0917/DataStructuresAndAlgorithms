@@ -1,8 +1,5 @@
 package LeetcodePrograms.src;
 
-/**
- * Created by rkhurana on 7/25/18.
- */
 public class PlusOne {
     public static int[] plusOne(int[] digits) {
         int n = digits.length;

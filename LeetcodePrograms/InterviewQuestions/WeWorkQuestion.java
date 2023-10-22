@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions;
 //  decode("i20e") -> 20
 //  decode("i5ei-30e") -> 5, -30
 //  decode("3:foo") -> "foo"

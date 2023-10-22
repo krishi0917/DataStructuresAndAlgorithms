@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * @author Rishi Khurana
- */
 public class BinaryMinHeap<T> {
     private List<Node> allNodes = new ArrayList<>();
     private Map<T,Integer> nodePosition = new HashMap<>();

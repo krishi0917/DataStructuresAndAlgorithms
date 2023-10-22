@@ -19,15 +19,7 @@ public class NextDoor {
   oo-oo----
 
 Print the state of the grid with the lines on them
-
 */
-    /*
-     * To execute Java, please define "static void main" on a class
-     * named Solution.
-     *
-     * If you need more classes, simply define them inline.
-     */
-
 
         public int[][] createGrid(){
             int[][]grid = new int[10][10];

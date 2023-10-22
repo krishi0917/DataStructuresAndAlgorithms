@@ -1,8 +1,5 @@
 package LeetcodePrograms.src;
 
-/**
- * Created by rkhurana on 4/1/19.
- */
 public class RegularExpressionMatchingRecursion {
     public boolean isMatch(String s, String p) {
         // base case

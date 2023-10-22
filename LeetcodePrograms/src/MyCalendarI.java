@@ -1,11 +1,11 @@
 package LeetcodePrograms.src;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-
 /**
- * @author Rishi Khurana
  * Implement a MyCalendar class to store your events. A new event can be added if adding the event will not cause a
  * double booking.
  *
@@ -30,22 +30,23 @@ import java.util.TreeSet;
  * The third event can be booked, as the first event takes every time less than 20, but not including 20.
  */
 public class MyCalendarI {
-    TreeMap<Integer, Integer> calendar;
-
+    List<int[]> list;
     public MyCalendarI() {
-        calendar = new TreeMap<>();
+        list = new ArrayList<>();
     }
 
     public boolean book(int start, int end) {
-        Integer floorKey = calendar.floorKey(start);
-        if (floorKey != null && calendar.get(floorKey) > start)
-            return false;
-        Integer ceilingKey = calendar.ceilingKey(start);
-        if (ceilingKey != null && ceilingKey < end)
-            return false;
-
-        calendar.put(start, end);
+        for(int[] interval : list){
+            if(start >= interval[0] && start < interval[1] ){
+                return false;
+            } else if(interval[0] >= start && end > interval[0]){
+                return false;
+            }
+        }
+        int[] booking = {start, end};
+        list.add(booking);
         return true;
+
     }
 
     public static void main(String []args){

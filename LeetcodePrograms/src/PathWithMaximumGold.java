@@ -1,7 +1,6 @@
 package LeetcodePrograms.src;
 
 /**
- * @author Rishi Khurana
  * look for bfs method as well
  * 1219. Path with Maximum Gold
  * In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that

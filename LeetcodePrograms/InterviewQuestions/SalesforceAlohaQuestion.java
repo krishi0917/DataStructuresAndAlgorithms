@@ -1,9 +1,9 @@
 
 
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions;
 import java.util.*;
 
-public class Main {
+public class SalesforceAlohaQuestion {
     static class NaryTree{
         NaryTree parent;
         ArrayList<NaryTree> children;

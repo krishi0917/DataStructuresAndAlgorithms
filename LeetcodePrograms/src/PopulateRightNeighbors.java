@@ -1,10 +1,5 @@
 package LeetcodePrograms.src;
 
-/**
- * Created by rkhurana on 8/20/18.
- */
-
-
 public class PopulateRightNeighbors
 {
     private class TreeNode

@@ -3,10 +3,7 @@ package LeetcodePrograms.src;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-
 /**
- * @author Rishi Khurana
  *             * input: “( * 3 6 ( + 2 4 ) 2 )” -> (* 3 6 6 2) -> 216 ->  ( * 3 6 12)
  */
 public class PrefixNotation {

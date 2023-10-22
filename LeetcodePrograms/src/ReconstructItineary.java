@@ -1,8 +1,6 @@
 package LeetcodePrograms.src;
 import java.util.*;
-/**
- * Created by rkhurana on 3/17/19.
- */
+
 // #Uber
 public class ReconstructItineary {
     public List<String> findItinerary2(String[][] tickets) {

@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions;
 /*
 We have communities with IDs C1,C2,... and followers with IDs F1,F2,..., where each user can follow any of the communities.
 
