@@ -1,7 +1,3 @@
-/**
- * Created by rkhurana on 12/12/18.
- */
-
 package LeetcodePrograms.src;
 // Q1 > to print the count of all the
 

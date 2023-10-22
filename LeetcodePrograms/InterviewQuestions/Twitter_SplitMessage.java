@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;/*
+package LeetcodePrograms.InterviewQuestions;/*
 Write a function that performs this auto-segmentation. The function must take
 an arbitrary length message and return the equivalent message as an array of segments.
 
@@ -30,7 +30,7 @@ output:
 */
 
 import java.util.*;
-public class TwitterSplitMessage {
+public class Twitter_SplitMessage {
     public static String splitMessage(String text, int maxLength){
         String []words = text.split(" ");
         List<String> result = new ArrayList<>();

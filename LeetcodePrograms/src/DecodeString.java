@@ -32,7 +32,6 @@ public class DecodeString {
             else
             {
                 //step 1: if you find a closing ] then retrieve the string it encapsulates
-
                 StringBuilder sb = new StringBuilder();
                 while(!stack.isEmpty() && Character.isLetter(stack.peek()))
                     sb.append(stack.pop());
@@ -52,7 +51,6 @@ public class DecodeString {
 
 
                 //step 3: repeat the string within the [ ] count number of times and push it back into stack
-
                 while(count > 0)
                 {
                     for(char ch : sub.toCharArray())

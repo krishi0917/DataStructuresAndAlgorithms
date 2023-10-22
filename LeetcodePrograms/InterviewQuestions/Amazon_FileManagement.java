@@ -1,10 +1,6 @@
 //package LeetcodePrograms.InterviewQuestions;
 //
 //import java.util.*;
-//
-//
-///**
-// * @author Rishi Khurana
 // * You are given the class File(String dir) which has the following methods
 // * 1) getSize() - return int
 // * 2) getName()  - return String
@@ -15,7 +11,7 @@
 // * base dir: “/home/user/” and
 // * conditions "extension is .java" or "file is bigger than 5000 bytes".
 // */
-//public class AmazonQuestion {
+// public class AmazonQuestion {
 //    class File{
 //        public File(){
 //

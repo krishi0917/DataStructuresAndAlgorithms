@@ -339,6 +339,8 @@
 
 package LeetcodePrograms.src;
 
+import LeetcodePrograms.InterviewQuestions.MetaQuestions;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.*;
@@ -7749,6 +7751,74 @@ public static int SearchInsertPosition(int A[], int target) {
         }
         return result;
     }
+
+    /**
+     * Merge 2 intervals
+     // Given two sorted, non-overlapping interval lists, return a 3rd interval list that is the union of the input interval lists.
+     //
+     // For example:
+     // Input:
+     // {[1,2], [3,9]}
+     // {[4,6], [8,10], [11,12]}
+
+     // Output should be:
+     // {[1,2], [3,10], [11,12]}
+     //
+     // Input:
+     // 0   1   2   3   4   5   6   7   8   9  10  11  12
+     //     [---]   [-----------------------]
+     //                 [-------]       [------]   [----]
+     // Output:
+     //     [---]   [--------------------------]   [----]
+
+     */
+
+    public List<Interval> mereSortedList(List<Interval> l1, List<Interval> l2){
+
+        if( l1 == null || l1.size() == 0)
+            return l2;
+        if( l2 == null || l2.size() == 0)
+            return l1;
+
+        List<Interval> result = new ArrayList<>();
+
+        Interval prev = null;
+
+        int indexList1 = 0;
+        int indexList2 = 0;
+
+        // find first interval for result list
+        if(l1.get(0).start < l2.get(0).start){
+            prev = l1.get(0);
+            indexList1++;
+        }else{
+            prev = l2.get(0);
+            indexList2++;
+        }
+        while(indexList1 < l1.size() || indexList2 < l2.size()){
+
+            if(indexList2 == l2.size() || (indexList1 < l1.size() && l1.get(indexList1).start < l2.get(indexList2).start)){
+                // Merge prev1 with list1
+                if(prev.end < l1.get(indexList1).start){
+                    result.add(prev);
+                    prev  = l1.get(indexList1);
+                }else{
+                    prev.end = Math.max(prev.end , l1.get(indexList1).end);
+                }
+                indexList1++;
+            }else{
+                if(prev.end < l2.get(indexList2).start){
+                    result.add(prev);
+                    prev = l2.get(indexList2);
+                }else{
+                    prev.end = Math.max(prev.end , l2.get(indexList2).end);
+                }
+                indexList2++;
+            }
+        }
+        result.add(prev);
+        return result;
+    }
     /*
     435. Non-overlapping Intervals #interval
     Given an array of intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the
@@ -10325,6 +10395,22 @@ public static int SearchInsertPosition(int A[], int target) {
     // with the next element from the same column. explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
     // time complexity of this one O(min(K,N)+K*logN)
 
+
+     class Tuple{
+
+            public int x;
+            public int y;
+            public int val;
+            public Tuple (int x, int y, int val) {
+                this.x = x;
+                this.y = y;
+                this.val = val;
+            }
+
+            public int compareTo (KthSmallestElementMatrix.Tuple that) {
+                return this.val - that.val;
+            }
+    }
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
         PriorityQueue<Tuple> pq = new PriorityQueue<>();

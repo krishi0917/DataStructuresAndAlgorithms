@@ -1,9 +1,8 @@
 package LeetcodePrograms.InterviewQuestions;
 import java.util.*;
+
+// Find Duplicates in the file system
 /*
-
-https://app.coderpad.io/MG2AXQKD/playback
-
 Imagine that we are writing a backup application used to backup files from your laptop to a remote server.
 To save on network bandwidth, we want to identify duplicate files (i.e., files with the same contents).
 This way, we only need to upload duplicate files once.
@@ -23,9 +22,8 @@ For traversing the filesystem, use these library functions:
 - list_folder(path) → list of names of immediate file and folder children
 - is_folder(path) → boolean
 
-*
 */
-public class Airtable {
+public class Airtable_FindDupFileSystem {
         Map<String,Set<String>> resultMap = new HashMap<>();
         public List<List<String>> findDuplicates(String path){
             findDuplicatesUtil(path,"");

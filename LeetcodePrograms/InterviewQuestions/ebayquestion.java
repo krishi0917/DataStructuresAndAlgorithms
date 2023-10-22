@@ -87,6 +87,30 @@ class ebayquestion {
         mapInput.put("order", mapOrder);
     }
 
+    public static void main(String args[] ) {
+        ebayquestion s = new ebayquestion();
+        s.printMap4();
+    }
+
+    public void printMap4(){
+        for(String key : mapInput.keySet()) {
+            getStringRepresentation(key, key, mapInput);
+        }
+    }
+
+    private void getStringRepresentation(String keyPrefix, String key, Map<String, Object> temp) {
+        if(temp.get(key) instanceof String ){
+            System.out.println(keyPrefix + ": "+temp.get(key));
+        } else {
+            Map<String,Object> innerMap = (Map<String,Object>)temp.get(key);
+            for(String ikey : innerMap.keySet()) {
+                getStringRepresentation(keyPrefix + "." + ikey, ikey, (Map<String, Object>) temp.get(key));
+            }
+        }
+    }
+
+}
+/*
     public void printMap(){
         Map<String,Object> mapInput1 ;
         mapInput1 = mapInput;
@@ -117,28 +141,4 @@ class ebayquestion {
         }
     }
 
-
-
-    public static void main(String args[] ) {
-        ebayquestion s = new ebayquestion();
-        s.printMap4();
-    }
-
-    public void printMap4(){
-        for(String key : mapInput.keySet()) {
-            getStringRepresentation(key, key, mapInput);
-        }
-    }
-
-    private void getStringRepresentation(String keyPrefix, String key, Map<String, Object> temp) {
-        if(temp.get(key) instanceof String ){
-            System.out.println(keyPrefix + ": "+temp.get(key));
-        } else {
-            Map<String,Object> innerMap = (Map<String,Object>)temp.get(key);
-            for(String ikey : innerMap.keySet()) {
-                getStringRepresentation(keyPrefix + "." + ikey, ikey, (Map<String, Object>) temp.get(key));
-            }
-        }
-    }
-
-}
+*/

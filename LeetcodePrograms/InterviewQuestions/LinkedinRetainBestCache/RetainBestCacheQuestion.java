@@ -7,7 +7,6 @@ public class RetainBestCacheQuestion <K, V extends Rankable> {
     HashMap<K, V> cacheMap ;
     TreeMap<Long, List<K>> sortByRankMap;
 
-
     Rankable rankable;
     public RetainBestCacheQuestion(DataSource<K, V> ds,  int entriesToRetain){
         capacity = entriesToRetain;

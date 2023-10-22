@@ -1,8 +1,6 @@
 package LeetcodePrograms.src;
 import java.util.*;
-/**
- * Created by rkhurana on 10/27/18.
- */
+
 public class BTMaximumPathSum {
     TreeNode root;
     int maxValue;

@@ -1,8 +1,4 @@
 package LeetcodePrograms.InterviewQuestions;
-/*
-identity
-experience platform
-*/
 import java.util.*;
 import java.util.regex.*;
 

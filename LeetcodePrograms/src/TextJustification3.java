@@ -26,12 +26,13 @@ public class TextJustification3  {
             int gaps = last - index - 1;
             StringBuilder sb = new StringBuilder();
             if (last == n || gaps == 0) {    // if there is only word or its the last line
+                // gaps == 0 condition is to avoid having arithmetic null pointer exception when there is no gaps
                 for (int i = index; i < last; i++) {
                     sb.append(words[i]);
                     sb.append(' ');
                 }
                 sb.deleteCharAt(sb.length() - 1); // extra space in the end is added in the above for loop
-                while (sb.length() < maxWidth) { // add the remaining characters with spaces
+                while (sb.length() < maxWidth) { // add the remaining characters with spaces when its a last line to make it to maxwidth
                     sb.append(' ');
                 }
             } else {
@@ -41,8 +42,7 @@ public class TextJustification3  {
                     sb.append(words[i]);
                     int s=0;
                     if(i == last - 1) // this condition will come when you have printed the last word in the line
-                        // for loop will end before even printing the list word in the first line. In our case, its "an"
-                        // for ex when an is printed for the line "this is an", no extra spaces needs to be put after an and hence we break the loop
+                        // this will avoid having extra spaces provided by the below line which will exist even though not required
                         break;
                     while(s++ < spaces){
                         sb.append(" ");
