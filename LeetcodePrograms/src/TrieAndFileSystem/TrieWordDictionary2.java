@@ -1,8 +1,5 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.src.TrieAndFileSystem;
 import java.util.*;
-/**
- * Created by rkhurana on 3/22/19.
- */
 public class TrieWordDictionary2 {
 
     private class TrieNode {

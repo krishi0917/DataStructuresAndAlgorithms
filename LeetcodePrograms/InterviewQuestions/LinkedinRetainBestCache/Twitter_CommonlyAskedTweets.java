@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.InterviewQuestions.LinkedinRetainBestCache;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,49 +18,8 @@ import java.util.Map;
 //@li,T4
 //@li,T3
 //@li,T2
-public class CommonlyAskedTweets {
 
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-//        Scanner s = new Scanner(System.in);
-//        Scanner s2 = new Scanner(System.in);
-//        System.out.println("enter the number of inputs");
-//        int inputSize = s.nextInt();
-
-//        for(int i = 0 ; i < inputSize ; i++){
-//            list.add(s2.nextLine());
-//        }
-
-        list.add("@Biz,T1");
-        list.add("@Jack,T7");
-        list.add("@Biz,T2");
-        list.add("@Biz,T5");
-//        list.add("@mike,T1");
-//        list.add("@mike,T3");
-//        list.add("@mike,T4");
-//        list.add("@biz,T1");
-//        list.add("@biz,T2");
-//        list.add("@biz,T3");
-//        list.add("@jack,T5");
-//        list.add("@jack,T3");
-//        list.add("@jack,T4");
-//        list.add("@li,T4");
-//        list.add("@li,T3");
-//        list.add("@li,T2");
-//
-
-//        while (s.hasNext()) {
-//            list.add(s.nextLine());
-//        }
-        FindMostCommonTweetViewPath f = new FindMostCommonTweetViewPath();
-        List<String> resultList = f.findMostCommonTweetViewPath(list);
-        for (int i = 0; i < resultList.size(); i++) {
-            System.out.println(resultList.get(i));
-        }
-    }
-}
-
-    class FindMostCommonTweetViewPath {
+    class Twitter_CommonlyAskedTweets {
         public List<String> findMostCommonTweetViewPath(List<String> list) {
             boolean flag = false;
             Map<String, List<String>> map = new HashMap<>();
@@ -128,5 +87,43 @@ public class CommonlyAskedTweets {
 
             Collections.sort(result);
             return result;
+        }
+        public static void main(String[] args) {
+            List<String> list = new ArrayList<>();
+//        Scanner s = new Scanner(System.in);
+//        Scanner s2 = new Scanner(System.in);
+//        System.out.println("enter the number of inputs");
+//        int inputSize = s.nextInt();
+
+//        for(int i = 0 ; i < inputSize ; i++){
+//            list.add(s2.nextLine());
+//        }
+
+            list.add("@Biz,T1");
+            list.add("@Jack,T7");
+            list.add("@Biz,T2");
+            list.add("@Biz,T5");
+//        list.add("@mike,T1");
+//        list.add("@mike,T3");
+//        list.add("@mike,T4");
+//        list.add("@biz,T1");
+//        list.add("@biz,T2");
+//        list.add("@biz,T3");
+//        list.add("@jack,T5");
+//        list.add("@jack,T3");
+//        list.add("@jack,T4");
+//        list.add("@li,T4");
+//        list.add("@li,T3");
+//        list.add("@li,T2");
+//
+
+//        while (s.hasNext()) {
+//            list.add(s.nextLine());
+//        }
+            Twitter_CommonlyAskedTweets f = new Twitter_CommonlyAskedTweets();
+            List<String> resultList = f.findMostCommonTweetViewPath(list);
+            for (int i = 0; i < resultList.size(); i++) {
+                System.out.println(resultList.get(i));
+            }
         }
     }

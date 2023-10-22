@@ -1,7 +1,5 @@
-package LeetcodePrograms.src;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+package LeetcodePrograms.InterviewQuestions;
+
 /*
         Overview:
 
@@ -76,19 +74,18 @@ class Client:
         # t15 - value is 62 -> [do nothing]
 
         # compare val to alerts[0].threshold and may call notify or resolve
+
+        Part II: Introduce Repeat Interval
+
+Add support for repeat intervals, so that if an alert is continuously firing it will only re-notify after the repeat interval.
+
+Part III: Introduce Warning Threshold
+
+Incorporate using the warn threshold in the alerting engine - now an alert can go between states PASS <-> WARN <-> CRITICAL <-> PASS.
 */
-public class AlertSystem {
+public class Chronospher_AlertSystem {
 public static void main(String []args) {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                // task to run goes here
-                System.out.println("Hello !!");
-            }
-        };
 
-
-    ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-    service.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
     }
 }
 

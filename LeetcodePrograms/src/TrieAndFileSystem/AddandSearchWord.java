@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.src.TrieAndFileSystem;
 
 import java.util.HashMap;
 import java.util.Map;

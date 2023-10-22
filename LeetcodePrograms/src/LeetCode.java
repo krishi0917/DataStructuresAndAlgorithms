@@ -3167,6 +3167,16 @@ Output: true
 // Q117 populating next right pointers in each node 2 #binarytree
 // doesnt need to be a perfect binary tree
 //very well explained by iDeserve https://www.youtube.com/watch?v=G46cenlnXvI&t=478s
+public class TreeLinkNode {
+
+    int val;
+    public TreeLinkNode left, right, next;
+
+    public TreeLinkNode(int x) {
+        val = x;
+    }
+}
+
     public void connect(TreeLinkNode root) {
 
         while (root != null) {

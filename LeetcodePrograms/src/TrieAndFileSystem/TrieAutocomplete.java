@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.src.TrieAndFileSystem;
 // Q1 > to print the count of all the
 
 import java.util.*;

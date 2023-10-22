@@ -1,9 +1,8 @@
-package LeetcodePrograms.src;
-
+package LeetcodePrograms.InterviewQuestions;
+// clone a tree to a particular level #adobe
 import java.util.LinkedList;
 import java.util.Queue;
-// clone a tree to a particular level
-public class AdobeQuestion {
+public class Adobe_CloneTreeToALevel {
     static class TreeNode{
         TreeNode left;
         TreeNode right;
@@ -42,16 +41,14 @@ public class AdobeQuestion {
         // Pushing first level node into first queue
         q1.add(treeNode);
 
-        // Executing loop till both the queues
-        // become empty
+        // Executing loop till both the queues become empty
         while (!q1.isEmpty() || !q2.isEmpty())
         {
 
             while (!q1.isEmpty())
             {
 
-                // Pushing left child of current node in
-                // first queue into second queue
+                // Pushing left child of current node in first queue into second queue
                 if (q1.peek().left != null)
                     q2.add(q1.peek().left);
 
@@ -68,13 +65,11 @@ public class AdobeQuestion {
             while (!q2.isEmpty())
             {
 
-                // pushing left child of current node
-                // in second queue into first queue
+                // pushing left child of current node in second queue into first queue
                 if (q2.peek().left != null)
                     q1.add(q2.peek().left);
 
-                // pushing right child of current
-                // node in second queue into first queue
+                // pushing right child of current node in second queue into first queue
                 if (q2.peek().right != null)
                     q1.add(q2.peek().right);
 
@@ -94,7 +89,7 @@ public class AdobeQuestion {
         treeNode.right.left = new TreeNode(6);
         treeNode.right.right = new TreeNode(7);
         treeNode.right.left.left = new TreeNode(9);
-        TreeNode result = LevelTraversaltoaLevel(treeNode , 2);
+        TreeNode result = LevelTraversaltoaLevel(treeNode , 3);
         printLevelOrder(result);
     }
 }
