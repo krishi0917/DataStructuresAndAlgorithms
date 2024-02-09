@@ -338,9 +338,6 @@
 // palindrome , permutation, parenthesis, interval, matrix,
 
 package LeetcodePrograms.src;
-
-import LeetcodePrograms.InterviewQuestions.MetaQuestions;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.security.*;
@@ -10146,6 +10143,39 @@ public static int SearchInsertPosition(int A[], int target) {
             }
             return T[str1.length][str2.length];
         }
+
+        public static boolean isInterleaved(String s1, String s2, String s3){
+        boolean matrix [][] = new boolean [s1.length() + 1][s2.length() + 1];
+        if(s1.length() + s2.length() != s3.length()){
+            return false;
+        }
+        matrix[0][0] = true;
+        for(int i = 1 ; i <=s1.length(); i++){
+             if(matrix[i-1][0] == true && s1.charAt(i-1) == s3.charAt(i-1))
+                 matrix[i][0] = true;
+             else
+                 matrix[i][0] = false;
+        }
+
+        for(int i =1 ; i <= s2.length(); i++){
+            if(matrix[0][i-1] == true && s2.charAt(i-1) == s3.charAt(i-1))
+                 matrix[0][i] = true;
+             else
+                 matrix[0][i] = false;
+        }
+
+        for(int i = 1 ; i <= s1.length(); i++){
+            for(int j = 1; j <= s2.length(); j++){
+                 if (( matrix[i-1][j] == true && s1.charAt(i-1) == s3.charAt(i+j-1)) ||
+                  (matrix[i][j-1] == true && s2.charAt(j-1) == s3.charAt(i+j-1))){
+                     matrix[i][j] = true;
+                 }
+                else
+                     matrix[i][j] = false;
+            }
+        }
+        return matrix[s1.length()][s2.length()];
+    }
 
 //  Q5 longest palindromic Substring #TopInterviewQuestion #dynamicprogramming #dp
 //  Given a string s, return the longest palindromic substring in s.
