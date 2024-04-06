@@ -3,7 +3,12 @@ package LeetcodePrograms.InterviewQuestions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+// Suppose we have two lists of signed integers in ascending order and. Write a function that takes these two ordered lists as well as an integr max_result_length argument and returns a merged list with max_result_length elements in ascending order.
+//Example:
+//a = LinkedList -> [1, 3, 5]
+//b = [2, 6, 8, 9]
+//c = [4,5,6]
+// d = [10,23,23]
 public class Hubspot_phone { public List<Integer> MergeTwoList(List<Integer> list1, List<Integer> list2, int max_result_length){
     if(list1 == null){
         list1 = new ArrayList<>();
