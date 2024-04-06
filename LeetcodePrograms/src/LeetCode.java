@@ -12742,6 +12742,7 @@ Explanation: The events go as follows:
             return new int[] { duplicate, (int) sum + duplicate };
         }
 
+    // add two arrays
         public static void AddTwoArrays() {
             int val = 0;
             int carry = 0;
@@ -14284,6 +14285,7 @@ Explanation: The events go as follows:
         // 1 + 99 = 100, 99 + 100 = 199
         // Note: Numbers in the additive sequence cannot have leading zeros, so
         // sequence 1, 2, 03 or 1, 02, 3 is invalid.
+    // add two string
         private String add(String a, String b) {
             StringBuilder rst = new StringBuilder();
             int i = a.length() - 1, j = b.length() - 1, carry = 0;

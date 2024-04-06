@@ -34,7 +34,7 @@ public class FindKPairsSmallestSums {
         FindKPairsSmallestSums kPairsSmallestSums = new FindKPairsSmallestSums();
         int[] nums1 = { 1, 7, 11 };
         int[] nums2 = { 2, 4, 6 };
-        System.out.println(kPairsSmallestSums.kSmallestPairs2(nums1, nums2, 3));
+        System.out.println(kPairsSmallestSums.kSmallestPairs3(nums1, nums2, 3));
     }
 
     // time complexity k log n
@@ -81,8 +81,8 @@ public class FindKPairsSmallestSums {
             sum = (long) n1 + (long) n2;
         }
     }
-    class CompPair implements Comparator<KPairsWithSmallestSum.Pair> {
-        public int compare(KPairsWithSmallestSum.Pair p1, KPairsWithSmallestSum.Pair p2){
+    class CompPair implements Comparator<Pair> {
+        public int compare(Pair p1, Pair p2){
             return Long.compare(p1.sum, p2.sum);
         }
     }
