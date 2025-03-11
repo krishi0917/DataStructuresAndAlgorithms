@@ -215,6 +215,25 @@ public class MetaQuestions {
         return sum(n.left, s*10 + n.val) + sum(n.right, s*10 + n.val);
     }
 
+// Given a directed graph, compress the graph by combining nodes.
+// Input: Origal graph:
+// a --> d
+// b --> d
+// c --> d
+// d --> e
+// e --> f
+// f --> g
+// f --> h
+// {A, B, C} -> D -> E -> F -> {G, H}
+
+// Output: output GRAPH:
+// a --> def
+// b --> def
+// c --> def
+// def --> g
+// def --> h
+// {A, B, C} -> DEF -> {G, H}
+
     public static void main(String[] args) {
 
     }

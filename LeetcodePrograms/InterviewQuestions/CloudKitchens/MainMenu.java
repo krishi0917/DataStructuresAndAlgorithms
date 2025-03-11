@@ -1,10 +1,5 @@
 package LeetcodePrograms.InterviewQuestions.CloudKitchens;
 
-
-/*
- * Click `Run` to execute the snippet below!
- */
-
 import java.util.*;
 
 /*
