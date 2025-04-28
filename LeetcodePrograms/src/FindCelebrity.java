@@ -101,9 +101,5 @@ both 0 and 2 know him but 1 does not know anybody.
 
     public static void main(String []args){
        System.out.println(findCelebrity1(5));
-
-
     }
-
-
 }

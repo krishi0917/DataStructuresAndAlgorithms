@@ -24,6 +24,7 @@ public class MaxStack {
         map = new TreeMap<>();
     }
 
+    // new node is adding to the tail. therefor pop will also be from the tail
     public void push(int x) {
         Node newNode = new Node(x);
         newNode.pre = tail.pre;
@@ -51,7 +52,7 @@ public class MaxStack {
 
     public int peekMax() {
         return map.lastKey();
-    }
+    } // o(logn)
 
     public int popMax() {
         int maxVal = map.lastKey();

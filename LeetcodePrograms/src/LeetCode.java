@@ -1181,6 +1181,7 @@ Output: true
     }
 
 // Q53 maximum sum subarray #TopInterviewQuestion  cadence algorithm
+    // maximum subarray
 // Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 // Maintain Indices https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/ #NeedsAttention
 
@@ -2744,6 +2745,7 @@ Output: true
     }
 
     // Iterative nested list weight sum
+    // time and space complexity O(n)
     public int depthSumIterative(List<NestedInteger> nestedList) {
         int level = 1, total = 0;
         while (nestedList.size() != 0) {
@@ -2760,6 +2762,7 @@ Output: true
         return total;
     }
 
+//can also be done using a queue
     // 364. Nested List Weight Sum II
     // You are given a nested list of integers nestedList. Each element is either an integer or a list
     // whose elements may also be integers or other lists.

@@ -37,7 +37,7 @@ public class NestedListWeightSumii {
     weighted = Running sum OF above sum
 
     e.g.                                   unweighted        weighted
-    level 1 - integers = [2]     sum = 2     2                2
+    level 1 - integers = [2]         sum = 2     2                2
     level 2 - integers = [1,1,1,1]   sum = 4     2 + 4            2 +  2+4 = 8
 
 

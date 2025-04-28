@@ -2,7 +2,11 @@ package LeetcodePrograms.src;
 
 import java.util.Stack;
 
-// time complexity O(N) for the pop max operation but the other operations is O(1)
+// time complexity O(N) for the pop max operation
+// Other operations is O(1)
+// push: Whatever element we have the max element at that point , will be pushed for sure in max stack
+// for pop you need to create a temp stack to move all elements out of it, pop the maxelement and then put the remaining elements back to stack
+
 public class MaxStack2 {
     Stack<Integer> stack;
     Stack<Integer> maxStack;

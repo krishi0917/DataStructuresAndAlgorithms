@@ -2,7 +2,7 @@
 package LeetcodePrograms.src;
 import java.util.*;
 /**
- * go for AllOOneDataStructure3
+ * go for AllOOneDataStructure4
  * 432. All O`one Data Structure
  * Implement a data structure supporting the following operations:
  *

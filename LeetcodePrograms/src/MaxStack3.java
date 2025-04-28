@@ -85,5 +85,4 @@ public class MaxStack3 {
             map.remove(max);
         return max;
     }
-
 }

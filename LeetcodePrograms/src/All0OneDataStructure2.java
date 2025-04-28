@@ -1,7 +1,7 @@
 package LeetcodePrograms.src;
 import java.util.*;
 
-// go for AllOOneDataStructure3
+// go for AllOOneDataStructure4
 public class All0OneDataStructure2 {
     private Bucket head;
     private Bucket tail;

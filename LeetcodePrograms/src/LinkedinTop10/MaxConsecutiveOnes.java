@@ -1,4 +1,4 @@
-package LeetcodePrograms.src;
+package LeetcodePrograms.src.LinkedinTop10;
 
 /**
  * 487. Max Consecutive Ones
