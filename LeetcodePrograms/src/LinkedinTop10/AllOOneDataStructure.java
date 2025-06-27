@@ -1,4 +1,6 @@
 package LeetcodePrograms.src.LinkedinTop10;
+import LeetcodePrograms.src.All0OneDataStructure3;
+
 import java.util.*;
     /*
 https://photos.google.com/share/AF1QipN8DtG8CnIp1cBaXFJ_nAelLrBlEHs5m4Cjfz0KA5O4d8kRbLNqUC8FeNjaycGqUg?pli=1&key=VTY2LThrVHlRV0ExN1NkWVZjclFTeWVGVkxvbWhn
@@ -35,7 +37,6 @@ Return any key from the node just after the head, or an empty string if the list
 */
 
 class AllOOneDataStructure {
-
     class Node {
         int count; // this is the frequency
         Set<String> keys;
@@ -141,6 +142,27 @@ class AllOOneDataStructure {
     private void removeNode(Node node){
         node.prev.next = node.next;
         node.next.prev = node.prev;
+    }
+
+    public static void main(String []args) {
+        AllOOneDataStructure ds = new AllOOneDataStructure();
+        ds.inc("A");
+        ds.inc("A");
+        ds.inc("B");
+        ds.inc("D");
+        ds.inc("C");
+        ds.inc("A");
+        ds.inc("B");
+        ds.inc("B");
+        ds.inc("B");
+        ds.inc("C");
+        ds.inc("D");
+        ds.inc("E");
+        ds.dec("A");
+        ds.dec("C");
+        ds.dec("D");
+        ds.dec("C");
+        ds.dec("E");
     }
 }
 

@@ -2,21 +2,21 @@ package LeetcodePrograms;
 
 import java.util.*;
 
-class Box {
-    boolean isLocked;
-    int candies;
-    List<Integer> boxes;
-    List<Integer> keys;
-
-    public Box(boolean isLocked, int candies, List<Integer> boxes, List<Integer> keys) {
-        this.isLocked = isLocked;
-        this.candies = candies;
-        this.boxes = boxes;
-        this.keys = keys;
-    }
-}
-
 public class MaxCandies {
+    static class Box {
+        boolean isLocked;
+        int candies;
+        List<Integer> boxes;
+        List<Integer> keys;
+
+        public Box(boolean isLocked, int candies, List<Integer> boxes, List<Integer> keys) {
+            this.isLocked = isLocked;
+            this.candies = candies;
+            this.boxes = boxes;
+            this.keys = keys;
+        }
+    }
+
 
     public int maxCandies(Box[] boxArray, int initialBox) {
         // Step 1: Initialize structures

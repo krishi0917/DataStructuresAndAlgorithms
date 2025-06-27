@@ -1,24 +1,24 @@
 package LeetcodePrograms.src;
+import java.util.*;
 
 public class Candies {
-    import java.util.*;
 
-    // Box class representing the structure of each box
-    class Box {
-        boolean isLocked;
-        int candies;
-        List<Integer> containedBoxes;
-        List<Integer> keys;
+    public static class MaximumCandies {
+        // Box class representing the structure of each box
 
-        public Box(boolean isLocked, int candies, List<Integer> containedBoxes, List<Integer> keys) {
-            this.isLocked = isLocked;
-            this.candies = candies;
-            this.containedBoxes = containedBoxes;
-            this.keys = keys;
+        static class Box {
+            boolean isLocked;
+            int candies;
+            List<Integer> containedBoxes;
+            List<Integer> keys;
+
+            public Box(boolean isLocked, int candies, List<Integer> containedBoxes, List<Integer> keys) {
+                this.isLocked = isLocked;
+                this.candies = candies;
+                this.containedBoxes = containedBoxes;
+                this.keys = keys;
+            }
         }
-    }
-
-    public class MaximumCandies {
 
         // Method to get the maximum candies we can collect
         public int maxCandies(Box[] boxes, int start) {
@@ -60,7 +60,6 @@ public class Candies {
                     }
                 }
             }
-
             return totalCandies;
         }
 
