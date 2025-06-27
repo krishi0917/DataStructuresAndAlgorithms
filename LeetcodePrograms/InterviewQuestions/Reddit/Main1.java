@@ -1,5 +1,46 @@
 package LeetcodePrograms.InterviewQuestions.Reddit;
+/*
 
+Part 1
+Let's pair code a program that can do scoring for a game:
+The game has exactly 2 players. Each player scores 1pt at a time. Each player starts with 0 points.
+The player with a score >= 4 wins but they must win by 2 pts.
+4 to 2 wins
+4 to 3 does not win
+5 to 3 wins
+If the score is tied at or above 3, we change both scores to 3 and keep going until one player wins by 2
+We should be able to:
+(1) Write a function that returns the current score
+(2) Write a function that increments the score of a given player, error if the game is already over
+(3) Write a function that returns which player won or an error when the game is not over yet.
+
+Part 2
+Congrats, you basically implemented the scoring mechanism for Tennis!
+In our modified tennis game, sets are made up of games. A set is a group of 5 games.
+A player wins a set if they win 3 games.
+After a game is done, the same two players play another game until the set is over.
+Let's implement sets now.
+
+Part 3
+There are a few tweaks though.
+Tennis has different names for the scores:
+0 is called 'love'. 1 is called '15'. 2 is called '30'. 3 is called '40'.
+A tied score below 3 is called “All”.
+0-0 is "Love All", 1-1 is "15 All", 2-2 is "30 All"
+3-3 is called “Deuce”
+4-3 is called “Advantage Player 1”
+3-4 is called “Advantage Player 2”
+If the game is over, the score should show as "Player 1 Wins” or "Player 2 Wins"
+Let's add a new function to get the current tennis score for a game.
+
+Part 4
+Let's update the code to handle the fact that players switch sides between games.
+
+[execution time limit] 3 seconds (java)
+
+[memory limit] 1 GB
+
+ */
     class Playerxyz {
         private final String name;
         private int score;
