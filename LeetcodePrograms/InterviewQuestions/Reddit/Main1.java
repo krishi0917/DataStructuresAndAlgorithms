@@ -44,35 +44,29 @@ Let's update the code to handle the fact that players switch sides between games
     class Playerxyz {
         private final String name;
         private int score;
-
         public Playerxyz(String name) {
             this.name = name;
             this.score = 0;
         }
-
         public String getName() {
             return name;
         }
-
         public int getScore() {
             return score;
         }
-
         public void incrementScore() {
             this.score++;
         }
-
         public void setScore(int score) {
             this.score = score;
         }
     }
 
-     class Game {
-    private final Playerxyz player1;
-    private final Playerxyz player2;
-    private boolean isGameOver;
-
-    public Game(String player1Name, String player2Name) {
+    class Game {
+        private final Playerxyz player1;
+        private final Playerxyz player2;
+        private boolean isGameOver;
+        public Game(String player1Name, String player2Name) {
         this.player1 = new Playerxyz(player1Name);
         this.player2 = new Playerxyz(player2Name);
         this.isGameOver = false;
