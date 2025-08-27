@@ -3,10 +3,6 @@ package LeetcodePrograms.src;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
-/**
- * @author Rishi Khurana
- */
 public class InsertDeleteGetRandom {
     // apart from insert remove delete , getLast in O(1)
     // Design a data structure that supports all following operations in average O(1) time.

@@ -1,8 +1,5 @@
 package LeetcodePrograms.src;
 import java.util.*;
-/**
- * Created by rkhurana on 2/21/19.
- */
 public class InsertDeleteGetRandomNoDuplicates {
     ArrayList<Integer> list;
     // map to put the value and the location in the list of that element

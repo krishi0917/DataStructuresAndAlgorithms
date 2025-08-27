@@ -115,4 +115,13 @@ public class DesignInMemoryFileSystem {
         }
         return cur;
     }
+
+    public static void main(String []args){
+        DesignInMemoryFileSystem fileSystem = new DesignInMemoryFileSystem();
+        fileSystem.ls("/");                         // return []
+        fileSystem.mkdir("/a/b/c");
+        fileSystem.addContentToFile("/a/b/c/d", "hello");
+        fileSystem.ls("/");                         // return ["a"]
+        fileSystem.readContentFromFile("/a/b/c/d"); // return "hello"
+    }
 }
